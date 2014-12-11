@@ -1,0 +1,25 @@
+package Dados;
+
+public class ServicoRepositorio implements Repositorio{
+
+	public void adicionar(Object servico) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void remover(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void remover(Object objeto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object[] listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

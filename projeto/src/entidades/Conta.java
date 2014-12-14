@@ -5,12 +5,14 @@ public class Conta {
 	private String CPF;
 	private Endereco endereco;
 	private Carro carro;
+	private Servico[] servicos;
 	
 	public Conta(String nome, String CPF, Endereco endereco, Carro carro){
 		this.nome = nome;
 		this.CPF = CPF;
 		this.endereco = endereco;
 		this.carro = carro;
+		this.servicos = new Servico[0];
 	}
 
 	public String getNome() {
@@ -45,6 +47,14 @@ public class Conta {
 		this.carro = carro;
 	}
 	
+	public Servico[] getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(Servico[] servicos) {
+		this.servicos = servicos;
+	}
+
 	public String toString(){
 		String r = "Nome: " + this.nome + "\nCPF: " + this.CPF + "\nEndereco: " + "\nRua: " + this.endereco.getRua() + "\nNumero: " +
 				this.endereco.getNumero() + "\t" + this.endereco.getComplemento() + "\nCEP: " + this.endereco.getCEP() + "\nBairro: " +

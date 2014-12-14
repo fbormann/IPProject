@@ -17,8 +17,8 @@ public class CadastroConta {
 		contas.remover(CPF);
 	}
 
-	public Conta buscar(String cpf){
-		return contas.buscar(cpf);
+	public Conta buscar(String CPF){
+		return contas.buscar(CPF);
 	}
 
 

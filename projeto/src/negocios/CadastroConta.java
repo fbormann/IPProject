@@ -13,13 +13,8 @@ public class CadastroConta {
 		contas.adicionar(cliente);
 	}
 
-	public boolean remover(Conta cliente){
-		if(contas.procurar(cliente.getCPF())){ //IF conta exists.
-			contas.remover(cliente);
-		}else{
-			return false; //If it wasn't deleted.
-		}
-		return true; //If it was deleted
+	public void remover(String CPF){
+		contas.remover(CPF);
 	}
 
 	public Conta buscar(String cpf){

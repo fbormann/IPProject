@@ -7,7 +7,7 @@ public interface RepositorioContas {
 	
 	public void remover(int index);
 	
-	public void remover(Conta objeto);
+	public void remover(String CPF);
 	
 	public Conta[] listar();
 	

@@ -3,9 +3,9 @@ package entidades;
 public class Conta {
 	private String nome;
 	private String CPF;
-	private Endereco endereco;
+	private Endereco endereco; //TODO: verificar a necessidade desse endereço.
 	private Carro carro;
-	private Servico[] servicos;
+	private Servico[] servicos; //TODO: adicionar servicos(para criar relatório).
 	
 	public Conta(String nome, String CPF, Endereco endereco, Carro carro){
 		this.nome = nome;

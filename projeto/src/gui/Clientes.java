@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Clientes extends JFrame {
 
@@ -44,6 +46,13 @@ public class Clientes extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new CadastrarClientes().setVisible(true); //To Open a new Cadastrarclientes Window
+				fecharJFrame();
+			}
+		});
+		
 		btnCadastrar.setBounds(20, 6, 117, 29);
 		contentPane.add(btnCadastrar);
 		
@@ -57,11 +66,20 @@ public class Clientes extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnListar = new JButton("Listar");
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnListar.setBounds(170, 6, 117, 29);
 		contentPane.add(btnListar);
 		
 		JButton btnRemover = new JButton("Remover");
 		btnRemover.setBounds(308, 6, 117, 29);
 		contentPane.add(btnRemover);
+	}
+	
+	public void fecharJFrame(){
+		this.dispose();
 	}
 }

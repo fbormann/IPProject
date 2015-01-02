@@ -18,6 +18,10 @@ public class Endereco {
 		this.cidade = cidade;
 		this.estado = estado;
 	}
+	
+	public Endereco(){
+		
+	}
 
 	public String getRua() {
 		return this.rua;

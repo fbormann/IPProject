@@ -11,8 +11,8 @@ public class CadastroConta {
 		this.contas = contas;
 	}
 
-	public void cadastrar(Conta cliente) throws ContaJaCadastrada{ //TODO: Criar "Conta ja criada Exception"
-		contas.adicionar(cliente);
+	public void cadastrar(Conta conta) throws ContaJaCadastrada{ //TODO: Criar "Conta ja criada Exception"
+		contas.adicionar(conta);
 	}
 
 	public void remover(String CPF) throws ContaNaoExiste{

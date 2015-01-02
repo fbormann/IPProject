@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JMenuItem;
 
 public class Oficina extends JFrame {
 
@@ -43,7 +44,7 @@ public class Oficina extends JFrame {
 	 */
 	public Oficina() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 477, 324);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,6 +55,12 @@ public class Oficina extends JFrame {
 		contentPane.add(btnVendas);
 		
 		btnClientes = new JButton("Clientes");
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Clientes().setVisible(true);
+				fecharJFrame();
+			}
+		});
 		btnClientes.setBounds(158, 6, 117, 29);
 		contentPane.add(btnClientes);
 		
@@ -71,5 +78,7 @@ public class Oficina extends JFrame {
 		contentPane.add(txtNomeLogo);
 		txtNomeLogo.setColumns(10);
 	}
-
+	public void fecharJFrame(){
+		this.dispose();
+	}
 }

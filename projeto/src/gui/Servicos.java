@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class Serviços extends JFrame {
+public class Servicos extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnNewButton;
@@ -26,7 +26,7 @@ public class Serviços extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Serviços frame = new Serviços();
+					Servicos frame = new Servicos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class Serviços extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Serviços() {
+	public Servicos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

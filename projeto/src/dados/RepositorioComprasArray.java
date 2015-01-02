@@ -14,7 +14,6 @@ public class RepositorioComprasArray implements RepositorioCompras{
 			aux[i] = compras[i];
 
 		}
-
 		aux[aux.length -1] = compra; //Adiciona o último item ao final do array;
 
 		this.compras = aux;
@@ -28,7 +27,6 @@ public class RepositorioComprasArray implements RepositorioCompras{
 				aux[i] = compras[i];
 			}
 		}
-		
 		this.compras = aux;
 	}
 

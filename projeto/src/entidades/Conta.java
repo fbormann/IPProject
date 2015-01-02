@@ -14,6 +14,9 @@ public class Conta {
 		this.carro = carro;
 		this.servicos = new Servico[0];
 	}
+	
+	public Conta(){
+	}
 
 	public String getNome() {
 		return this.nome;

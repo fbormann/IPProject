@@ -1,6 +1,7 @@
 package dados;
 
 import entidades.Servico;
+import excecoes.ServicoJaCadastrado;
 
 public class ServicoRepositorioArray implements ServicoRepositorio{
 	private Servico[] servicos;
@@ -9,8 +10,18 @@ public class ServicoRepositorioArray implements ServicoRepositorio{
 		this.servicos = new Servico[0];
 	}
 
-	public void adicionar(Servico servico) {
+	public void adicionar(Servico servico) throws ServicoJaCadastrado {
 		Servico[] aux = new Servico[this.servicos.length+1];
+		for(int i = 0; i < this.servicos.length;i++){
+			if(this.servicos[i].getID().equals(servico.getID())){
+				throw new ServicoJaCadastrado();
+			}else{
+				aux[i] = this.servicos[i];
+			}
+		}
+		
+		aux[aux.length-1] = servico;
+		
 	}
 
 	public void remover(String ID) {

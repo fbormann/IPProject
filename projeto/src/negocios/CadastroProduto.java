@@ -1,5 +1,6 @@
 package negocios;
 import entidades.Servico;
+import excecoes.ServicoJaCadastrado;
 import dados.ServicoRepositorio;
 public class CadastroProduto {
 	
@@ -8,7 +9,7 @@ public class CadastroProduto {
 	public CadastroProduto(ServicoRepositorio produtos){
 		this.produtos = produtos;
 	}
-	public void cadastrar(Servico servico){
+	public void cadastrar(Servico servico) throws ServicoJaCadastrado{
 		produtos.adicionar(servico);
 	}
 	public void remover(String ID){

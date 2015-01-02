@@ -15,7 +15,7 @@ public class CadastroConta {
 		contas.adicionar(cliente);
 	}
 
-	public void remover(String CPF){
+	public void remover(String CPF) throws ContaNaoExiste{
 		contas.remover(CPF);
 	}
 

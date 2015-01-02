@@ -1,8 +1,9 @@
 package dados;
 import entidades.Servico;
+import excecoes.ServicoJaCadastrado;
 public interface ServicoRepositorio {
 	
-	void adicionar(Servico servico);
+	void adicionar(Servico servico) throws ServicoJaCadastrado;
 	
 	void remover(String ID);
 	

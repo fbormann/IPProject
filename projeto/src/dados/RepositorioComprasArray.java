@@ -33,7 +33,6 @@ public class RepositorioComprasArray implements RepositorioCompras{
 	}
 
 	public void update(Compra compra) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -44,7 +43,6 @@ public class RepositorioComprasArray implements RepositorioCompras{
 			}
 		}
 
-		// TODO Auto-generated method stub
 		return null;
 	}
 

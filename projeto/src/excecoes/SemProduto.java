@@ -1,4 +1,4 @@
-package exceções;
+package excecoes;
 
 public class SemProduto extends Exception {
 	public SemProduto(){

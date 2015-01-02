@@ -1,4 +1,4 @@
-package exceções;
+package excecoes;
 
 public class ContaJaCadastrada extends Exception{
 	

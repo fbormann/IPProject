@@ -1,4 +1,4 @@
-package exceções;
+package excecoes;
 
 public class ServicoJaCadastrado extends Exception{
 	public ServicoJaCadastrado(){

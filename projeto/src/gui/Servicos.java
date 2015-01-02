@@ -9,6 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 public class Servicos extends JFrame {
 
@@ -40,17 +43,26 @@ public class Servicos extends JFrame {
 	 */
 	public Servicos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 463, 313);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		btnNewButton = new JButton("Cadastrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnNewButton.setBounds(26, 6, 117, 29);
 		contentPane.add(btnNewButton);
-		
 		btnListar = new JButton("Listar");
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
 		btnListar.setBounds(163, 6, 117, 29);
 		contentPane.add(btnListar);
 		
@@ -59,13 +71,14 @@ public class Servicos extends JFrame {
 		contentPane.add(btnRemover);
 		
 		btnProcurar = new JButton("Procurar");
-		btnProcurar.setBounds(327, 243, 117, 29);
+		btnProcurar.setBounds(325, 250, 117, 20);
 		contentPane.add(btnProcurar);
 		
 		textField = new JTextField();
-		textField.setBounds(181, 242, 134, 28);
+		textField.setBounds(181, 250, 134, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
+		
 	}
-
+	
 }

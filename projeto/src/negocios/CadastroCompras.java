@@ -11,5 +11,4 @@ public class CadastroCompras {
 	public void cadastrarCompra(Compra compra){
 		compras.adicionar(compra);
 	}
-	//TODO: checar novas coisas para fazer.
 }

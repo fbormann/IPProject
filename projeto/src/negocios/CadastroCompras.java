@@ -8,7 +8,6 @@ public class CadastroCompras {
 		this.compras = compras;
 	}
 	
-	
 	public void cadastrarCompra(Compra compra){
 		compras.adicionar(compra);
 	}

@@ -1,7 +1,10 @@
 package dados;
 
+import entidades.Conta;
 import entidades.Servico;
+import excecoes.ContaNaoExiste;
 import excecoes.ServicoJaCadastrado;
+import excecoes.ServicoNaoEncontrado;
 
 public class ServicoRepositorioArray implements ServicoRepositorio{
 	private Servico[] servicos;
@@ -24,8 +27,24 @@ public class ServicoRepositorioArray implements ServicoRepositorio{
 		
 	}
 
-	public void remover(String ID) {
+	public void remover(String ID) throws ServicoNaoEncontrado{
+		Servico[] aux = new Servico[this.servicos.length-1];
+		boolean existe = false;
+		for(int i = 0; i < this.servicos.length;i++){
+			if(this.servicos[i].getID().equals(ID)){
+				existe = true;
+			}
+		}
 		
+		if(!existe){
+			throw new ServicoNaoEncontrado();
+		}
+		
+		for(int i = 0; i < this.servicos.length;i++){
+			if(!this.servicos[i].getID().equals(ID)){
+				aux[i] = this.servicos[i];
+			}
+		}
 	}
 
 	public void atualizar(String ID) {

@@ -29,7 +29,7 @@ public class RepositorioContasArray implements RepositorioContas {
 		Conta[] aux = new Conta[this.contas.length-1];
 		boolean existe = false;
 		for(int i = 0; i < this.contas.length;i++){
-			if(this.contas[i].equals(CPF)){
+			if(this.contas[i].getCPF().equals(CPF)){
 				existe = true;
 			}
 		}
@@ -39,7 +39,7 @@ public class RepositorioContasArray implements RepositorioContas {
 		}
 		
 		for(int i = 0; i < this.contas.length;i++){
-			if(!this.contas[i].equals(CPF)){
+			if(!this.contas[i].getCPF().equals(CPF)){
 				aux[i] = this.contas[i];
 			}
 		}

@@ -19,9 +19,9 @@ import javax.swing.JSeparator;
 
 import dados.RepositorioContasArray;
 import entidades.Conta;
-import excecoes.ContaJaCadastrada;
-import excecoes.CPFInvalido;
-import excecoes.CEPInvalido;
+import excecoes.ContaJaCadastradaException;
+import excecoes.CPFInvalidoException;
+import excecoes.CEPInvalidoException;
 import negocios.CadastroConta;
 
 import javax.swing.JPopupMenu;
@@ -108,7 +108,7 @@ public class CadastrarClientes extends JFrame {
 				novaConta.setNome(nome);
 				try {
 					contas.cadastrar(novaConta);
-				} catch (ContaJaCadastrada e1) {
+				} catch (ContaJaCadastradaException e1) {
 					e1.getMessage(); //TODO: create popup to display message.
 				}
 			}
@@ -201,8 +201,8 @@ public class CadastrarClientes extends JFrame {
 		});
 	}
 
-	public boolean validadeCPF(String CPF) throws CPFInvalido{
-		CPFInvalido e = new CPFInvalido(CPF);
+	public boolean validadeCPF(String CPF) throws CPFInvalidoException{
+		CPFInvalidoException e = new CPFInvalidoException(CPF);
 		//checar tamanho da entrada
 		if(CPF.length()!=14){
 			throw e;
@@ -230,8 +230,8 @@ public class CadastrarClientes extends JFrame {
 		}
 	}
 
-	public boolean validadeCEP(String CEP) throws CEPInvalido{
-		CEPInvalido e = new CEPInvalido(CEP);
+	public boolean validadeCEP(String CEP) throws CEPInvalidoException{
+		CEPInvalidoException e = new CEPInvalidoException(CEP);
 		//checar tamanho
 		if(CEP.length()!=9){
 			throw e;

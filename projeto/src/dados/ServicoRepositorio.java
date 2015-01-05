@@ -1,14 +1,14 @@
 package dados;
 import entidades.Servico;
-import excecoes.ServicoJaCadastrado;
-import excecoes.ServicoNaoEncontrado;
+import excecoes.ServicoJaCadastradoException;
+import excecoes.ServicoNaoEncontradoException;
 public interface ServicoRepositorio {
 	
-	void adicionar(Servico servico) throws ServicoJaCadastrado;
+	void adicionar(Servico servico) throws ServicoJaCadastradoException;
 	
-	void remover(String ID) throws ServicoNaoEncontrado;
+	void remover(String ID) throws ServicoNaoEncontradoException;
 	
-	void atualizar(String ID);
+	void update(String ID) throws ServicoNaoEncontradoException;
 	
 	double consultaPreco(String ID);
 	

@@ -31,7 +31,12 @@ public class RepositorioComprasArray implements RepositorioCompras{
 	}
 
 	public void update(Compra compra) {
-
+		//TODO: Implementar o método update
+		for(int i = 0; i < this.compras.length;i++){
+			if(this.compras[i].getId().equals(compra.getId())){
+				this.compras[i] = compra;
+			}
+		}
 	}
 
 	public Compra buscar(String ID) {

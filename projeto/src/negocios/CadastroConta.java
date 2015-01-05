@@ -1,8 +1,8 @@
 package negocios;
 import dados.RepositorioContas;
 import entidades.Conta;
-import excecoes.ContaJaCadastrada;
-import excecoes.ContaNaoExiste;
+import excecoes.ContaJaCadastradaException;
+import excecoes.ContaNaoExisteException;
 
 public class CadastroConta {
 	private RepositorioContas contas;
@@ -11,15 +11,15 @@ public class CadastroConta {
 		this.contas = contas;
 	}
 
-	public void cadastrar(Conta conta) throws ContaJaCadastrada{ //TODO: Criar "Conta ja criada Exception"
+	public void cadastrar(Conta conta) throws ContaJaCadastradaException{ //TODO: Criar "Conta ja criada Exception"
 		contas.adicionar(conta);
 	}
 
-	public void remover(String CPF) throws ContaNaoExiste{
+	public void remover(String CPF) throws ContaNaoExisteException{
 		contas.remover(CPF);
 	}
 
-	public Conta buscar(String CPF) throws ContaNaoExiste{
+	public Conta buscar(String CPF) throws ContaNaoExisteException{
 		return contas.buscar(CPF);
 	}
 

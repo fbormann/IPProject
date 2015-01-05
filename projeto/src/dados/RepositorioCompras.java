@@ -1,11 +1,11 @@
 package dados;
 import entidades.Compra;
-import excecoes.CompraNaoExiste;
+import excecoes.CompraNaoExisteException;
 
 public interface RepositorioCompras {
 	public void adicionar(Compra compra);
 	
-	public void remover(String ID) throws CompraNaoExiste;
+	public void remover(String ID) throws CompraNaoExisteException;
 	
 	public void update(Compra compra);
 	

@@ -2,9 +2,9 @@ package dados;
 
 import entidades.Conta;
 import entidades.Servico;
-import excecoes.ContaNaoExiste;
-import excecoes.ServicoJaCadastrado;
-import excecoes.ServicoNaoEncontrado;
+import excecoes.ContaNaoExisteException;
+import excecoes.ServicoJaCadastradoException;
+import excecoes.ServicoNaoEncontradoException;
 
 public class ServicoRepositorioArray implements ServicoRepositorio{
 	private Servico[] servicos;
@@ -13,11 +13,11 @@ public class ServicoRepositorioArray implements ServicoRepositorio{
 		this.servicos = new Servico[0];
 	}
 
-	public void adicionar(Servico servico) throws ServicoJaCadastrado {
+	public void adicionar(Servico servico) throws ServicoJaCadastradoException {
 		Servico[] aux = new Servico[this.servicos.length+1];
 		for(int i = 0; i < this.servicos.length;i++){
 			if(this.servicos[i].getID().equals(servico.getID())){
-				throw new ServicoJaCadastrado();
+				throw new ServicoJaCadastradoException();
 			}else{
 				aux[i] = this.servicos[i];
 			}
@@ -27,7 +27,7 @@ public class ServicoRepositorioArray implements ServicoRepositorio{
 		
 	}
 
-	public void remover(String ID) throws ServicoNaoEncontrado{
+	public void remover(String ID) throws ServicoNaoEncontradoException{
 		Servico[] aux = new Servico[this.servicos.length-1];
 		boolean existe = false;
 		for(int i = 0; i < this.servicos.length;i++){
@@ -37,7 +37,7 @@ public class ServicoRepositorioArray implements ServicoRepositorio{
 		}
 		
 		if(!existe){
-			throw new ServicoNaoEncontrado();
+			throw new ServicoNaoEncontradoException();
 		}
 		
 		for(int i = 0; i < this.servicos.length;i++){
@@ -47,7 +47,7 @@ public class ServicoRepositorioArray implements ServicoRepositorio{
 		}
 	}
 
-	public void atualizar(String ID) {
+	public void update(String ID) throws ServicoNaoEncontradoException {
 		
 	}
 

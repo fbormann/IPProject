@@ -1,7 +1,7 @@
 package negocios;
 import entidades.Servico;
-import excecoes.ServicoJaCadastrado;
-import excecoes.ServicoNaoEncontrado;
+import excecoes.ServicoJaCadastradoException;
+import excecoes.ServicoNaoEncontradoException;
 import dados.ServicoRepositorio;
 public class CadastroProduto {
 	
@@ -10,10 +10,10 @@ public class CadastroProduto {
 	public CadastroProduto(ServicoRepositorio produtos){
 		this.produtos = produtos;
 	}
-	public void cadastrar(Servico servico) throws ServicoJaCadastrado{
+	public void cadastrar(Servico servico) throws ServicoJaCadastradoException{
 		produtos.adicionar(servico);
 	}
-	public void remover(String ID) throws ServicoNaoEncontrado{
+	public void remover(String ID) throws ServicoNaoEncontradoException{
 		produtos.remover(ID);
 	}
 	public double consultaPreco(String ID){

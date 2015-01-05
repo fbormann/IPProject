@@ -1,7 +1,7 @@
 package dados;
 import entidades.Conta;
-import excecoes.ContaJaCadastrada;
-import excecoes.ContaNaoExiste;
+import excecoes.ContaJaCadastradaException;
+import excecoes.ContaNaoExisteException;
 
 public class RepositorioContasArray implements RepositorioContas {
 	private Conta[] contas;
@@ -10,12 +10,12 @@ public class RepositorioContasArray implements RepositorioContas {
 		this.contas = new Conta[0];
 	}
 
-	public void adicionar(Conta conta) throws ContaJaCadastrada {
+	public void adicionar(Conta conta) throws ContaJaCadastradaException {
 		Conta[] aux = new Conta[this.contas.length+1];
 
 		for(int i = 0; i < this.contas.length;i++){
 			if(this.contas[i].getCPF().equals(conta.getCPF())){
-				throw new ContaJaCadastrada();
+				throw new ContaJaCadastradaException();
 			}else{
 				aux[i] = this.contas[i];
 			}
@@ -24,8 +24,16 @@ public class RepositorioContasArray implements RepositorioContas {
 		this.contas = aux;
 	}
 
+	
+	public void update(Conta conta) throws ContaNaoExisteException{
+		for(int i = 0; i < this.contas.length;i++){
+			if(this.contas[i].getCPF().equals(conta.getCPF())){
+				this.contas[i] = conta;
+			}
+		}
+	}
 
-	public void remover(String CPF) throws ContaNaoExiste {
+	public void remover(String CPF) throws ContaNaoExisteException {
 		Conta[] aux = new Conta[this.contas.length-1];
 		boolean existe = false;
 		for(int i = 0; i < this.contas.length;i++){
@@ -35,7 +43,7 @@ public class RepositorioContasArray implements RepositorioContas {
 		}
 		
 		if(!existe){
-			throw new ContaNaoExiste();
+			throw new ContaNaoExisteException();
 		}
 		
 		for(int i = 0; i < this.contas.length;i++){
@@ -50,7 +58,7 @@ public class RepositorioContasArray implements RepositorioContas {
 		return null;
 	}
 
-	public Conta buscar(String CPF) throws ContaNaoExiste {
+	public Conta buscar(String CPF) throws ContaNaoExisteException {
 		Conta contaProcurada = new Conta();
 		for(int i = 0; i < this.contas.length;i++){
 			if(this.contas[i].getCPF().equals(CPF)){
@@ -58,7 +66,7 @@ public class RepositorioContasArray implements RepositorioContas {
 			}
 		}
 		if(contaProcurada == null){
-			throw new ContaNaoExiste();
+			throw new ContaNaoExisteException();
 		}else{
 			return contaProcurada;
 		}

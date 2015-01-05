@@ -6,17 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JMenuBar;
-import javax.swing.JTextField;
+import javax.swing.JLabel;
 import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 
 public class Clientes extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -45,41 +42,24 @@ public class Clientes extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new CadastrarClientes().setVisible(true); //To Open a new Cadastrarclientes Window
-				fecharJFrame();
-			}
-		});
+		JLabel lblClientes = new JLabel("Clientes");
+		lblClientes.setBounds(103, 11, 46, 14);
+		contentPane.add(lblClientes);
 		
-		btnCadastrar.setBounds(20, 6, 117, 29);
-		contentPane.add(btnCadastrar);
-		
-		JButton btnProcurar = new JButton("Procurar");
-		btnProcurar.setBounds(327, 243, 117, 29);
-		contentPane.add(btnProcurar);
-		
-		textField = new JTextField();
-		textField.setBounds(181, 242, 134, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnListar = new JButton("Listar");
-		btnListar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnListar.setBounds(170, 6, 117, 29);
-		contentPane.add(btnListar);
+		table = new JTable();
+		table.setBounds(25, 36, 219, 204);
+		contentPane.add(table);
 		
 		JButton btnRemover = new JButton("Remover");
-		btnRemover.setBounds(308, 6, 117, 29);
+		btnRemover.setBounds(294, 121, 89, 23);
 		contentPane.add(btnRemover);
-	}
-	
-	public void fecharJFrame(){
-		this.dispose();
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBounds(294, 186, 89, 23);
+		contentPane.add(btnSalvar);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(294, 56, 89, 23);
+		contentPane.add(btnCadastrar);
 	}
 }

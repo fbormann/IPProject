@@ -4,13 +4,23 @@ public abstract class Servico {
 	private String nome;
 	private double preco;
 	private String ID;
+	private String codigo;
 	
-	public Servico(double preco, String ID){
+	public Servico(double preco, String ID, String codigo){
 		this.preco = preco;
 		this.ID = ID;
+		this.codigo = codigo;
 	}
 
 	public abstract double comissao(double compra);
+	
+	public String getCodigo(){
+		return this.codigo;
+	}
+	
+	public void setCodigo(String codigo){
+		this.codigo = codigo;
+	}
 	
 	public String getNome(){
 		return this.nome;

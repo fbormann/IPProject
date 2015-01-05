@@ -11,13 +11,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class CadastrarServico extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField tf_nome;
 	private JTextField tf_id;
 	private JTextField tf_preco;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -50,12 +51,7 @@ public class CadastrarServico extends JFrame {
 		lblNome.setBounds(10, 11, 46, 14);
 		contentPane.add(lblNome);
 		
-		tf_nome = new JTextField();
-		tf_nome.setBounds(66, 8, 86, 20);
-		contentPane.add(tf_nome);
-		tf_nome.setColumns(10);
-		
-		JLabel lblId = new JLabel("Id:");
+		JLabel lblId = new JLabel("C\u00F3digo:");
 		lblId.setBounds(10, 47, 46, 14);
 		contentPane.add(lblId);
 		
@@ -65,11 +61,11 @@ public class CadastrarServico extends JFrame {
 		tf_id.setColumns(10);
 		
 		JLabel lblPreco = new JLabel("Pre\u00E7o:");
-		lblPreco.setBounds(10, 91, 46, 14);
+		lblPreco.setBounds(10, 78, 46, 14);
 		contentPane.add(lblPreco);
 		
 		tf_preco = new JTextField();
-		tf_preco.setBounds(66, 88, 86, 20);
+		tf_preco.setBounds(66, 75, 86, 20);
 		contentPane.add(tf_preco);
 		tf_preco.setColumns(10);
 		
@@ -79,8 +75,24 @@ public class CadastrarServico extends JFrame {
 				
 			}
 		});
-		btnCadastrar.setBounds(335, 228, 89, 23);
+		btnCadastrar.setBounds(335, 187, 89, 23);
 		contentPane.add(btnCadastrar);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(66, 8, 166, 20);
+		contentPane.add(textField);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Lavagem");
+		rdbtnNewRadioButton.setBounds(31, 120, 109, 23);
+		contentPane.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Otimiza\u00E7\u00E3o");
+		rdbtnNewRadioButton_1.setBounds(156, 120, 109, 23);
+		contentPane.add(rdbtnNewRadioButton_1);
+		
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Produto");
+		rdbtnNewRadioButton_2.setBounds(292, 120, 109, 23);
+		contentPane.add(rdbtnNewRadioButton_2);
 	}
-
 }

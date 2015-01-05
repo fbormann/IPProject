@@ -74,7 +74,10 @@ public class CadastrarClientes extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 
+	 * 
 	 */
+	//TODO: criar construtor para testar a janela do cadastrar já preenchida com as informações do cliente (para poder editar) para não termos que fazer outra janela igual
 	public CadastrarClientes() {
 		repositorioContas = new RepositorioContasArray();
 		contas = new CadastroConta(repositorioContas);

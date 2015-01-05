@@ -68,5 +68,15 @@ public class ServicoRepositorioArray implements ServicoRepositorio{
 	}
 	
 	
+	public boolean exist(String ID){
+		boolean exist = false;
+		for(int i = 0; i < this.servicos.length;i++){
+			if(this.servicos[i].getID().equals(ID)){
+				exist = true;
+			}
+		}
+		return exist;
+	}
+	
 
 }

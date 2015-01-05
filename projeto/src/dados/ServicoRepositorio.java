@@ -18,4 +18,5 @@ public interface ServicoRepositorio {
 	
 	Servico consulta(String ID);
 	
+	boolean exist(String ID);
 }

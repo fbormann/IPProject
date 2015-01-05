@@ -48,5 +48,15 @@ public class RepositorioComprasArray implements RepositorioCompras{
 
 		return null;
 	}
+	
+	public boolean exist(String ID){
+		boolean exist = false;
+		for(int i = 0; i < this.compras.length;i++){
+			if(this.compras[i].getId().equals(ID)){
+				exist = true;
+			}
+		}
+		return exist;
+	}
 
 }

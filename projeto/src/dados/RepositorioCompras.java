@@ -10,4 +10,6 @@ public interface RepositorioCompras {
 	public void update(Compra compra);
 	
 	public Compra buscar(String ID);
+	
+	public boolean exist(String ID);
 }

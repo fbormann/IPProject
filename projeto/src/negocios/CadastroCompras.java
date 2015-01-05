@@ -11,4 +11,8 @@ public class CadastroCompras {
 	public void cadastrarCompra(Compra compra){
 		compras.adicionar(compra);
 	}
+	
+	public boolean exist(String ID){
+		return this.compras.exist(ID);
+	}
 }

@@ -22,6 +22,10 @@ public class CadastroConta {
 	public Conta buscar(String CPF) throws ContaNaoExisteException{
 		return contas.buscar(CPF);
 	}
+	
+	public boolean exist(String CPF){
+		return contas.exist(CPF);
+	}
 
 
 }

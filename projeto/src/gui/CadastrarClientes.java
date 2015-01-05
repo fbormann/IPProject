@@ -22,6 +22,7 @@ import entidades.Conta;
 import excecoes.ContaJaCadastrada;
 import excecoes.CPFInvalido;
 import excecoes.CEPInvalido;
+import excecoes.PlacaInvalida;
 import negocios.CadastroConta;
 
 import javax.swing.JPopupMenu;
@@ -41,11 +42,15 @@ public class CadastrarClientes extends JFrame {
 	private RepositorioContasArray repositorioContas;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_2;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
 
 	/**
 	 * Launch the application.
@@ -88,11 +93,11 @@ public class CadastrarClientes extends JFrame {
 		tf_name.setColumns(10);
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(23, 42, 65, 14);
+		lblCpf.setBounds(177, 11, 65, 14);
 		contentPane.add(lblCpf);
 
 		tf_cpf = new JTextField();
-		tf_cpf.setBounds(81, 39, 86, 20);
+		tf_cpf.setBounds(221, 8, 86, 20);
 		contentPane.add(tf_cpf);
 		tf_cpf.setColumns(10);
 
@@ -113,75 +118,107 @@ public class CadastrarClientes extends JFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(335, 228, 89, 23);
+		btnCadastrar.setBounds(320, 228, 89, 23);
 		contentPane.add(btnCadastrar);
 
 		JLabel lblRua = new JLabel("Rua:");
-		lblRua.setBounds(23, 68, 61, 16);
+		lblRua.setBounds(23, 36, 61, 16);
 		contentPane.add(lblRua);
 
 		JLabel lblNumero = new JLabel("Numero:");
-		lblNumero.setBounds(23, 96, 61, 16);
+		lblNumero.setBounds(177, 36, 61, 16);
 		contentPane.add(lblNumero);
 
 		JLabel lblComplemento = new JLabel("Comp.:");
-		lblComplemento.setBounds(23, 125, 92, 16);
+		lblComplemento.setBounds(271, 36, 40, 16);
 		contentPane.add(lblComplemento);
 
 		JLabel lblCep = new JLabel("CEP:");
-		lblCep.setBounds(23, 155, 61, 16);
+		lblCep.setBounds(23, 65, 61, 16);
 		contentPane.add(lblCep);
 
 		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(23, 189, 61, 16);
+		lblBairro.setBounds(177, 65, 61, 16);
 		contentPane.add(lblBairro);
 
 		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(23, 219, 61, 16);
+		lblCidade.setBounds(23, 94, 61, 16);
 		contentPane.add(lblCidade);
 
 		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(23, 247, 61, 16);
+		lblEstado.setBounds(177, 92, 40, 16);
 		contentPane.add(lblEstado);
-
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(429, 6, 15, 266);
-		contentPane.add(scrollBar);
 
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(81, 68, 86, 20);
+		textField.setBounds(81, 34, 86, 20);
 		contentPane.add(textField);
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(81, 96, 86, 20);
+		textField_1.setBounds(221, 34, 40, 20);
 		contentPane.add(textField_1);
-
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(81, 123, 86, 20);
-		contentPane.add(textField_2);
 
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(81, 149, 86, 20);
+		textField_3.setBounds(81, 63, 86, 20);
 		contentPane.add(textField_3);
 
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(81, 183, 86, 20);
+		textField_4.setBounds(221, 63, 86, 20);
 		contentPane.add(textField_4);
 
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(81, 217, 86, 20);
+		textField_5.setBounds(81, 92, 86, 20);
 		contentPane.add(textField_5);
 
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(81, 245, 86, 20);
+		textField_6.setBounds(221, 90, 86, 20);
 		contentPane.add(textField_6);
+
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(315, 34, 40, 20);
+		contentPane.add(textField_7);
+
+		JLabel lblNewLabel = new JLabel("Modelo:");
+		lblNewLabel.setBounds(23, 147, 46, 14);
+		contentPane.add(lblNewLabel);
+
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(81, 144, 86, 20);
+		contentPane.add(textField_2);
+
+		JLabel lblNewLabel_1 = new JLabel("Marca:");
+		lblNewLabel_1.setBounds(177, 147, 46, 14);
+		contentPane.add(lblNewLabel_1);
+
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(221, 144, 86, 20);
+		contentPane.add(textField_8);
+
+		JLabel lblCor = new JLabel("Cor:");
+		lblCor.setBounds(23, 192, 46, 14);
+		contentPane.add(lblCor);
+
+		JLabel lblNewLabel_2 = new JLabel("Placa:");
+		lblNewLabel_2.setBounds(177, 192, 46, 14);
+		contentPane.add(lblNewLabel_2);
+
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(81, 189, 86, 20);
+		contentPane.add(textField_9);
+
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(221, 189, 86, 20);
+		contentPane.add(textField_10);
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
@@ -218,10 +255,10 @@ public class CadastrarClientes extends JFrame {
 				}
 			}
 			//checar os pontos e o hifen
-			String exemplo = "000.000.000-00";
-			int a = exemplo.charAt(3);
-			int b = exemplo.charAt(7);
-			int c = exemplo.charAt(11);
+			String exemploCPF = "000.000.000-00";
+			int a = exemploCPF.charAt(3);
+			int b = exemploCPF.charAt(7);
+			int c = exemploCPF.charAt(11);
 			if(a == 46 && b == 46 && c == 45){
 				return true;
 			}else{
@@ -235,6 +272,7 @@ public class CadastrarClientes extends JFrame {
 		//checar tamanho
 		if(CEP.length()!=9){
 			throw e;
+			//checando se há somente números
 		}else{
 			for(int i = 0; i<CEP.length(); i++){
 				if(i!=5){
@@ -245,8 +283,9 @@ public class CadastrarClientes extends JFrame {
 					}
 				}
 			}
-			String exemplo = "00000-000";
-			int a = exemplo.charAt(5);
+			//checando ap
+			String exemploCEP = "00000-000";
+			int a = exemploCEP.charAt(5);
 			if(a == 45){
 				return true;
 			}else{
@@ -255,4 +294,39 @@ public class CadastrarClientes extends JFrame {
 		}
 	}
 
+	public boolean validadePlaca(String placa) throws PlacaInvalida{
+		PlacaInvalida a = new PlacaInvalida(placa);
+		//checar tamanho
+		if(placa.length()!=8){
+			throw a;
+			//checando se há numeros onde deve haver números
+		}else{
+			for(int i = 0; i <placa.length(); i++){
+				if(i>=4){
+					if(placa.charAt(i)>=48 && placa.charAt(i)<=57){
+						return true;
+					}else{
+						throw a;
+					}
+				}
+				//checando se há letras onde deve haver letras
+				if(i<=2){
+					if(placa.charAt(i)>=65 && placa.charAt(i)<=90){
+						return true;
+					}else{
+						throw a;
+					}
+				}
+			}
+			//checando se o hifen está na posicao correta
+			String exemploPlaca = "AAA-0000";
+			int c = exemploPlaca.charAt(3);
+			if(c == 45){
+				return true;
+			}else{
+				throw a;
+			}
+
+		}
+	}
 }

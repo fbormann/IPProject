@@ -19,16 +19,12 @@ import javax.swing.JSeparator;
 
 import dados.RepositorioContasArray;
 import entidades.Conta;
-<<<<<<< HEAD
-import excecoes.ContaJaCadastrada;
-import excecoes.CPFInvalido;
-import excecoes.CEPInvalido;
+
 import excecoes.PlacaInvalida;
-=======
 import excecoes.ContaJaCadastradaException;
 import excecoes.CPFInvalidoException;
 import excecoes.CEPInvalidoException;
->>>>>>> branch 'master' of https://github.com/fbormann/IPProject.git
+
 import negocios.CadastroConta;
 
 import javax.swing.JPopupMenu;

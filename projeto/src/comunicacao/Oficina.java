@@ -21,14 +21,18 @@ public class Oficina {
 	private ManagerServico servicos;
 	private RepositorioComprasArray comprasArray;
 	private RepositorioServicoArray servicoArray;
-	private RepositorioContasArray contaArray;
+	private RepositorioContasArray contasArray;
 	
 	
 	public Oficina(){
 		comprasArray = new RepositorioComprasArray();
 		this.compras = new ManagerCompras(comprasArray);
+		this.servicoArray = new RepositorioServicoArray();
+		this.contasArray = new RepositorioContasArray();
 		this.servicos = new ManagerServico(servicoArray);
-		this.contas = new ManagerConta(contaArray);
+		this.contas = new ManagerConta(contasArray);
+		
+	
 	}
 	
 	//VENDA

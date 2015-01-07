@@ -9,6 +9,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JButton;
+<<<<<<< HEAD
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+=======
+>>>>>>> d2f3a5081ae09c0ae4a73a124cf20501556ea765
 
 public class Clientes extends JFrame {
 
@@ -61,5 +66,24 @@ public class Clientes extends JFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(294, 56, 89, 23);
 		contentPane.add(btnCadastrar);
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new CadastrarClientes().setVisible(true);
+				fecharJFrame();
+			}
+		});
+		btnCadastrar.setBounds(294, 56, 89, 23);
+		contentPane.add(btnCadastrar);
+		
+		
+	}
+	
+	public void listarClientes(){
+		
+	}
+	
+	public void fecharJFrame(){
+		this.dispose();
+
 	}
 }

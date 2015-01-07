@@ -3,13 +3,13 @@ package entidades;
 public class Endereco {
 	private String rua;
 	private int numero;
-	private int complemento;
+	private String complemento;
 	private String CEP;
 	private String bairro;
 	private String cidade;
 	private String estado;
 
-	public Endereco(String rua, int numero, int complemento, String CEP, String bairro, String cidade, String estado){
+	public Endereco(String rua, int numero, String complemento, String CEP, String bairro, String cidade, String estado){
 		this.rua = rua;
 		this.numero = numero;
 		this.complemento = complemento;
@@ -31,7 +31,7 @@ public class Endereco {
 		return this.numero;
 	}
 
-	public int getComplemento() {
+	public String getComplemento() {
 		return this.complemento;
 	}
 
@@ -59,7 +59,7 @@ public class Endereco {
 		this.numero = numero;
 	}
 
-	public void setComplemento(int complemento) {
+	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
 

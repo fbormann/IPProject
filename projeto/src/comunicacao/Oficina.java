@@ -9,37 +9,32 @@ import excecoes.PlacaInvalida;
 import negocios.*;
 
 public class Oficina {
-	private CadastroCompras compras;
-	private CadastroConta contas;
-	private CadastroServico servicos;
+	private ManagerCompras compras;
+	private ManagerConta contas;
+	private ManagerServico servicos;
 	private RepositorioComprasArray comprasArray;
 	
 	
 	public Oficina(){
 		comprasArray = new RepositorioComprasArray();
-		this.compras = new CadastroCompras(comprasArray);
+		this.compras = new ManagerCompras(comprasArray);
 	}
 	
 	public void adicionarCompra(Compra compra){
 		if(!this.compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
 		}else{
-			//TODO: implementar a logica por 
+			
 		}
 		
 		this.compras.cadastrarCompra(compra);
 	}
 	
-	public void adicionarConta(Conta conta){
+	public void adicionarConta(Conta conta) throws ContaJaCadastradaException{
 		if(!this.contas.exist(conta.getCPF())){
-			try {
 				this.contas.cadastrar(conta);
-			} catch (ContaJaCadastradaException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} //TODO devo usar try catch aqui na camada de fachada ou na propria GUI?
 		}else{
-			//TODO: Implementar acoes contra.
+		
 		}
 	}
 	

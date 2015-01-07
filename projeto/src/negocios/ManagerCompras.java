@@ -2,9 +2,9 @@ package negocios;
 import dados.RepositorioCompras;
 import entidades.Compra;
 
-public class CadastroCompras {
+public class ManagerCompras {
 	private RepositorioCompras compras;
-	public CadastroCompras(RepositorioCompras compras){
+	public ManagerCompras(RepositorioCompras compras){
 		this.compras = compras;
 	}
 	

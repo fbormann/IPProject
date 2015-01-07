@@ -4,14 +4,14 @@ import entidades.Conta;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
 
-public class CadastroConta {
+public class ManagerConta {
 	private RepositorioContas contas;
 
-	public CadastroConta(RepositorioContas contas){
+	public ManagerConta(RepositorioContas contas){
 		this.contas = contas;
 	}
 
-	public void cadastrar(Conta conta) throws ContaJaCadastradaException{ //TODO: Criar "Conta ja criada Exception"
+	public void cadastrar(Conta conta) throws ContaJaCadastradaException{ 
 		contas.adicionar(conta);
 	}
 

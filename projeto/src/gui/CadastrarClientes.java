@@ -25,7 +25,7 @@ import excecoes.ContaJaCadastradaException;
 import excecoes.CPFInvalidoException;
 import excecoes.CEPInvalidoException;
 
-import negocios.CadastroConta;
+import negocios.ManagerConta;
 
 import javax.swing.JPopupMenu;
 
@@ -116,7 +116,11 @@ public class CadastrarClientes extends JFrame {
 				Conta novaConta = new Conta();
 				novaConta.setCPF(cpf);
 				novaConta.setNome(nome);
-				oficina.adicionarConta(novaConta);
+				try{
+					oficina.adicionarConta(novaConta);
+				}catch(ContaJaCadastradaException excep){
+					//TODO: Aprender como utilizar popup ou mensagens de erro.
+				}
 			}
 		});
 		btnCadastrar.setBounds(320, 228, 89, 23);

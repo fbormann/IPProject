@@ -1,6 +1,7 @@
 package comunicacao;
 
 import dados.RepositorioComprasArray;
+import dados.RepositorioContasArray;
 import entidades.Compra;
 import entidades.Conta;
 import excecoes.CEPInvalidoException;
@@ -13,11 +14,14 @@ public class Oficina {
 	private ManagerConta contas;
 	private ManagerServico servicos;
 	private RepositorioComprasArray comprasArray;
+	private RepositorioContasArray contasArray;
 	
 	
 	public Oficina(){
 		comprasArray = new RepositorioComprasArray();
 		this.compras = new ManagerCompras(comprasArray);
+		this.contasArray = new RepositorioContasArray();
+		this.contas = new ManagerConta(contasArray);
 	}
 	
 	public void adicionarCompra(Compra compra){

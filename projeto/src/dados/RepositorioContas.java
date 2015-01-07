@@ -5,7 +5,7 @@ import excecoes.ContaNaoExisteException;
 
 public interface RepositorioContas {
 
-	public void adicionar(Conta conta) throws ContaJaCadastradaException; //TODO: Modularizar isto para as classes necessarias
+	public void adicionar(Conta conta) throws ContaJaCadastradaException; 
 		
 	public void remover(String CPF) throws ContaNaoExisteException;
 	

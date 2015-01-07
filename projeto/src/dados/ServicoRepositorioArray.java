@@ -1,8 +1,7 @@
 package dados;
 
-import entidades.Conta;
+
 import entidades.Servico;
-import excecoes.ContaNaoExisteException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 

@@ -52,6 +52,12 @@ public class Oficina extends JFrame {
 		contentPane.setLayout(null);
 		
 		btnVendas = new JButton("Vendas");
+		btnVendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new CadastrarVenda().setVisible(true);
+				fecharJFrame();
+			}
+		});
 		btnVendas.setBounds(20, 37, 117, 29);
 		contentPane.add(btnVendas);
 		
@@ -68,6 +74,8 @@ public class Oficina extends JFrame {
 		btnServios = new JButton("Servi\u00E7os");
 		btnServios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new CadastrarServico().setVisible(true);
+				fecharJFrame();
 			}
 		});
 		btnServios.setBounds(327, 37, 117, 29);

@@ -18,13 +18,13 @@ import javax.swing.JEditorPane;
 import javax.swing.JSeparator;
 
 import dados.RepositorioContasArray;
+import entidades.Carro;
 import entidades.Conta;
-
+import entidades.Endereco;
 import excecoes.PlacaInvalida;
 import excecoes.ContaJaCadastradaException;
 import excecoes.CPFInvalidoException;
 import excecoes.CEPInvalidoException;
-
 import negocios.ManagerConta;
 
 import javax.swing.JPopupMenu;
@@ -43,17 +43,17 @@ public class CadastrarClientes extends JFrame {
 	private JTextField tf_name;
 	private JTextField tf_cpf;
 	private Oficina oficina;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_2;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
+	private JTextField tf_rua;
+	private JTextField tf_numero;
+	private JTextField tf_cep;
+	private JTextField tf_bairro;
+	private JTextField tf_cidade;
+	private JTextField tf_estado;
+	private JTextField tf_comp;
+	private JTextField tf_modelo;
+	private JTextField tf_marca;
+	private JTextField tf_cor;
+	private JTextField tf_placa;
 
 	/**
 	 * Launch the application.
@@ -110,14 +110,30 @@ public class CadastrarClientes extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cpf = tf_cpf.getText();
-
-
 				String nome = tf_name.getText();
-				Conta novaConta = new Conta();
-				novaConta.setCPF(cpf);
-				novaConta.setNome(nome);
+				//Criando o objeto Endereco.
+				Endereco novoEndereco = new Endereco();
+				novoEndereco.setBairro(tf_bairro.getText());
+				novoEndereco.setCEP(tf_cep.getText());
+				novoEndereco.setCidade(tf_cidade.getText());
+				novoEndereco.setEstado(tf_estado.getText());
+				novoEndereco.setRua(tf_rua.getText());
+				novoEndereco.setComplemento(tf_comp.getText());
+				novoEndereco.setNumero(Integer.parseInt(tf_numero.getText()));
+
+				Carro novoCarro = new Carro();
+				novoCarro.setCor(tf_cor.getText());
+				novoCarro.setMarca(tf_marca.getText());
+				novoCarro.setModelo(tf_modelo.getText());
+				novoCarro.setPlaca(tf_placa.getText());
+
+				Conta novaConta = new Conta(nome,cpf,novoEndereco,novoCarro);
+
+
 				try{
 					oficina.adicionarConta(novaConta);
+					new Clientes().setVisible(true);
+					fecharJFrame();
 				}catch(ContaJaCadastradaException excep){
 					//TODO: Aprender como utilizar popup ou mensagens de erro.
 				}
@@ -154,58 +170,58 @@ public class CadastrarClientes extends JFrame {
 		lblEstado.setBounds(177, 92, 40, 16);
 		contentPane.add(lblEstado);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(81, 34, 86, 20);
-		contentPane.add(textField);
+		tf_rua = new JTextField();
+		tf_rua.setColumns(10);
+		tf_rua.setBounds(81, 34, 86, 20);
+		contentPane.add(tf_rua);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(221, 34, 40, 20);
-		contentPane.add(textField_1);
+		tf_numero = new JTextField();
+		tf_numero.setColumns(10);
+		tf_numero.setBounds(221, 34, 40, 20);
+		contentPane.add(tf_numero);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(81, 63, 86, 20);
-		contentPane.add(textField_3);
+		tf_cep = new JTextField();
+		tf_cep.setColumns(10);
+		tf_cep.setBounds(81, 63, 86, 20);
+		contentPane.add(tf_cep);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(221, 63, 86, 20);
-		contentPane.add(textField_4);
+		tf_bairro = new JTextField();
+		tf_bairro.setColumns(10);
+		tf_bairro.setBounds(221, 63, 86, 20);
+		contentPane.add(tf_bairro);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(81, 92, 86, 20);
-		contentPane.add(textField_5);
+		tf_cidade = new JTextField();
+		tf_cidade.setColumns(10);
+		tf_cidade.setBounds(81, 92, 86, 20);
+		contentPane.add(tf_cidade);
 
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(221, 90, 86, 20);
-		contentPane.add(textField_6);
+		tf_estado = new JTextField();
+		tf_estado.setColumns(10);
+		tf_estado.setBounds(221, 90, 86, 20);
+		contentPane.add(tf_estado);
 
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(315, 34, 40, 20);
-		contentPane.add(textField_7);
+		tf_comp = new JTextField();
+		tf_comp.setColumns(10);
+		tf_comp.setBounds(315, 34, 40, 20);
+		contentPane.add(tf_comp);
 
 		JLabel lblNewLabel = new JLabel("Modelo:");
 		lblNewLabel.setBounds(23, 147, 46, 14);
 		contentPane.add(lblNewLabel);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(81, 144, 86, 20);
-		contentPane.add(textField_2);
+		tf_modelo = new JTextField();
+		tf_modelo.setColumns(10);
+		tf_modelo.setBounds(81, 144, 86, 20);
+		contentPane.add(tf_modelo);
 
 		JLabel lblNewLabel_1 = new JLabel("Marca:");
 		lblNewLabel_1.setBounds(177, 147, 46, 14);
 		contentPane.add(lblNewLabel_1);
 
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(221, 144, 86, 20);
-		contentPane.add(textField_8);
+		tf_marca = new JTextField();
+		tf_marca.setColumns(10);
+		tf_marca.setBounds(221, 144, 86, 20);
+		contentPane.add(tf_marca);
 
 		JLabel lblCor = new JLabel("Cor:");
 		lblCor.setBounds(23, 192, 46, 14);
@@ -215,15 +231,15 @@ public class CadastrarClientes extends JFrame {
 		lblNewLabel_2.setBounds(177, 192, 46, 14);
 		contentPane.add(lblNewLabel_2);
 
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(81, 189, 86, 20);
-		contentPane.add(textField_9);
+		tf_cor = new JTextField();
+		tf_cor.setColumns(10);
+		tf_cor.setBounds(81, 189, 86, 20);
+		contentPane.add(tf_cor);
 
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(221, 189, 86, 20);
-		contentPane.add(textField_10);
+		tf_placa = new JTextField();
+		tf_placa.setColumns(10);
+		tf_placa.setBounds(221, 189, 86, 20);
+		contentPane.add(tf_placa);
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
@@ -243,7 +259,10 @@ public class CadastrarClientes extends JFrame {
 		});
 	}
 
-	
+	public void fecharJFrame(){
+		this.dispose();
+	}
+
 
 }
 

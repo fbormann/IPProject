@@ -1,11 +1,18 @@
 package comunicacao;
 
 import dados.RepositorioComprasArray;
+import dados.RepositorioServicoArray;
+import dados.RepositorioContasArray;
 import entidades.Compra;
 import entidades.Conta;
+import entidades.Servico;
 import excecoes.CEPInvalidoException;
+import excecoes.CPFInvalidoException;
+import excecoes.CompraNaoExisteException;
 import excecoes.ContaJaCadastradaException;
+import excecoes.ContaNaoExisteException;
 import excecoes.PlacaInvalida;
+import excecoes.ServicoNaoEncontradoException;
 import negocios.*;
 
 public class Oficina {
@@ -13,14 +20,20 @@ public class Oficina {
 	private ManagerConta contas;
 	private ManagerServico servicos;
 	private RepositorioComprasArray comprasArray;
+	private RepositorioServicoArray servicoArray;
+	private RepositorioContasArray contaArray;
 	
 	
 	public Oficina(){
 		comprasArray = new RepositorioComprasArray();
 		this.compras = new ManagerCompras(comprasArray);
+		this.servicos = new ManagerServico(servicoArray);
+		this.contas = new ManagerConta(contaArray);
 	}
 	
-	public void adicionarCompra(Compra compra){
+	//VENDA
+	public void adicionarCompra(Compra compra) {
+
 		if(!this.compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
 		}else{
@@ -29,7 +42,16 @@ public class Oficina {
 		
 		this.compras.cadastrarCompra(compra);
 	}
-	
+	public boolean compraExiste(String ID) throws CompraNaoExisteException{
+		CompraNaoExisteException e = new CompraNaoExisteException();
+		if(this.compras.exist(ID)){
+			return true;
+		}else{
+			throw e;
+		}
+	}
+
+	//CLIENTE
 	public void adicionarConta(Conta conta) throws ContaJaCadastradaException{
 		if(!this.contas.exist(conta.getCPF())){
 				this.contas.cadastrar(conta);
@@ -37,7 +59,35 @@ public class Oficina {
 		
 		}
 	}
-	
+	public boolean validadeCPF(String CPF) throws CPFInvalidoException{
+		CPFInvalidoException e = new CPFInvalidoException(CPF);
+		//checar tamanho
+		if(CPF.length()!=14){
+			throw e;
+		}else{
+			//checar se há somente números
+			for(int i = 0; i<CPF.length(); i++){
+				if(i!=3 && i!=7 && i!=11){
+					if(CPF.charAt(i)>=48 && CPF.charAt(i)<=57){
+						return true;
+					}else{
+						throw e;
+					}
+				}
+			}
+			//checando hifen e ponto
+			String exemplo = "000.000.000-00";
+			int a = exemplo.charAt(3);
+			int b = exemplo.charAt(7);
+			int c = exemplo.charAt(11);
+			if(a == 46 && b == 46 && c == 45){
+				return true;
+			}else{
+				throw e;
+			}
+			
+		}
+	}
 	public boolean validadeCEP(String CEP) throws CEPInvalidoException{
 		CEPInvalidoException e = new CEPInvalidoException(CEP);
 		//checar tamanho
@@ -64,7 +114,6 @@ public class Oficina {
 			}
 		}
 	}
-
 	public boolean validadePlaca(String placa) throws PlacaInvalida{
 		PlacaInvalida a = new PlacaInvalida(placa);
 		//checar tamanho
@@ -100,4 +149,52 @@ public class Oficina {
 
 		}
 	}
+	public Conta buscarCliente(String CPF) throws ContaNaoExisteException{
+		ContaNaoExisteException s = new ContaNaoExisteException();
+		if(this.contas.exist(CPF)){
+			return this.contas.buscar(CPF);
+		}else{
+			throw s;
+		}
+	}
+	//TODO: validadeCPF/validadeCEP/validadePlaca para adicionarConta && removerCliente(CPF existe?)
+	
+	//SERVICO
+	//TODO: adicionarServico && removerServico(ID existe?)
+	public double consultaPreco(String ID) throws ServicoNaoEncontradoException{
+		ServicoNaoEncontradoException s = new ServicoNaoEncontradoException();
+		if(this.servicos.exist(ID)){
+			return this.servicos.consultaPreco(ID);
+		}else{
+			throw s;
+		}
+	}
+	public double consultaPrecoNome(String nome) throws ServicoNaoEncontradoException{
+		ServicoNaoEncontradoException s = new ServicoNaoEncontradoException();
+		if(this.servicos.exist(nome)){
+			return this.servicos.consultaPrecoNome(nome);
+		}else{
+			throw s;
+		}
+	}
+	public Servico consulta(String ID) throws ServicoNaoEncontradoException{
+		ServicoNaoEncontradoException s = new ServicoNaoEncontradoException();
+		if(this.servicos.exist(ID)){
+			return this.servicos.consulta(ID);
+		}else{
+			throw s;
+		}
+	}
+	public boolean existServico(String ID) throws ServicoNaoEncontradoException{
+		ServicoNaoEncontradoException e = new ServicoNaoEncontradoException();
+		if(this.servicos.exist(ID)){
+			return true;
+		}else{
+			throw e;
+		}
+	}
+	
+	
+	
+	
 }

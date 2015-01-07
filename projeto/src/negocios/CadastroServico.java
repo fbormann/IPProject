@@ -3,11 +3,11 @@ import entidades.Servico;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 import dados.RepositorioServico;
-public class ManagerServico {
+public class CadastroServico {
 	
 	private RepositorioServico produtos;
 	
-	public ManagerServico(RepositorioServico produtos){
+	public CadastroServico(RepositorioServico produtos){
 		this.produtos = produtos;
 	}
 	public void cadastrar(Servico servico) throws ServicoJaCadastradoException{

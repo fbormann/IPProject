@@ -2,12 +2,12 @@ package negocios;
 import entidades.Servico;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
-import dados.ServicoRepositorio;
+import dados.RepositorioServico;
 public class CadastroServico {
 	
-	private ServicoRepositorio produtos;
+	private RepositorioServico produtos;
 	
-	public CadastroServico(ServicoRepositorio produtos){
+	public CadastroServico(RepositorioServico produtos){
 		this.produtos = produtos;
 	}
 	public void cadastrar(Servico servico) throws ServicoJaCadastradoException{

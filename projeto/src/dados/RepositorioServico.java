@@ -2,7 +2,7 @@ package dados;
 import entidades.Servico;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
-public interface ServicoRepositorio {
+public interface RepositorioServico {
 	
 	void adicionar(Servico servico) throws ServicoJaCadastradoException;
 	

@@ -6,10 +6,10 @@ import excecoes.ContaNaoExisteException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 
-public class ServicoRepositorioArray implements ServicoRepositorio{
+public class RepositorioServicoArray implements RepositorioServico{
 	private Servico[] servicos;
 	
-	public ServicoRepositorioArray(){
+	public RepositorioServicoArray(){
 		this.servicos = new Servico[0];
 	}
 

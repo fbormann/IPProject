@@ -35,14 +35,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JScrollBar;
 
-import comunicacao.Oficina;
+import comunicacao.OficinaFacade;
 
 public class CadastrarClientes extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tf_name;
 	private JTextField tf_cpf;
-	private Oficina oficina;
 	private JTextField tf_rua;
 	private JTextField tf_numero;
 	private JTextField tf_cep;
@@ -80,7 +79,7 @@ public class CadastrarClientes extends JFrame {
 	 */
 	//TODO: criar construtor para testar a janela do cadastrar já preenchida com as informações do cliente (para poder editar) para não termos que fazer outra janela igual
 	public CadastrarClientes() {
-		oficina = new Oficina();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -118,7 +117,7 @@ public class CadastrarClientes extends JFrame {
 				novoEndereco.setCidade(tf_cidade.getText());
 				novoEndereco.setEstado(tf_estado.getText());
 				novoEndereco.setRua(tf_rua.getText());
-				novoEndereco.setComplemento(tf_comp.getText());
+				//novoEndereco.setComplemento(tf_comp.getText());
 				novoEndereco.setNumero(Integer.parseInt(tf_numero.getText()));
 
 				Carro novoCarro = new Carro();
@@ -131,7 +130,7 @@ public class CadastrarClientes extends JFrame {
 
 
 				try{
-					oficina.adicionarConta(novaConta);
+					OficinaFacade.adicionarConta(novaConta);
 					new Clientes().setVisible(true);
 					fecharJFrame();
 				}catch(ContaJaCadastradaException excep){

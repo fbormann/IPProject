@@ -6,14 +6,22 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
-<<<<<<< HEAD
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-=======
->>>>>>> d2f3a5081ae09c0ae4a73a124cf20501556ea765
+
+import javax.swing.JList;
+
+import comunicacao.OficinaFacade;
+import entidades.Conta;
+
+import javax.swing.ListSelectionModel;
+
 
 public class Clientes extends JFrame {
 
@@ -46,23 +54,19 @@ public class Clientes extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblClientes = new JLabel("Clientes");
 		lblClientes.setBounds(103, 11, 46, 14);
 		contentPane.add(lblClientes);
-		
-		table = new JTable();
-		table.setBounds(25, 36, 219, 204);
-		contentPane.add(table);
-		
+
 		JButton btnRemover = new JButton("Remover");
 		btnRemover.setBounds(294, 121, 89, 23);
 		contentPane.add(btnRemover);
-		
+
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(294, 186, 89, 23);
 		contentPane.add(btnSalvar);
-		
+
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(294, 56, 89, 23);
 		contentPane.add(btnCadastrar);
@@ -74,14 +78,38 @@ public class Clientes extends JFrame {
 		});
 		btnCadastrar.setBounds(294, 56, 89, 23);
 		contentPane.add(btnCadastrar);
-		
-		
-	}
+		//		
+		//		table = new JTable();
+		//		table.setBounds(10, 41, 252, 210);
+		//		contentPane.add(table);
+		//		
+
+
+		DefaultListModel model = new DefaultListModel();
+		if(OficinaFacade.contasArray != null){
+			Conta[] contas = OficinaFacade.contasArray.listar();
+			if(contas != null){
+				for(int i = 0; i < contas.length;i++){
+					model.addElement(contas[i].getNome());
+				}
+			}
+		}
 	
+		model.addElement("teste");
+
+		JList list_clientes = new JList(model);
+		list_clientes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		contentPane.add(list_clientes);
+		JScrollPane teste = new JScrollPane();
+		teste.setViewportView(list_clientes);
+
+
+	}
+
 	public void listarClientes(){
-		
+
 	}
-	
+
 	public void fecharJFrame(){
 		this.dispose();
 

@@ -9,34 +9,38 @@ import excecoes.ContaJaCadastradaException;
 import excecoes.PlacaInvalida;
 import negocios.*;
 
-public class Oficina {
-	private ManagerCompras compras;
-	private ManagerConta contas;
-	private ManagerServico servicos;
-	private RepositorioComprasArray comprasArray;
-	private RepositorioContasArray contasArray;
+public class OficinaFacade {
+	public static ManagerCompras compras;
+	public static ManagerConta contas;
+	public static ManagerServico servicos;
+	public static RepositorioComprasArray comprasArray;
+	public static RepositorioContasArray contasArray;
 	
 	
-	public Oficina(){
-		comprasArray = new RepositorioComprasArray();
-		this.compras = new ManagerCompras(comprasArray);
-		this.contasArray = new RepositorioContasArray();
-		this.contas = new ManagerConta(contasArray);
+	public OficinaFacade(){
+	
 	}
 	
-	public void adicionarCompra(Compra compra){
-		if(!this.compras.exist(compra.getId())){
+	public static void init(){
+		OficinaFacade.comprasArray = new RepositorioComprasArray();
+		OficinaFacade.compras = new ManagerCompras(comprasArray);
+		OficinaFacade.contasArray = new RepositorioContasArray();
+		OficinaFacade.contas = new ManagerConta(contasArray);
+	}
+	
+	public static void adicionarCompra(Compra compra){
+		if(!OficinaFacade.compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
 		}else{
 			
 		}
 		
-		this.compras.cadastrarCompra(compra);
+		OficinaFacade.compras.cadastrarCompra(compra);
 	}
 	
-	public void adicionarConta(Conta conta) throws ContaJaCadastradaException{
-		if(!this.contas.exist(conta.getCPF())){
-				this.contas.cadastrar(conta);
+	public static void adicionarConta(Conta conta) throws ContaJaCadastradaException{
+		if(!OficinaFacade.contas.exist(conta.getCPF())){
+				OficinaFacade.contas.cadastrar(conta);
 		}else{
 		
 		}

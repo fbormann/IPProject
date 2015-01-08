@@ -55,7 +55,7 @@ public class RepositorioContasArray implements RepositorioContas {
 	}
 
 	public Conta[] listar() {
-		return null;
+		return this.contas;
 	}
 
 	public Conta buscar(String CPF) throws ContaNaoExisteException {

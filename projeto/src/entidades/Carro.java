@@ -13,7 +13,9 @@ public class Carro {
 		this.placa = placa;
 	}
 	
-	public Carro(){}
+	public Carro(){
+		
+	}
 
 	public String getModelo() {
 		return this.modelo;

@@ -10,10 +10,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
+
+import comunicacao.OficinaFacade;
 
 public class Oficina extends JFrame {
 
@@ -44,6 +48,7 @@ public class Oficina extends JFrame {
 	 * Create the frame.
 	 */
 	public Oficina() {
+		OficinaFacade.init();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 477, 324);
 		contentPane = new JPanel();

@@ -21,7 +21,7 @@ import dados.RepositorioContasArray;
 import entidades.Carro;
 import entidades.Conta;
 import entidades.Endereco;
-import excecoes.PlacaInvalida;
+import excecoes.PlacaInvalidaException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.CPFInvalidoException;
 import excecoes.CEPInvalidoException;
@@ -130,11 +130,22 @@ public class CadastrarClientes extends JFrame {
 
 
 				try{
-					OficinaFacade.adicionarConta(novaConta);
+
+						OficinaFacade.adicionarConta(novaConta);
+					
 					new Clientes().setVisible(true);
 					fecharJFrame();
 				}catch(ContaJaCadastradaException excep){
 					//TODO: Aprender como utilizar popup ou mensagens de erro.
+				} catch (CPFInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CEPInvalidoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PlacaInvalidaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});

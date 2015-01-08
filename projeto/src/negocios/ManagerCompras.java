@@ -3,7 +3,9 @@ import dados.RepositorioCompras;
 import entidades.Compra;
 
 public class ManagerCompras {
+	
 	private RepositorioCompras compras;
+	
 	public ManagerCompras(RepositorioCompras compras){
 		this.compras = compras;
 	}

@@ -14,7 +14,6 @@ public class Carro {
 	}
 	
 	public Carro(){
-		
 	}
 
 	public String getModelo() {

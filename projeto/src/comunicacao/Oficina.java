@@ -11,7 +11,8 @@ import excecoes.CPFInvalidoException;
 import excecoes.CompraNaoExisteException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
-import excecoes.PlacaInvalida;
+import excecoes.PlacaInvalidaException;
+import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 import negocios.*;
 
@@ -22,8 +23,8 @@ public class Oficina {
 	private RepositorioComprasArray comprasArray;
 	private RepositorioServicoArray servicoArray;
 	private RepositorioContasArray contasArray;
-	
-	
+
+
 	public Oficina(){
 		comprasArray = new RepositorioComprasArray();
 		this.compras = new ManagerCompras(comprasArray);
@@ -31,19 +32,17 @@ public class Oficina {
 		this.contasArray = new RepositorioContasArray();
 		this.servicos = new ManagerServico(servicoArray);
 		this.contas = new ManagerConta(contasArray);
-		
-	
 	}
-	
+
 	//VENDA
 	public void adicionarCompra(Compra compra) {
 
 		if(!this.compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
 		}else{
-			
+
 		}
-		
+
 		this.compras.cadastrarCompra(compra);
 	}
 	public boolean compraExiste(String ID) throws CompraNaoExisteException{
@@ -56,15 +55,40 @@ public class Oficina {
 	}
 
 	//CLIENTE
-	public void adicionarConta(Conta conta) throws ContaJaCadastradaException{
+	public void adicionarConta(Conta conta) throws ContaJaCadastradaException, CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException {
 		if(!this.contas.exist(conta.getCPF())){
-				this.contas.cadastrar(conta);
+			if(validadeCPF(conta.getCPF())){
+				if(validadeCEP(conta.getEndereco().getCEP())){
+					if(validadePlaca(conta.getCarro().getPlaca())){
+						this.contas.cadastrar(conta);
+					}else{
+						PlacaInvalidaException a = new PlacaInvalidaException();
+						throw a;
+					}
+				}else{
+					CEPInvalidoException b = new CEPInvalidoException();
+					throw b;
+				}
+			}else{
+				CPFInvalidoException c = new CPFInvalidoException();
+				throw c;
+			}
 		}else{
-		
+			ContaJaCadastradaException d = new ContaJaCadastradaException();
+			throw d;
 		}
 	}
+	public void removerConta(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
+		if(!this.contas.exist(CPF)){
+			ContaNaoExisteException e = new ContaNaoExisteException();
+			throw e;
+		}else{
+			this.contas.remover(CPF);
+		}
+	}
+
 	public boolean validadeCPF(String CPF) throws CPFInvalidoException{
-		CPFInvalidoException e = new CPFInvalidoException(CPF);
+		CPFInvalidoException e = new CPFInvalidoException();
 		//checar tamanho
 		if(CPF.length()!=14){
 			throw e;
@@ -89,11 +113,11 @@ public class Oficina {
 			}else{
 				throw e;
 			}
-			
+
 		}
 	}
 	public boolean validadeCEP(String CEP) throws CEPInvalidoException{
-		CEPInvalidoException e = new CEPInvalidoException(CEP);
+		CEPInvalidoException e = new CEPInvalidoException();
 		//checar tamanho
 		if(CEP.length()!=9){
 			throw e;
@@ -118,8 +142,8 @@ public class Oficina {
 			}
 		}
 	}
-	public boolean validadePlaca(String placa) throws PlacaInvalida{
-		PlacaInvalida a = new PlacaInvalida(placa);
+	public boolean validadePlaca(String placa) throws PlacaInvalidaException{
+		PlacaInvalidaException a = new PlacaInvalidaException();
 		//checar tamanho
 		if(placa.length()!=8){
 			throw a;
@@ -161,10 +185,37 @@ public class Oficina {
 			throw s;
 		}
 	}
-	//TODO: validadeCPF/validadeCEP/validadePlaca para adicionarConta && removerCliente(CPF existe?)
-	
+	public boolean clienteExiste(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
+		if(validadeCPF(CPF)){
+			if(this.contas.exist(CPF)){
+				return true;
+			}else{
+				throw new ContaNaoExisteException();
+			}
+		}else{
+			throw new CPFInvalidoException();
+		}
+	}
+
+
 	//SERVICO
-	//TODO: adicionarServico && removerServico(ID existe?)
+	public void adicionarServico(Servico servico) throws ServicoJaCadastradoException{
+		if(!this.servicos.exist(servico.getID())){
+			this.servicos.cadastrar(servico);
+		}else{
+			ServicoJaCadastradoException e = new ServicoJaCadastradoException();
+			throw e;
+		}
+	}
+	public void removerServico(String ID) throws ServicoNaoEncontradoException{
+		if(!this.servicos.exist(ID)){
+			ServicoNaoEncontradoException e = new ServicoNaoEncontradoException();
+			throw e;
+		}else{
+			this.servicos.remover(ID);
+		}
+	}
+
 	public double consultaPreco(String ID) throws ServicoNaoEncontradoException{
 		ServicoNaoEncontradoException s = new ServicoNaoEncontradoException();
 		if(this.servicos.exist(ID)){
@@ -189,7 +240,7 @@ public class Oficina {
 			throw s;
 		}
 	}
-	public boolean existServico(String ID) throws ServicoNaoEncontradoException{
+	public boolean servicoExiste(String ID) throws ServicoNaoEncontradoException{
 		ServicoNaoEncontradoException e = new ServicoNaoEncontradoException();
 		if(this.servicos.exist(ID)){
 			return true;
@@ -197,8 +248,5 @@ public class Oficina {
 			throw e;
 		}
 	}
-	
-	
-	
-	
+
 }

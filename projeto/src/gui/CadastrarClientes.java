@@ -21,7 +21,7 @@ import dados.RepositorioContasArray;
 import entidades.Carro;
 import entidades.Conta;
 import entidades.Endereco;
-import excecoes.PlacaInvalida;
+import excecoes.PlacaInvalidaException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.CPFInvalidoException;
 import excecoes.CEPInvalidoException;

@@ -29,6 +29,8 @@ public class RepositorioContasArray implements RepositorioContas {
 		for(int i = 0; i < this.contas.length;i++){
 			if(this.contas[i].getCPF().equals(conta.getCPF())){
 				this.contas[i] = conta;
+			}else{
+				throw new ContaNaoExisteException(); //marcela: tava faltando jogar a excecao
 			}
 		}
 	}

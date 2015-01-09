@@ -30,4 +30,8 @@ public class ManagerServico {
 		return this.produtos.exist(ID);
 	}
 	
+	public void update(String ID) throws ServicoNaoEncontradoException{
+		this.produtos.update(ID);
+	}
+	
 }

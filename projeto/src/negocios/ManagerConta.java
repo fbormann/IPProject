@@ -23,9 +23,11 @@ public class ManagerConta {
 		return contas.buscar(CPF);
 	}
 	
-	public boolean exist(String CPF){
+	public boolean exist(String CPF) {
 		return contas.exist(CPF);
 	}
-
-
+	
+	public void update(Conta conta) throws ContaNaoExisteException{
+		contas.update(conta);
+	}
 }

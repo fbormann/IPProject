@@ -34,14 +34,12 @@ public class OficinaFacade {
 
 
 	//VENDA
-	public static void adicionarCompra(Compra compra) {
-
+	public static void adicionarCompra(Compra compra) throws ContaJaCadastradaException{
 		if(!OficinaFacade.compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
 		}else{
-
+			throw new ContaJaCadastradaException();
 		}
-
 		OficinaFacade.compras.cadastrarCompra(compra);
 	}
 
@@ -86,7 +84,9 @@ public class OficinaFacade {
 			OficinaFacade.contas.remover(CPF);
 		}
 	}
-
+	//TODO: implementar codigo do metodo update conta e update servico
+	
+	
 	public static boolean validadeCPF(String CPF) throws CPFInvalidoException{
 		CPFInvalidoException e = new CPFInvalidoException();
 		//checar tamanho
@@ -177,6 +177,7 @@ public class OficinaFacade {
 
 		}
 	}
+	
 	public static Conta buscarCliente(String CPF) throws ContaNaoExisteException{
 		ContaNaoExisteException s = new ContaNaoExisteException();
 		if(OficinaFacade.contas.exist(CPF)){
@@ -196,7 +197,6 @@ public class OficinaFacade {
 			throw new CPFInvalidoException();
 		}
 	}
-
 
 	//SERVICO
 	public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException{

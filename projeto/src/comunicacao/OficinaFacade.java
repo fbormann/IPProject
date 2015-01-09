@@ -45,7 +45,7 @@ public class OficinaFacade {
 
 	public boolean compraExiste(String ID) throws CompraNaoExisteException{
 		CompraNaoExisteException e = new CompraNaoExisteException();
-		if(this.compras.exist(ID)){
+		if(OficinaFacade.compras.exist(ID)){
 			return true;
 		}else{
 			throw e;

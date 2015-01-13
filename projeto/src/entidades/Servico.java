@@ -38,7 +38,7 @@ public abstract class Servico {
 	}
 	
 	public String toString(){
-		String r = "Serviço: " + "\nNome: " + this.nome + "\nPreco: " + this.preco + "\nID: " + this.ID; 
+		String r = "Servico: " + "\nNome: " + this.nome + "\nPreco: " + this.preco + "\nID: " + this.ID; 
 		return r;
 	}
 	

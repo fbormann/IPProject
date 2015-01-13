@@ -5,12 +5,17 @@ import java.util.Scanner;
 import entidades.Conta;
 import entidades.Endereco;
 import entidades.Carro;
+import entidades.Lavagem;
+import entidades.Otimizacao;
+import entidades.Produto;
 import entidades.Servico;
 import excecoes.CEPInvalidoException;
 import excecoes.CPFInvalidoException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
 import excecoes.PlacaInvalidaException;
+import excecoes.ServicoJaCadastradoException;
+import excecoes.ServicoNaoEncontradoException;
 import comunicacao.OficinaFacade;
 
 //classe que irá testar todos os métodos da fachada(OficinaFacade)
@@ -158,9 +163,131 @@ public class Programa {
 			System.out.println("Menu: 1) Adicionar; 2) Remover; 3) Update; 4) Consultar preco; 5) Buscar.");
 			int escolhaServico = in.nextInt();
 			if(escolhaServico==1){
-				System.out.print("Qual tipo de servico voce quer adicionar? 1) Lavagem; 2) Otimizacao; 3) Produto");
+				System.out.print("Qual tipo de servico voce quer adicionar? 1) Lavagem; 2) Otimizacao; 3) Produto.");
+				int escolhaTipo = in.nextInt();
+				//nao podemos instanciar Servico por ela ser uma classe abstrata
+				if(escolhaTipo == 1){
+					System.out.print("Nome: ");
+					String nome = str.nextLine();
+					System.out.print("Preco: ");
+					double preco = in.nextDouble();
+					System.out.print("ID: ");
+					String ID = str.nextLine();
+					Lavagem servicoLavagem = new Lavagem(nome, preco, ID);
+					try {
+						OficinaFacade.adicionarServico(servicoLavagem);
+					} catch (ServicoJaCadastradoException e) {
+						System.out.println("Erro: " + e.getMessage());
+						e.printStackTrace();
+					}
+					
+				}else if(escolhaTipo==2){
+					System.out.print("Nome: ");
+					String nome = str.nextLine();
+					System.out.print("Preco: ");
+					double preco = in.nextDouble();
+					System.out.print("ID: ");
+					String ID = str.nextLine();
+					Otimizacao servicoOtimizacao = new Otimizacao(nome, preco, ID);
+					try {
+						OficinaFacade.adicionarServico(servicoOtimizacao);
+					} catch (ServicoJaCadastradoException e) {
+						System.out.println("Erro: " + e.getMessage());
+						e.printStackTrace();
+					}
+					
+				}else if(escolhaTipo == 3){
+					System.out.print("Nome: ");
+					String nome = str.nextLine();
+					System.out.print("Preco: ");
+					double preco = in.nextDouble();
+					System.out.print("ID: ");
+					String ID = str.nextLine();
+					Produto servicoProduto = new Produto(nome, preco, ID);
+					try {
+						OficinaFacade.adicionarServico(servicoProduto);
+					} catch (ServicoJaCadastradoException e) {
+						System.out.println("Erro: " + e.getMessage());
+						e.printStackTrace();
+					}
+					
+				}
+			}else if(escolhaServico == 2){
+				System.out.print("Digite o ID do servico que voce quer remover: ");
+				String ID = str.nextLine();
+				try {
+					OficinaFacade.removerServico(ID);
+				} catch (ServicoNaoEncontradoException e) {
+					System.out.println("Erro: " + e.getMessage());
+					e.printStackTrace();
+				}
+			}else if(escolhaServico == 3){
+				System.out.println("Que servico voce quer atualizar? 1) Lavagem; 2) Otimizacao; 3) Produto");
+				int escolhaAtualizar = in.nextInt();
+				if(escolhaAtualizar == 1){
+					System.out.print("Nome: ");
+					String nome = str.nextLine();
+					System.out.print("Preco: ");
+					double preco = in.nextDouble();
+					System.out.print("ID: ");
+					String ID = str.nextLine();
+					Lavagem servicoLavagem = new Lavagem(nome, preco, ID);
+					try {
+						OficinaFacade.adicionarServico(servicoLavagem);
+					} catch (ServicoJaCadastradoException e) {
+						System.out.println("Erro: " + e.getMessage());
+						e.printStackTrace();
+					}
+					
+				}else if(escolhaAtualizar == 2){
+					System.out.print("Nome: ");
+					String nome = str.nextLine();
+					System.out.print("Preco: ");
+					double preco = in.nextDouble();
+					System.out.print("ID: ");
+					String ID = str.nextLine();
+					Otimizacao servicoOtimizacao = new Otimizacao(nome, preco, ID);
+					try {
+						OficinaFacade.adicionarServico(servicoOtimizacao);
+					} catch (ServicoJaCadastradoException e) {
+						System.out.println("Erro: " + e.getMessage());
+						e.printStackTrace();
+					}
+				}else if (escolhaAtualizar == 3){
+					System.out.print("Nome: ");
+					String nome = str.nextLine();
+					System.out.print("Preco: ");
+					double preco = in.nextDouble();
+					System.out.print("ID: ");
+					String ID = str.nextLine();
+					Produto servicoProduto = new Produto(nome, preco, ID);
+					try {
+						OficinaFacade.adicionarServico(servicoProduto);
+					} catch (ServicoJaCadastradoException e) {
+						System.out.println("Erro: " + e.getMessage());
+						e.printStackTrace();
+					}
+				}
+			}else if(escolhaServico == 4){
+				System.out.print("Digite o ID do servico: ");
+				String ID = str.nextLine();
+				try {
+					OficinaFacade.consultaPreco(ID);
+				} catch (ServicoNaoEncontradoException e) {
+					System.out.println("Erro: " + e.getMessage());
+					e.printStackTrace();
+				}
+			}else if(escolhaServico == 5){
+				System.out.print("Digite o ID do servico que voce quer buscar: ");
+				String ID = str.nextLine();
+				try {
+					OficinaFacade.buscarServico(ID);
+				} catch (ServicoNaoEncontradoException e) {
+					System.out.println("Erro: " + e.getMessage());
+					e.printStackTrace();
+				}
 			}
 
-		}
+		} //TODO: parte de vendas
 	}
 }

@@ -23,29 +23,30 @@ public class OficinaFacade {
 	public static ManagerServico servicos;
 	public static RepositorioComprasArray comprasArray;
 	public static RepositorioContasArray contasArray;
-
+	public static RepositorioServicoArray servicosArray;
 
 	public static void inicializar(){
 		OficinaFacade.comprasArray = new RepositorioComprasArray();
 		OficinaFacade.compras = new ManagerCompras(comprasArray);
 		OficinaFacade.contasArray = new RepositorioContasArray();
 		OficinaFacade.contas = new ManagerConta(contasArray);
+		OficinaFacade.servicosArray = new RepositorioServicoArray();
+		OficinaFacade.servicos = new ManagerServico(servicosArray);
 	}
 
 
 	//VENDA
 	public static void adicionarCompra(Compra compra) throws ContaJaCadastradaException{
-		if(!OficinaFacade.compras.exist(compra.getId())){
+		if(compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
 		}else{
 			throw new ContaJaCadastradaException();
 		}
-		OficinaFacade.compras.cadastrarCompra(compra);
+		compras.cadastrarCompra(compra);
 	}
-
 	public boolean compraExiste(String ID) throws CompraNaoExisteException{
 		CompraNaoExisteException e = new CompraNaoExisteException();
-		if(OficinaFacade.compras.exist(ID)){
+		if(compras.exist(ID)){
 			return true;
 		}else{
 			throw e;
@@ -54,11 +55,11 @@ public class OficinaFacade {
 
 	//CLIENTE
 	public static void adicionarConta(Conta conta) throws ContaJaCadastradaException, CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException {
-		if(!OficinaFacade.contas.exist(conta.getCPF())){
+		if(!contas.exist(conta.getCPF())){
 			if(validadeCPF(conta.getCPF())){
 				if(validadeCEP(conta.getEndereco().getCEP())){
 					if(validadePlaca(conta.getCarro().getPlaca())){
-						OficinaFacade.contas.cadastrar(conta);
+						contas.cadastrar(conta);
 					}else{
 						PlacaInvalidaException a = new PlacaInvalidaException();
 						throw a;
@@ -77,16 +78,34 @@ public class OficinaFacade {
 		}
 	}
 	public static void removerConta(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
-		if(!OficinaFacade.contas.exist(CPF)){
+		if(!contas.exist(CPF)){
 			ContaNaoExisteException e = new ContaNaoExisteException();
 			throw e;
 		}else{
-			OficinaFacade.contas.remover(CPF);
+			contas.remover(CPF);
 		}
 	}
-	//TODO: implementar codigo do metodo update conta e update servico
-	
-	
+	public static void updateConta(Conta conta) throws CPFInvalidoException, ContaNaoExisteException, CEPInvalidoException, PlacaInvalidaException{
+		if(contas.exist(conta.getCPF())){
+			if(validadeCPF(conta.getCPF())){
+				if(validadeCEP(conta.getEndereco().getCEP())){
+					if(validadePlaca(conta.getCarro().getPlaca())){
+						contas.update(conta);
+					}else{
+						throw new PlacaInvalidaException();
+					}
+				}else{
+					throw new CEPInvalidoException();
+				}
+			}else{
+				throw new CPFInvalidoException();
+			}
+		}else{
+			throw new ContaNaoExisteException();
+		}
+	}
+
+
 	public static boolean validadeCPF(String CPF) throws CPFInvalidoException{
 		CPFInvalidoException e = new CPFInvalidoException();
 		//checar tamanho
@@ -177,18 +196,20 @@ public class OficinaFacade {
 
 		}
 	}
-	
-	public static Conta buscarCliente(String CPF) throws ContaNaoExisteException{
-		ContaNaoExisteException s = new ContaNaoExisteException();
-		if(OficinaFacade.contas.exist(CPF)){
-			return OficinaFacade.contas.buscar(CPF);
+	public static Conta buscarConta(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
+		if(validadeCPF(CPF)){
+			if(contas.exist(CPF)){
+				return contas.buscar(CPF);
+			}else{
+				throw new ContaNaoExisteException();
+			}
 		}else{
-			throw s;
+			throw new CPFInvalidoException();
 		}
 	}
-	public static boolean clienteExiste(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
+	public static boolean contaExiste(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
 		if(validadeCPF(CPF)){
-			if(OficinaFacade.contas.exist(CPF)){
+			if(contas.exist(CPF)){
 				return true;
 			}else{
 				throw new ContaNaoExisteException();
@@ -200,49 +221,47 @@ public class OficinaFacade {
 
 	//SERVICO
 	public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException{
-		if(!OficinaFacade.servicos.exist(servico.getID())){
-			OficinaFacade.servicos.cadastrar(servico);
+		if(!servicos.exist(servico.getID())){
+			servicos.cadastrar(servico);
 		}else{
 			ServicoJaCadastradoException e = new ServicoJaCadastradoException();
 			throw e;
 		}
 	}
 	public static void removerServico(String ID) throws ServicoNaoEncontradoException{
-		if(!OficinaFacade.servicos.exist(ID)){
+		if(!servicos.exist(ID)){
 			ServicoNaoEncontradoException e = new ServicoNaoEncontradoException();
 			throw e;
 		}else{
-			OficinaFacade.servicos.remover(ID);
+			servicos.remover(ID);
 		}
 	}
-
-	public static  double consultaPreco(String ID) throws ServicoNaoEncontradoException{
+	public static void updateServico(Servico servico) throws ServicoNaoEncontradoException{
+		if(servicoExiste(servico.getID())){
+			servicos.update(servico);
+		}else{
+			throw new ServicoNaoEncontradoException();
+		}
+	}
+	public static double consultaPreco(String ID) throws ServicoNaoEncontradoException{
 		ServicoNaoEncontradoException s = new ServicoNaoEncontradoException();
-		if(OficinaFacade.servicos.exist(ID)){
-			return OficinaFacade.servicos.consultaPreco(ID);
+		if(servicos.exist(ID)){
+			return servicos.consultaPreco(ID);
 		}else{
 			throw s;
 		}
 	}
-	public static double consultaPrecoNome(String nome) throws ServicoNaoEncontradoException{
+	public static Servico buscarServico(String ID) throws ServicoNaoEncontradoException{
 		ServicoNaoEncontradoException s = new ServicoNaoEncontradoException();
-		if(OficinaFacade.servicos.exist(nome)){
-			return OficinaFacade.servicos.consultaPrecoNome(nome);
-		}else{
-			throw s;
-		}
-	}
-	public static Servico consulta(String ID) throws ServicoNaoEncontradoException{
-		ServicoNaoEncontradoException s = new ServicoNaoEncontradoException();
-		if(OficinaFacade.servicos.exist(ID)){
-			return OficinaFacade.servicos.consulta(ID);
+		if(servicos.exist(ID)){
+			return servicos.buscar(ID);
 		}else{
 			throw s;
 		}
 	}
 	public static boolean servicoExiste(String ID) throws ServicoNaoEncontradoException{
 		ServicoNaoEncontradoException e = new ServicoNaoEncontradoException();
-		if(OficinaFacade.servicos.exist(ID)){
+		if(servicos.exist(ID)){
 			return true;
 		}else{
 			throw e;

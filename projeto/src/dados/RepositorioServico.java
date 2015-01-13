@@ -8,15 +8,13 @@ public interface RepositorioServico {
 	
 	void remover(String ID) throws ServicoNaoEncontradoException;
 	
-	void update(String ID) throws ServicoNaoEncontradoException;
+	void update(Servico servico) throws ServicoNaoEncontradoException;
 	
 	double consultaPreco(String ID);
-	
-	double consultaPrecoNome(String nome);
-	
+		
 	Servico[] listar();
 	
-	Servico consulta(String ID);
+	Servico buscar(String ID);
 	
 	boolean exist(String ID);
 }

@@ -47,14 +47,10 @@ public class RepositorioServicoArray implements RepositorioServico{
 	}
 
 	public void update(String ID) throws ServicoNaoEncontradoException {
-		
+		//TODO: vai bormann
 	}
 
 	public double consultaPreco(String ID) {
-		return 0;
-	}
-
-	public double consultaPrecoNome(String nome) {
 		return 0;
 	}
 
@@ -62,7 +58,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 		return null;
 	}
 
-	public Servico consulta(String ID) {
+	public Servico buscar(String ID) {
 		return null;
 	}
 	
@@ -75,6 +71,16 @@ public class RepositorioServicoArray implements RepositorioServico{
 			}
 		}
 		return exist;
+	}
+
+	public void update(Servico servico) throws ServicoNaoEncontradoException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public double consultaPrecoNome(String nome) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

@@ -19,19 +19,17 @@ public class ManagerServico {
 	public double consultaPreco(String ID){
 		return produtos.consultaPreco(ID);
 	}
-	public double consultaPrecoNome(String nome){
-		return produtos.consultaPrecoNome(nome);
-	}
-	public Servico consulta(String ID){
-		return produtos.consulta(ID);
+	
+	public Servico buscar(String ID){
+		return produtos.buscar(ID);
 	}
 
 	public boolean exist(String ID){
 		return this.produtos.exist(ID);
 	}
 	
-	public void update(String ID) throws ServicoNaoEncontradoException{
-		this.produtos.update(ID);
+	public void update(Servico servico) throws ServicoNaoEncontradoException{
+		this.produtos.update(servico);
 	}
 	
 }

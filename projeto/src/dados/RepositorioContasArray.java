@@ -28,9 +28,9 @@ public class RepositorioContasArray implements RepositorioContas {
 	public void update(Conta conta) throws ContaNaoExisteException{
 		for(int i = 0; i < this.contas.length;i++){
 			if(this.contas[i].getCPF().equals(conta.getCPF())){
-				this.contas[i] = conta;
+				this.contas[i] = conta;//TODO: Melhorar metodo update (implementar todos os IF's para somente modificar os campos digitados pela novaConta)
 			}else{
-				throw new ContaNaoExisteException(); //marcela: tava faltando jogar a excecao
+				throw new ContaNaoExisteException();
 			}
 		}
 	}

@@ -26,6 +26,7 @@ import javax.swing.ListSelectionModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.AbstractListModel;
 
 
 
@@ -69,9 +70,9 @@ public class Clientes extends JFrame {
 		btnRemover.setBounds(294, 121, 89, 23);
 		contentPane.add(btnRemover);
 
-		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(294, 186, 89, 23);
-		contentPane.add(btnSalvar);
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setBounds(294, 186, 89, 23);
+		contentPane.add(btnAtualizar);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(294, 56, 89, 23);
@@ -84,14 +85,11 @@ public class Clientes extends JFrame {
 		});
 		btnCadastrar.setBounds(294, 56, 89, 23);
 		contentPane.add(btnCadastrar);
-		//		
-		//		table = new JTable();
-		//		table.setBounds(10, 41, 252, 210);
-		//		contentPane.add(table);
-		//		
-
-
+		
 		DefaultListModel model = new DefaultListModel();
+		JList list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setBounds(26, 44, 59, 63);
 		if(OficinaFacade.contasArray != null){
 			Conta[] contas = OficinaFacade.contasArray.listar();
 			if(contas != null){
@@ -100,13 +98,14 @@ public class Clientes extends JFrame {
 				}
 			}
 		}
+		list.setModel(model);
+		contentPane.add(list);
+		
+		//TODO: Implementar o método Update e o método Remover na Lista de Clientes.
+		
 	
-		model.addElement("teste");
-
-		JList list_clientes = new JList(model);
-		list_clientes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		JScrollPane teste = new JScrollPane();
-		teste.setViewportView(list_clientes);
+	
+		
 
 
 	}

@@ -37,6 +37,11 @@ public class CadastrarCompra extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		//TODO: Criar uma Lista Onde tem todos os Servicos chamda "Servicos" e outra chamada "Compra" 
+		//TODO: Criar Botao "Add" para uma segunda lista chamda "Compra"
+		//TODO: Criar Botao "Delete" que retira o item selecionado da lista "Compra"
+		//TODO: Criar Botao "Finalizar Compra" que finaliza a compra e abre a tela "Oficina"
 	}
 
 }

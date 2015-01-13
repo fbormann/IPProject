@@ -120,7 +120,6 @@ public class CadastrarServico extends JFrame {
 						OficinaFacade.adicionarServico(novoServico);
 					
 				} catch (ServicoJaCadastradoException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

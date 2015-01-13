@@ -212,7 +212,7 @@ public class CadastrarClientes extends JFrame {
 		
 		final JLabel label_error = new JLabel("");
 		label_error.setForeground(Color.RED);
-		label_error.setBounds(23, 237, 194, 14);
+		label_error.setBounds(23, 217, 257, 34);
 		contentPane.add(label_error);
 		
 		

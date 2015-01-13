@@ -56,10 +56,10 @@ public class Oficina extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		btnVendas = new JButton("Vendas");
+		btnVendas = new JButton("Compras");
 		btnVendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new CadastrarVenda().setVisible(true);
+				new CadastrarCompra().setVisible(true);
 				fecharJFrame();
 			}
 		});

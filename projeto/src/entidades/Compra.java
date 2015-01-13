@@ -7,6 +7,7 @@ public class Compra {
 	private Servico[] servicos;
 	
 	public Compra(){
+
 		this.servicos = new Servico[0];
 		this.valor = 0;
 	}

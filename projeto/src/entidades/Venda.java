@@ -5,13 +5,13 @@ public class Venda extends Servico {
 	
 	private final double COMISSAO;
 
-	public Venda(double preco, String ID, String codigo){
-		super(preco, ID, codigo);
+	public Venda( String nome,double preco, String ID){
+		super(nome,preco, ID);
 		this.COMISSAO = 0;
 	}
 	
 	public double comissao(double compra){
-		return 0;
+		return compra*this.COMISSAO; //TODO:ver isto aqui.
 	}
 
 

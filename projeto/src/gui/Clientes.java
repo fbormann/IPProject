@@ -105,7 +105,6 @@ public class Clientes extends JFrame {
 
 		JList list_clientes = new JList(model);
 		list_clientes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		contentPane.add(list_clientes);
 		JScrollPane teste = new JScrollPane();
 		teste.setViewportView(list_clientes);
 

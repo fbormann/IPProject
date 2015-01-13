@@ -36,6 +36,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JScrollBar;
 
 import comunicacao.OficinaFacade;
+import java.awt.Color;
 
 public class CadastrarClientes extends JFrame {
 
@@ -106,49 +107,7 @@ public class CadastrarClientes extends JFrame {
 		tf_cpf.setColumns(10);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String cpf = tf_cpf.getText();
-				String nome = tf_name.getText();
-				//Criando o objeto Endereco.
-				Endereco novoEndereco = new Endereco();
-				novoEndereco.setBairro(tf_bairro.getText());
-				novoEndereco.setCEP(tf_cep.getText());
-				novoEndereco.setCidade(tf_cidade.getText());
-				novoEndereco.setEstado(tf_estado.getText());
-				novoEndereco.setRua(tf_rua.getText());
-				//novoEndereco.setComplemento(tf_comp.getText());
-				novoEndereco.setNumero(Integer.parseInt(tf_numero.getText()));
-
-				Carro novoCarro = new Carro();
-				novoCarro.setCor(tf_cor.getText());
-				novoCarro.setMarca(tf_marca.getText());
-				novoCarro.setModelo(tf_modelo.getText());
-				novoCarro.setPlaca(tf_placa.getText());
-
-				Conta novaConta = new Conta(nome,cpf,novoEndereco,novoCarro);
-
-
-				try{
-
-						OficinaFacade.adicionarConta(novaConta);
-					
-					new Clientes().setVisible(true);
-					fecharJFrame();
-				}catch(ContaJaCadastradaException excep){
-					//TODO: Aprender como utilizar popup ou mensagens de erro.
-				} catch (CPFInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (CEPInvalidoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (PlacaInvalidaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		
 		btnCadastrar.setBounds(320, 228, 89, 23);
 		contentPane.add(btnCadastrar);
 
@@ -250,6 +209,54 @@ public class CadastrarClientes extends JFrame {
 		tf_placa.setColumns(10);
 		tf_placa.setBounds(221, 189, 86, 20);
 		contentPane.add(tf_placa);
+		
+		final JLabel label_error = new JLabel("");
+		label_error.setForeground(Color.RED);
+		label_error.setBounds(23, 237, 194, 14);
+		contentPane.add(label_error);
+		
+		
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cpf = tf_cpf.getText();
+				String nome = tf_name.getText();
+				//Criando o objeto Endereco.
+				Endereco novoEndereco = new Endereco();
+				novoEndereco.setBairro(tf_bairro.getText());
+				novoEndereco.setCEP(tf_cep.getText());
+				novoEndereco.setCidade(tf_cidade.getText());
+				novoEndereco.setEstado(tf_estado.getText());
+				novoEndereco.setRua(tf_rua.getText());
+				//novoEndereco.setComplemento(tf_comp.getText());
+				novoEndereco.setNumero(Integer.parseInt(tf_numero.getText()));
+
+				Carro novoCarro = new Carro();
+				novoCarro.setCor(tf_cor.getText());
+				novoCarro.setMarca(tf_marca.getText());
+				novoCarro.setModelo(tf_modelo.getText());
+				novoCarro.setPlaca(tf_placa.getText());
+
+				Conta novaConta = new Conta(nome,cpf,novoEndereco,novoCarro);
+
+
+				try{
+
+					OficinaFacade.adicionarConta(novaConta);
+					
+					new Clientes().setVisible(true);
+					fecharJFrame();
+				}catch(ContaJaCadastradaException e1){
+					label_error.setText(e1.getMessage());
+				} catch (CPFInvalidoException e1) {
+					label_error.setText(e1.getMessage());
+				} catch (CEPInvalidoException e1) {
+					label_error.setText(e1.getMessage());
+				} catch (PlacaInvalidaException e1) {
+					label_error.setText(e1.getMessage());
+				}
+			}
+		});
+		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
@@ -272,8 +279,6 @@ public class CadastrarClientes extends JFrame {
 	public void fecharJFrame(){
 		this.dispose();
 	}
-
-
 }
 
 

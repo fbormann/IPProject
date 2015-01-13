@@ -4,11 +4,11 @@ public class Compra {
 	private String contaCPF;
 	private double valor;
 	private String id;
-	private Venda[] vendas;
+
 	private Servico[] servicos;
 	
 	public Compra(){
-		this.vendas = new Venda[0];
+
 		this.servicos = new Servico[0];
 		this.valor = 0;
 	}
@@ -19,14 +19,6 @@ public class Compra {
 
 	public void setValor(double valor) {
 		this.valor = valor;
-	}
-
-	public Venda[] getProdutos() {
-		return vendas;
-	}
-
-	public void setProdutos(Venda[] produtos) {
-		this.vendas = produtos;
 	}
 
 	public Servico[] getServicos() {

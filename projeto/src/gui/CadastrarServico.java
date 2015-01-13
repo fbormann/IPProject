@@ -13,9 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 
+import comunicacao.OficinaFacade;
+
 import entidades.Lavagem;
 import entidades.Otimizacao;
+import entidades.Produto;
 import entidades.Servico;
+import excecoes.ServicoJaCadastradoException;
 
 public class CadastrarServico extends JFrame {
 
@@ -100,11 +104,24 @@ public class CadastrarServico extends JFrame {
 				String nome = tf_nome.getText();
 				String codigo = tf_id.getText();
 				String preco = tf_preco.getText();
-				Servico novoServico;
+				Servico novoServico = null;
 				if(rdbtn_lavagem.isSelected()){ //checar como anular os checkboxes.
-					 novoServico = new Lavagem(nome,Double.parseDouble(preco),codigo);
+					novoServico = new Lavagem(nome,Double.parseDouble(preco),codigo);
 				}else if(rdbtn_otimizacao.isSelected()){
-					 novoServico =  new Otimizacao(nome, Double.parseDouble(preco),codigo);
+					novoServico =  new Otimizacao(nome, Double.parseDouble(preco),codigo);
+				}else if(rdbtn_produto.isSelected()){
+					novoServico = new Produto(nome,Double.parseDouble(preco),codigo); //TODO:Just for debugging purposes, delete it.
+				}else{
+					//TODO: Tratar quando nenhum dos três checkboxes for selecionado.
+				}
+
+				try {
+					
+						OficinaFacade.adicionarServico(novoServico);
+					
+				} catch (ServicoJaCadastradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});

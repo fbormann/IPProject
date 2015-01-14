@@ -127,9 +127,7 @@ public class OficinaFacade {
 			//checar se há somente números
 			for(int i = 0; i<CPF.length(); i++){
 				if(i!=3 && i!=7 && i!=11){
-					if(CPF.charAt(i)>=48 && CPF.charAt(i)<=57){
-						return true;
-					}else{
+					if(CPF.charAt(i)<48 && CPF.charAt(i)>57){
 						throw e;
 					}
 				}
@@ -149,29 +147,26 @@ public class OficinaFacade {
 	}
 	public static boolean validadeCEP(String CEP) throws CEPInvalidoException{
 		CEPInvalidoException e = new CEPInvalidoException();
+		boolean resultado = true;
 		//checar tamanho
-		if(CEP.length()!=9){
+		if(CEP.length() != 9){
 			throw e;
 			//checando se há somente números
 		}else{
 			for(int i = 0; i<CEP.length(); i++){
 				if(i!=5){
-					if(CEP.charAt(i)>=48 && CEP.charAt(i)<=57){
-						return true;
-					}else{
+					if(CEP.charAt(i)<48 && CEP.charAt(i)>57){
 						throw e;
 					}
 				}
 			}
-			//checando ap
-			String exemploCEP = "00000-000";
-			int a = exemploCEP.charAt(5);
-			if(a == 45){
-				return true;
-			}else{
+			int a = CEP.charAt(5);
+			if(a != 45){
 				throw e;
 			}
 		}
+		
+		return resultado;
 	}
 	public static boolean validadePlaca(String placa) throws PlacaInvalidaException{
 		PlacaInvalidaException a = new PlacaInvalidaException();

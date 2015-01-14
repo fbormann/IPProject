@@ -5,7 +5,7 @@ import excecoes.ContaNaoExisteException;
 
 public class RepositorioContasArray implements RepositorioContas {
 	private Conta[] contas;
-	
+
 	public RepositorioContasArray(){
 		this.contas = new Conta[0];
 	}
@@ -24,11 +24,42 @@ public class RepositorioContasArray implements RepositorioContas {
 		this.contas = aux;
 	}
 
-	
+
 	public void update(Conta conta) throws ContaNaoExisteException{
 		for(int i = 0; i < this.contas.length;i++){
 			if(this.contas[i].getCPF().equals(conta.getCPF())){
-				this.contas[i] = conta;//TODO: Melhorar metodo update (implementar todos os IF's para somente modificar os campos digitados pela novaConta)
+				if(!conta.getNome().equals("")){
+					this.contas[i].setNome(conta.getNome());
+				}
+				if(!conta.getEndereco().getBairro().equals("")){
+					this.contas[i].getEndereco().setBairro(conta.getEndereco().getBairro());
+				}
+
+				if(!conta.getEndereco().getCidade().equals("")){
+					this.contas[i].getEndereco().setCidade(conta.getEndereco().getCidade());
+				}
+
+				if(!conta.getEndereco().getCEP().equals("")){
+					this.contas[i].getEndereco().setCEP(conta.getEndereco().getCEP());
+				}
+
+				if(!conta.getEndereco().getEstado().equals("")){
+					this.contas[i].getEndereco().setEstado(conta.getEndereco().getEstado());
+				}
+
+				if(!conta.getEndereco().getRua().equals("")){
+					this.contas[i].getEndereco().setRua(conta.getEndereco().getRua());
+				}
+
+				if(conta.getEndereco().getNumero() != 0){
+					this.contas[i].getEndereco().setNumero(conta.getEndereco().getNumero());
+				}
+
+				if(!conta.getNome().equals("")){
+					this.contas[i].setNome(conta.getNome());
+				}
+
+				
 			}else{
 				throw new ContaNaoExisteException();
 			}
@@ -43,17 +74,17 @@ public class RepositorioContasArray implements RepositorioContas {
 				existe = true;
 			}
 		}
-		
+
 		if(!existe){
 			throw new ContaNaoExisteException();
 		}
-		
+
 		for(int i = 0; i < this.contas.length;i++){
 			if(!this.contas[i].getCPF().equals(CPF)){
 				aux[i] = this.contas[i];
 			}
 		}
-		
+
 	}
 
 	public Conta[] listar() {
@@ -81,7 +112,7 @@ public class RepositorioContasArray implements RepositorioContas {
 				existe = true;
 			}
 		}
-		
+
 		return existe;
 	}
 }

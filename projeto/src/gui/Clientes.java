@@ -20,6 +20,8 @@ import javax.swing.JList;
 
 import comunicacao.OficinaFacade;
 import entidades.Conta;
+import excecoes.CPFInvalidoException;
+import excecoes.ContaNaoExisteException;
 
 import javax.swing.ListSelectionModel;
 
@@ -67,6 +69,7 @@ public class Clientes extends JFrame {
 		contentPane.add(lblClientes);
 
 		JButton btnRemover = new JButton("Remover");
+	
 		btnRemover.setBounds(294, 121, 89, 23);
 		contentPane.add(btnRemover);
 
@@ -86,28 +89,54 @@ public class Clientes extends JFrame {
 		btnCadastrar.setBounds(294, 56, 89, 23);
 		contentPane.add(btnCadastrar);
 		
-		DefaultListModel model = new DefaultListModel();
-		JList list = new JList();
+		final DefaultListModel model = new DefaultListModel();
+		final JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setBounds(26, 44, 59, 63);
+		list.setBounds(26, 44, 204, 165);
 		if(OficinaFacade.contasArray != null){
 			Conta[] contas = OficinaFacade.contasArray.listar();
 			if(contas != null){
 				for(int i = 0; i < contas.length;i++){
-					model.addElement(contas[i].getNome());
+					model.addElement(contas[i].getNome() + "(" + contas[i].getCPF() +")");
 				}
 			}
 		}
 		list.setModel(model);
 		contentPane.add(list);
 		
+		JLabel lbl_error = new JLabel("");
+		lbl_error.setBounds(26, 237, 204, 14);
+		contentPane.add(lbl_error);
+		
+		JButton btn_back = new JButton("Voltar");
+		btn_back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Oficina().setVisible(true);
+				fecharJFrame();
+			}
+		});
+		btn_back.setBounds(294, 7, 119, 23);
+		contentPane.add(btn_back);
+		
+		
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String CPF = list.getSelectedValue().toString().substring(list.getSelectedValue().toString().indexOf("(", 0)+1,list.getSelectedValue().toString().length()-1);
+				
+				try {
+					OficinaFacade.removerConta(CPF);
+					model.removeElement(list.getSelectedValue());
+				} catch (ContaNaoExisteException e) {
+					//Esses erros não acontecerão.
+					e.printStackTrace();
+				} catch (CPFInvalidoException e) {
+					//Este erro não acontecerá.
+					e.printStackTrace();
+				}			
+			}
+		});
 		//TODO: Implementar o método Update e o método Remover na Lista de Clientes.
-		
 	
-	
-		
-
-
 	}
 
 	public void listarClientes(){

@@ -34,6 +34,10 @@ public class RepositorioComprasArray implements RepositorioCompras{
 		
 		for(int i = 0; i < this.compras.length;i++){
 			if(this.compras[i].getId().equals(compra.getId())){
+				if(compra.getValor() != 0){
+					this.compras[i].setValor(compra.getValor());
+				}
+				//TODO: Entender o que pode ser modificado aqui.
 				this.compras[i] = compra;
 			}
 		}

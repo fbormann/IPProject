@@ -36,13 +36,12 @@ public class OficinaFacade {
 
 
 	//VENDA
-	public static void adicionarCompra(Compra compra) throws ContaJaCadastradaException{
+	public static void adicionarCompra(Compra compra) throws ContaNaoExisteException{
 		if(compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
 		}else{
-			throw new ContaJaCadastradaException();
+			throw new ContaNaoExisteException();
 		}
-		compras.cadastrarCompra(compra);
 	}
 	public boolean compraExiste(String ID) throws CompraNaoExisteException{
 		CompraNaoExisteException e = new CompraNaoExisteException();
@@ -50,6 +49,21 @@ public class OficinaFacade {
 			return true;
 		}else{
 			throw e;
+		}
+	}
+
+	public static void removerCompra(String ID) throws CompraNaoExisteException {
+		if(compras.exist(ID)){
+			compras.removerCompra(ID);
+		}else{
+			throw new CompraNaoExisteException();
+		}
+	}
+	public static Compra buscarCompra(String ID) throws CompraNaoExisteException{
+		if(compras.exist(ID)){
+			return compras.buscarCompra(ID);
+		}else{
+			throw new CompraNaoExisteException();
 		}
 	}
 
@@ -104,8 +118,6 @@ public class OficinaFacade {
 			throw new ContaNaoExisteException();
 		}
 	}
-
-
 	public static boolean validadeCPF(String CPF) throws CPFInvalidoException{
 		CPFInvalidoException e = new CPFInvalidoException();
 		//checar tamanho

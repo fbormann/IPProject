@@ -1,6 +1,7 @@
 package negocios;
 import dados.RepositorioCompras;
 import entidades.Compra;
+import excecoes.CompraNaoExisteException;
 
 public class ManagerCompras {
 	
@@ -11,7 +12,15 @@ public class ManagerCompras {
 	}
 	
 	public void cadastrarCompra(Compra compra){
-		compras.adicionar(compra);
+		this.compras.adicionar(compra);
+	}
+	
+	public void removerCompra(String ID) throws CompraNaoExisteException{
+		this.compras.remover(ID);
+	}
+	
+	public Compra buscarCompra(String ID) throws CompraNaoExisteException{
+		return this.compras.buscar(ID);
 	}
 	
 	public boolean exist(String ID){

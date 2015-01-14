@@ -17,6 +17,7 @@ import excecoes.PlacaInvalidaException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 import comunicacao.OficinaFacade;
+import dados.RepositorioServicoArray;
 
 //classe que irá testar todos os métodos da fachada(OficinaFacade)
 public class Programa {
@@ -24,6 +25,7 @@ public class Programa {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		Scanner str = new Scanner(System.in);
+		RepositorioServicoArray r = new RepositorioServicoArray();
 
 		OficinaFacade.inicializar();
 
@@ -180,7 +182,8 @@ public class Programa {
 						System.out.println("Erro: " + e.getMessage());
 						e.printStackTrace();
 					}
-					
+
+
 				}else if(escolhaTipo==2){
 					System.out.print("Nome: ");
 					String nome = str.nextLine();
@@ -195,7 +198,7 @@ public class Programa {
 						System.out.println("Erro: " + e.getMessage());
 						e.printStackTrace();
 					}
-					
+
 				}else if(escolhaTipo == 3){
 					System.out.print("Nome: ");
 					String nome = str.nextLine();
@@ -210,7 +213,7 @@ public class Programa {
 						System.out.println("Erro: " + e.getMessage());
 						e.printStackTrace();
 					}
-					
+
 				}
 			}else if(escolhaServico == 2){
 				System.out.print("Digite o ID do servico que voce quer remover: ");
@@ -238,7 +241,7 @@ public class Programa {
 						System.out.println("Erro: " + e.getMessage());
 						e.printStackTrace();
 					}
-					
+
 				}else if(escolhaAtualizar == 2){
 					System.out.print("Nome: ");
 					String nome = str.nextLine();
@@ -288,6 +291,38 @@ public class Programa {
 				}
 			}
 
-		} //TODO: parte de vendas
+		}else if(escolhaMenu == 3){
+			System.out.print("CPF: ");
+			String CPF = str.nextLine();
+			try {
+				OficinaFacade.contaExiste(CPF);
+			} catch (ContaNaoExisteException e) {
+				System.out.println("Erro: " + e.getMessage());
+				e.printStackTrace();
+			} catch (CPFInvalidoException e) {
+				System.out.println("Erro: " + e.getMessage());
+				e.printStackTrace();
+			}
+
+			Servico[] aux = OficinaFacade.servicosArray.listar();
+			for(int i = 0; i < aux.length; i++ ){
+				System.out.println(i + " - " + aux[i].getNome());
+			}
+			
+			RepositorioServicoArray comprados = new RepositorioServicoArray();
+
+			System.out.println("Escolha o servico. (Digite 'exit' caso nao queira adicionar mais servicos): ");
+			String escolhaServico = str.nextLine();
+			int a = Integer.parseInt(escolhaServico);
+			
+			while(!escolhaServico.equals("exit")){
+				try {
+					comprados.adicionar(aux[a]);
+				} catch (ServicoJaCadastradoException e) {
+					System.out.println("Erro: " + e.getMessage());
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }

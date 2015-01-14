@@ -12,22 +12,22 @@ public class ManagerConta {
 	}
 
 	public void cadastrar(Conta conta) throws ContaJaCadastradaException{ 
-		contas.adicionar(conta);
+		this.contas.adicionar(conta);
 	}
 
 	public void remover(String CPF) throws ContaNaoExisteException{
-		contas.remover(CPF);
+		this.contas.remover(CPF);
 	}
 
 	public Conta buscar(String CPF) throws ContaNaoExisteException{
-		return contas.buscar(CPF);
+		return this.contas.buscar(CPF);
 	}
 	
 	public boolean exist(String CPF) {
-		return contas.exist(CPF);
+		return this.contas.exist(CPF);
 	}
 	
 	public void update(Conta conta) throws ContaNaoExisteException{
-		contas.update(conta);
+		this.contas.update(conta);
 	}
 }

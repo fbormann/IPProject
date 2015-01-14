@@ -135,7 +135,7 @@ public class Clientes extends JFrame {
 				}			
 			}
 		});
-		//TODO: Implementar o método Update e o método Remover na Lista de Clientes.
+	
 	
 	}
 

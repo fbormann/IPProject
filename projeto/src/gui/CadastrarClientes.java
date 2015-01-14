@@ -102,7 +102,7 @@ public class CadastrarClientes extends JFrame {
 		contentPane.add(lblCpf);
 
 		tf_cpf = new JTextField();
-		tf_cpf.setBounds(221, 8, 86, 20);
+		tf_cpf.setBounds(221, 8, 134, 20);
 		contentPane.add(tf_cpf);
 		tf_cpf.setColumns(10);
 
@@ -227,7 +227,7 @@ public class CadastrarClientes extends JFrame {
 				novoEndereco.setCidade(tf_cidade.getText());
 				novoEndereco.setEstado(tf_estado.getText());
 				novoEndereco.setRua(tf_rua.getText());
-				//novoEndereco.setComplemento(tf_comp.getText());
+				novoEndereco.setComplemento(tf_comp.getText());
 				novoEndereco.setNumero(Integer.parseInt(tf_numero.getText()));
 
 				Carro novoCarro = new Carro();
@@ -240,7 +240,6 @@ public class CadastrarClientes extends JFrame {
 
 
 				try{
-
 					OficinaFacade.adicionarConta(novaConta);
 					
 					new Clientes().setVisible(true);

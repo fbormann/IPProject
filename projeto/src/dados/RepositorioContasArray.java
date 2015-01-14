@@ -58,7 +58,23 @@ public class RepositorioContasArray implements RepositorioContas {
 				if(!conta.getNome().equals("")){
 					this.contas[i].setNome(conta.getNome());
 				}
-
+				
+				if(!conta.getCarro().getCor().equals("")){
+					this.contas[i].getCarro().setCor(conta.getCarro().getCor());
+				}
+				
+				if(!conta.getCarro().getMarca().equals("")){
+					this.contas[i].getCarro().setMarca(conta.getCarro().getMarca());
+				}
+				
+				if(!conta.getCarro().getModelo().equals("")){
+					this.contas[i].getCarro().setModelo(conta.getCarro().getModelo());
+				}
+				
+				if(!conta.getCarro().getPlaca().equals("")){
+					this.contas[i].getCarro().setPlaca(conta.getCarro().getPlaca());
+				}
+				
 				
 			}else{
 				throw new ContaNaoExisteException();

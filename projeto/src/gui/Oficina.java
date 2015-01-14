@@ -27,7 +27,7 @@ public class Oficina extends JFrame {
 	private JButton btnServios;
 	private JButton btnHistrico;
 	private JTextField txtNomeLogo;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,7 +48,7 @@ public class Oficina extends JFrame {
 	 * Create the frame.
 	 */
 	public Oficina() {
-		OficinaFacade.inicializar();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 477, 324);
 		contentPane = new JPanel();

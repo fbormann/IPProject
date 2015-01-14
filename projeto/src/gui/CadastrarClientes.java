@@ -80,7 +80,7 @@ public class CadastrarClientes extends JFrame {
 	 */
 	//TODO: criar construtor para testar a janela do cadastrar já preenchida com as informações do cliente (para poder editar) para não termos que fazer outra janela igual
 	public CadastrarClientes() {
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -107,7 +107,7 @@ public class CadastrarClientes extends JFrame {
 		tf_cpf.setColumns(10);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
-		
+
 		btnCadastrar.setBounds(320, 228, 89, 23);
 		contentPane.add(btnCadastrar);
 
@@ -209,13 +209,13 @@ public class CadastrarClientes extends JFrame {
 		tf_placa.setColumns(10);
 		tf_placa.setBounds(221, 189, 86, 20);
 		contentPane.add(tf_placa);
-		
+
 		final JLabel label_error = new JLabel("");
 		label_error.setForeground(Color.RED);
 		label_error.setBounds(23, 217, 257, 34);
 		contentPane.add(label_error);
-		
-		
+
+
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cpf = tf_cpf.getText();
@@ -228,7 +228,9 @@ public class CadastrarClientes extends JFrame {
 				novoEndereco.setEstado(tf_estado.getText());
 				novoEndereco.setRua(tf_rua.getText());
 				novoEndereco.setComplemento(tf_comp.getText());
-				novoEndereco.setNumero(Integer.parseInt(tf_numero.getText()));
+				if(!tf_numero.getText().equals("")){
+					novoEndereco.setNumero(Integer.parseInt(tf_numero.getText()));
+				}
 
 				Carro novoCarro = new Carro();
 				novoCarro.setCor(tf_cor.getText());
@@ -241,7 +243,7 @@ public class CadastrarClientes extends JFrame {
 
 				try{
 					OficinaFacade.adicionarConta(novaConta);
-					
+
 					new Clientes().setVisible(true);
 					fecharJFrame();
 				}catch(ContaJaCadastradaException e1){
@@ -255,7 +257,7 @@ public class CadastrarClientes extends JFrame {
 				}
 			}
 		});
-		
+
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {

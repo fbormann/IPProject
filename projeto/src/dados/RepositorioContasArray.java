@@ -26,6 +26,8 @@ public class RepositorioContasArray implements RepositorioContas {
 
 
 	public void update(Conta conta) throws ContaNaoExisteException{
+		
+		//TODO: Implementar conta nao existe Exception.
 		for(int i = 0; i < this.contas.length;i++){
 			if(this.contas[i].getCPF().equals(conta.getCPF())){
 				if(!conta.getNome().equals("")){
@@ -76,8 +78,6 @@ public class RepositorioContasArray implements RepositorioContas {
 				}
 				
 				
-			}else{
-				throw new ContaNaoExisteException();
 			}
 		}
 	}

@@ -18,12 +18,13 @@ import negocios.*;
 
 
 public class OficinaFacade {
-	public static ManagerCompras compras;
-	public static ManagerConta contas;
-	public static ManagerServico servicos;
-	public static RepositorioComprasArray comprasArray;
-	public static RepositorioContasArray contasArray;
-	public static RepositorioServicoArray servicosArray;
+
+	public static RepositorioComprasArray comprasArray = new RepositorioComprasArray();
+	public static RepositorioContasArray contasArray = new RepositorioContasArray();
+	public static RepositorioServicoArray servicosArray = new RepositorioServicoArray();
+	public static ManagerCompras compras = new ManagerCompras(comprasArray);
+	public static ManagerConta contas = new ManagerConta(contasArray);
+	public static ManagerServico servicos= new ManagerServico(servicosArray);
 
 	public static void inicializar(){
 		OficinaFacade.comprasArray = new RepositorioComprasArray();
@@ -101,23 +102,20 @@ public class OficinaFacade {
 	}
 	public static void updateConta(Conta conta) throws CPFInvalidoException, ContaNaoExisteException, CEPInvalidoException, PlacaInvalidaException{
 		if(contas.exist(conta.getCPF())){
-			if(validadeCPF(conta.getCPF())){
-				if(validadeCEP(conta.getEndereco().getCEP())){
-					if(validadePlaca(conta.getCarro().getPlaca())){
-						contas.update(conta);
-					}else{
-						throw new PlacaInvalidaException();
-					}
-				}else{
-					throw new CEPInvalidoException();
-				}
-			}else{
-				throw new CPFInvalidoException();
+		
+			if(!conta.getEndereco().getCEP().equals("")){
+				OficinaFacade.validadeCEP(conta.getEndereco().getCEP());
 			}
-		}else{
-			throw new ContaNaoExisteException();
+			
+			if(!conta.getCarro().getPlaca().equals("")){
+				OficinaFacade.validadePlaca(conta.getCarro().getPlaca());
+			}
+			
+			contas.update(conta);
 		}
 	}
+
+
 	public static boolean validadeCPF(String CPF) throws CPFInvalidoException{
 		CPFInvalidoException e = new CPFInvalidoException();
 		//checar tamanho
@@ -165,7 +163,7 @@ public class OficinaFacade {
 				throw e;
 			}
 		}
-		
+
 		return resultado;
 	}
 	public static boolean validadePlaca(String placa) throws PlacaInvalidaException{

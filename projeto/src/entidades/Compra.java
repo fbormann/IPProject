@@ -19,9 +19,16 @@ public class Compra {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-
+	public double totalCompra(){
+		double r = 0;
+		for(int i = 0; i<this.servicos.length; i++){
+			r += this.servicos[i].getPreco();
+		}
+		return r;
+	}
+	
 	public Servico[] getServicos() {
-		return servicos;
+		return this.servicos;
 	}
 
 	public void setServicos(Servico[] servicos) {
@@ -29,7 +36,7 @@ public class Compra {
 	}
 
 	public String getContaCPF() {
-		return contaCPF;
+		return this.contaCPF;
 	}
 
 	public void setContaCPF(String contaCPF) {
@@ -37,7 +44,7 @@ public class Compra {
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {

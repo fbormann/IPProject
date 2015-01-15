@@ -10,11 +10,11 @@ public interface RepositorioServico {
 	
 	void update(Servico servico) throws ServicoNaoEncontradoException;
 	
-	double consultaPreco(String ID);
+	double consultaPreco(String ID) throws ServicoNaoEncontradoException;
 		
 	Servico[] listar();
 	
-	Servico buscar(String ID);
+	Servico buscar(String ID) throws ServicoNaoEncontradoException;
 	
 	boolean exist(String ID);
 }

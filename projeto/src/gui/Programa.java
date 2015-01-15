@@ -41,6 +41,12 @@ public class Programa {
 				String nome = str.nextLine();
 				System.out.print("CPF: ");
 				String CPF = str.nextLine();
+				try {
+					OficinaFacade.validadeCPF(CPF);
+				} catch (CPFInvalidoException e) {
+					System.out.println("Erro: " + e.getMessage());
+					e.printStackTrace();
+				}				
 				//endereço
 				System.out.print("Rua: ");
 				String rua = str.nextLine();
@@ -50,6 +56,12 @@ public class Programa {
 				String complemento = str.nextLine();
 				System.out.print("CEP: ");
 				String CEP = str.nextLine();
+				try {
+					OficinaFacade.validadeCEP(CEP);
+				} catch (CEPInvalidoException e){
+					System.out.println("Erro: " + e.getMessage());
+					e.printStackTrace();
+				}
 				System.out.print("Bairro: ");
 				String bairro = str.nextLine();
 				System.out.print("Cidade: ");
@@ -66,6 +78,12 @@ public class Programa {
 				String cor = str.nextLine();
 				System.out.print("Placa: ");
 				String placa = str.nextLine();
+				try {
+					OficinaFacade.validadePlaca(placa);
+				} catch (PlacaInvalidaException e){
+					System.out.println("Erro: " + e.getMessage());
+					e.printStackTrace();
+				}
 
 				Carro carro = new Carro(modelo, marca, cor, placa);
 				Conta conta = new Conta(nome, CPF, endereco, carro);
@@ -75,14 +93,12 @@ public class Programa {
 				} catch (ContaJaCadastradaException e) {
 					System.out.println("Erro: " + e.getMessage());
 					e.printStackTrace();
+					//os proximos erros nao irao acontecer pois ja foram checados
 				} catch (CPFInvalidoException e) {
-					System.out.println("Erro: " + e.getMessage());
 					e.printStackTrace();
 				} catch (CEPInvalidoException e) {
-					System.out.println("Erro: " + e.getMessage());
 					e.printStackTrace();
 				} catch (PlacaInvalidaException e) {
-					System.out.println("Erro: " + e.getMessage());
 					e.printStackTrace();
 				}
 

@@ -10,8 +10,8 @@ public abstract class Servico {
 		this.nome = nome;
 		this.ID = ID;
 	}
-
-	public abstract double comissao(double compra);
+	
+	public abstract double comissao(Compra compra);
 	
 	public String getNome(){
 		return this.nome;

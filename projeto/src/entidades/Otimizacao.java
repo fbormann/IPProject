@@ -7,9 +7,9 @@ public class Otimizacao extends Servico {
 	public Otimizacao(String nome,double preco, String ID){
 		super(nome,preco, ID);
 	}
-	
-	public double comissao(double compra){
-		double r = (compra * c2);
+
+	public double comissao(Compra compra){
+		double r = (compra.totalCompra() * c2);
 		return r;
 	}
 	

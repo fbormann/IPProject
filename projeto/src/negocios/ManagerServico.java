@@ -16,11 +16,11 @@ public class ManagerServico {
 	public void remover(String ID) throws ServicoNaoEncontradoException{
 		produtos.remover(ID);
 	}
-	public double consultaPreco(String ID){
+	public double consultaPreco(String ID) throws ServicoNaoEncontradoException{
 		return produtos.consultaPreco(ID);
 	}
 	
-	public Servico buscar(String ID){
+	public Servico buscar(String ID) throws ServicoNaoEncontradoException{
 		return produtos.buscar(ID);
 	}
 

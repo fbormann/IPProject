@@ -7,7 +7,7 @@ import excecoes.ServicoNaoEncontradoException;
 
 public class RepositorioServicoArray implements RepositorioServico{
 	private Servico[] servicos;
-	
+
 	public RepositorioServicoArray(){
 		this.servicos = new Servico[0];
 	}
@@ -21,9 +21,9 @@ public class RepositorioServicoArray implements RepositorioServico{
 				aux[i] = this.servicos[i];
 			}
 		}
-		
+
 		aux[aux.length-1] = servico;
-		
+
 	}
 
 	public void remover(String ID) throws ServicoNaoEncontradoException{
@@ -34,34 +34,70 @@ public class RepositorioServicoArray implements RepositorioServico{
 				existe = true;
 			}
 		}
-		
+
 		if(!existe){
 			throw new ServicoNaoEncontradoException();
 		}
-		
+
 		for(int i = 0; i < this.servicos.length;i++){
 			if(!this.servicos[i].getID().equals(ID)){
 				aux[i] = this.servicos[i];
 			}
 		}
 	}
+	//marcela
+	public void update(Servico servico) throws ServicoNaoEncontradoException {
+		for(int i = 0; i<this.servicos.length; i++){
+			if(this.servicos[i].getID().equals(servico.getID())){
+				if(!servico.getNome().equals("")){
+					this.servicos[i].setNome(servico.getNome());
+				}
+				if(servico.getPreco() != 0){
+					this.servicos[i].setPreco(servico.getPreco());
+				}
+				//ID do produto nao pode ser alterado
 
-	public void update(String ID) throws ServicoNaoEncontradoException {
+			}else{
+				throw new ServicoNaoEncontradoException();
+			}
+		}
 	}
-
-	public double consultaPreco(String ID) {
-		return 0;
+	
+	//marcela
+	public double consultaPreco(String ID) throws ServicoNaoEncontradoException{
+		double a = 0;
+		if(this.exist(ID)){
+			for(int i = 0; i<this.servicos.length; i++){
+				if(this.servicos[i].getID().equals(ID)){
+					a = this.servicos[i].getPreco();
+				}
+			}
+		}else{
+			throw new ServicoNaoEncontradoException();
+		}
+		return a;
 	}
 
 	public Servico[] listar() {
 		return null;
 	}
 
-	public Servico buscar(String ID) {
+	//marcela
+	public Servico buscar(String ID) throws ServicoNaoEncontradoException {
+		if(this.exist(ID)){
+			for(int i = 0; i<this.servicos.length; i++){
+				if(this.servicos[i].getID().equals(ID)){
+					return this.servicos[i];
+				}
+			}
+		}else{
+			throw new ServicoNaoEncontradoException();
+		}
+		
 		return null;
+		
 	}
-	
-	
+
 	public boolean exist(String ID){
 		boolean exist = false;
 		for(int i = 0; i < this.servicos.length;i++){
@@ -71,14 +107,5 @@ public class RepositorioServicoArray implements RepositorioServico{
 		}
 		return exist;
 	}
-
-	public void update(Servico servico) throws ServicoNaoEncontradoException {
-		//TODO: Criar método update em Servico
-	}
-
-	public double consultaPrecoNome(String nome) {
-		return 0;
-	}
-	
 
 }

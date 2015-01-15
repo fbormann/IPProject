@@ -131,11 +131,10 @@ public class OficinaFacade {
 					}
 				}
 			}
-			//checando hifen e ponto
-			String exemplo = "000.000.000-00";
-			int a = exemplo.charAt(3);
-			int b = exemplo.charAt(7);
-			int c = exemplo.charAt(11);
+			
+			int a = CPF.charAt(3);
+			int b = CPF.charAt(7);
+			int c = CPF.charAt(11);
 			if(a == 46 && b == 46 && c == 45){
 				return true;
 			}else{

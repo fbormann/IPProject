@@ -157,7 +157,7 @@ public class Clientes extends JFrame {
 						Conta aux = OficinaFacade.buscarConta(CPF);
 						AtualizarCliente frame = new AtualizarCliente();
 						frame.setVisible(true);
-						frame.addDados(aux.getNome(), aux.getCPF());
+						frame.addDados(aux);
 						fecharJFrame();
 					} catch (ContaNaoExisteException e1) {
 						lbl_error.setText(e1.getMessage());

@@ -258,10 +258,28 @@ public class AtualizarCliente extends JFrame {
 		});
 	}
 
-	public void addDados(String nome, String cpf){
-		this.nome = nome;
-		this.cpf = cpf;
-		this.tf_cpf.setText(cpf);
+	public void addDados(Conta conta){
+		this.nome = conta.getNome();
+		this.cpf = conta.getCPF();
+		this.tf_cpf.setText(this.cpf);
+		
+		//Set Endereco.
+		this.tf_bairro.setText(conta.getEndereco().getBairro());
+		this.tf_cep.setText(conta.getEndereco().getCEP());
+		this.tf_cidade.setText(conta.getEndereco().getCidade());
+		this.tf_complemento.setText(conta.getEndereco().getComplemento());
+		this.tf_rua.setText(conta.getEndereco().getRua());
+		this.tf_numero.setText(String.valueOf(conta.getEndereco().getNumero()));
+		
+		
+		//Set Carro.
+		this.tf_placa.setText(conta.getCarro().getPlaca());
+		this.tf_modelo.setText(conta.getCarro().getModelo());
+		this.tf_marca.setText(conta.getCarro().getMarca());
+		this.tf_cor.setText(conta.getCarro().getCor());
+		
+		
+		
 	}
 
 	public void fecharJFrame() {

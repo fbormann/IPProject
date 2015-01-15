@@ -63,4 +63,8 @@ public class RepositorioComprasArray implements RepositorioCompras{
 		return exist;
 	}
 
+	public Compra[] listar() {
+		return this.compras;
+	}
+
 }

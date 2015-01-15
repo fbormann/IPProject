@@ -2,6 +2,7 @@ package negocios;
 import entidades.Servico;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
+import excecoes.TipoNaoSelecionadoException;
 import dados.RepositorioServico;
 public class ManagerServico {
 	
@@ -10,7 +11,7 @@ public class ManagerServico {
 	public ManagerServico(RepositorioServico produtos){
 		this.produtos = produtos;
 	}
-	public void cadastrar(Servico servico) throws ServicoJaCadastradoException{
+	public void cadastrar(Servico servico) throws ServicoJaCadastradoException, TipoNaoSelecionadoException{
 		produtos.adicionar(servico);
 	}
 	public void remover(String ID) throws ServicoNaoEncontradoException{

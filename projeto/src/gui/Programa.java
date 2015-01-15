@@ -16,6 +16,7 @@ import excecoes.ContaNaoExisteException;
 import excecoes.PlacaInvalidaException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
+import excecoes.TipoNaoSelecionadoException;
 import comunicacao.OficinaFacade;
 import dados.RepositorioServicoArray;
 
@@ -197,6 +198,9 @@ public class Programa {
 					} catch (ServicoJaCadastradoException e) {
 						System.out.println("Erro: " + e.getMessage());
 						e.printStackTrace();
+					} catch (TipoNaoSelecionadoException e) {
+						//essa excecao nao vai ocorrer pois funcionara apenas na GUI
+						e.printStackTrace();
 					}
 
 
@@ -213,6 +217,9 @@ public class Programa {
 					} catch (ServicoJaCadastradoException e) {
 						System.out.println("Erro: " + e.getMessage());
 						e.printStackTrace();
+					} catch (TipoNaoSelecionadoException e) {
+						//essa excecao nao vai ocorrer pois funcionara apenas na GUI
+						e.printStackTrace();
 					}
 
 				}else if(escolhaTipo == 3){
@@ -227,6 +234,9 @@ public class Programa {
 						OficinaFacade.adicionarServico(servicoProduto);
 					} catch (ServicoJaCadastradoException e) {
 						System.out.println("Erro: " + e.getMessage());
+						e.printStackTrace();
+					} catch (TipoNaoSelecionadoException e) {
+						//essa excecao nao vai ocorrer pois funcionara apenas na GUI
 						e.printStackTrace();
 					}
 
@@ -251,10 +261,14 @@ public class Programa {
 					System.out.print("ID: ");
 					String ID = str.nextLine();
 					Lavagem servicoLavagem = new Lavagem(nome, preco, ID);
+					//TODO:arrumar
 					try {
 						OficinaFacade.adicionarServico(servicoLavagem);
 					} catch (ServicoJaCadastradoException e) {
 						System.out.println("Erro: " + e.getMessage());
+						e.printStackTrace();
+					} catch (TipoNaoSelecionadoException e) {
+						//essa excecao nao vai ocorrer pois funcionara apenas na GUI
 						e.printStackTrace();
 					}
 
@@ -271,7 +285,11 @@ public class Programa {
 					} catch (ServicoJaCadastradoException e) {
 						System.out.println("Erro: " + e.getMessage());
 						e.printStackTrace();
+					} catch (TipoNaoSelecionadoException e) {
+						//essa excecao nao vai ocorrer pois funcionara apenas na GUI
+						e.printStackTrace();
 					}
+					
 				}else if (escolhaAtualizar == 3){
 					System.out.print("Nome: ");
 					String nome = str.nextLine();
@@ -281,7 +299,12 @@ public class Programa {
 					String ID = str.nextLine();
 					Produto servicoProduto = new Produto(nome, preco, ID);
 					try {
-						OficinaFacade.adicionarServico(servicoProduto);
+						try {
+							OficinaFacade.adicionarServico(servicoProduto);
+						} catch (TipoNaoSelecionadoException e) {
+							//essa excecao nao vai ocorrer pois funcionara apenas na GUI
+							e.printStackTrace();
+						}
 					} catch (ServicoJaCadastradoException e) {
 						System.out.println("Erro: " + e.getMessage());
 						e.printStackTrace();

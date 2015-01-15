@@ -14,6 +14,7 @@ import excecoes.ContaNaoExisteException;
 import excecoes.PlacaInvalidaException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
+import excecoes.TipoNaoSelecionadoException;
 import negocios.*;
 
 
@@ -225,7 +226,7 @@ public class OficinaFacade {
 	}
 
 	//SERVICO
-	public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException{
+	public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException, TipoNaoSelecionadoException{
 		if(!servicos.exist(servico.getID())){
 			servicos.cadastrar(servico);
 		}else{

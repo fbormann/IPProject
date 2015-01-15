@@ -9,17 +9,24 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JRadioButton;
 
 import comunicacao.OficinaFacade;
-
 import entidades.Lavagem;
 import entidades.Otimizacao;
 import entidades.Produto;
 import entidades.Servico;
 import excecoes.ServicoJaCadastradoException;
+import excecoes.TipoNaoSelecionadoException;
+import excecoes.TiposSelecionadosException;
+
+import javax.swing.JCheckBox;
+
+import java.awt.Color;
 
 public class CadastrarServico extends JFrame {
 
@@ -60,7 +67,7 @@ public class CadastrarServico extends JFrame {
 		contentPane.add(lblNome);
 
 		JLabel lblId = new JLabel("C\u00F3digo:");
-		lblId.setBounds(10, 47, 46, 14);
+		lblId.setBounds(10, 47, 58, 14);
 		contentPane.add(lblId);
 
 		tf_id = new JTextField();
@@ -99,30 +106,71 @@ public class CadastrarServico extends JFrame {
 		rdbtn_produto.setBounds(292, 120, 109, 23);
 		contentPane.add(rdbtn_produto);
 
+		final JLabel label_error = new JLabel("");
+		label_error.setForeground(Color.RED);
+		label_error.setBounds(41, 223, 178, 16);
+		contentPane.add(label_error);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Oficina().setVisible(true);
+				fecharJFrame();
+			}
+		});
+		btnVoltar.setBounds(315, 32, 117, 29);
+		contentPane.add(btnVoltar);
+
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome = tf_nome.getText();
 				String codigo = tf_id.getText();
 				String preco = tf_preco.getText();
 				Servico novoServico = null;
-				if(rdbtn_lavagem.isSelected()){ //checar como anular os checkboxes.
-					novoServico = new Lavagem(nome,Double.parseDouble(preco),codigo);
-				}else if(rdbtn_otimizacao.isSelected()){
-					novoServico =  new Otimizacao(nome, Double.parseDouble(preco),codigo);
-				}else if(rdbtn_produto.isSelected()){
-					novoServico = new Produto(nome,Double.parseDouble(preco),codigo); //TODO:Just for debugging purposes, delete it.
-				}else{
-					//TODO: Tratar quando nenhum dos três checkboxes for selecionado.
-				}
 
 				try {
-					
+					checkbox(rdbtn_lavagem.isSelected(),rdbtn_otimizacao.isSelected(),rdbtn_produto.isSelected());
+					if(rdbtn_lavagem.isSelected()){ 
+						novoServico = new Lavagem(nome, Double.parseDouble(preco),codigo);
+					}else if(rdbtn_otimizacao.isSelected()){
+						novoServico =  new Otimizacao(nome, Double.parseDouble(preco),codigo);
+					}else if(rdbtn_produto.isSelected()){
+						novoServico = new Produto(nome, Double.parseDouble(preco),codigo); 
+					}
+					try {
 						OficinaFacade.adicionarServico(novoServico);
-					
-				} catch (ServicoJaCadastradoException e1) {
-					e1.printStackTrace();
+						new CadastrarServico().setVisible(true);
+						fecharJFrame();
+					} catch (ServicoJaCadastradoException e1) {
+						label_error.setText(e1.getMessage());
+					} catch (TipoNaoSelecionadoException e2){
+						label_error.setText(e2.getMessage());
+					}
+				} catch (TiposSelecionadosException e2) {
+					label_error.setText(e2.getMessage());
+					e2.printStackTrace();
 				}
+
 			}
+
 		});
+
+	}
+
+	//metodo que vai checar se mais de um botao de tipo de servico foi selecionado
+	public void checkbox(boolean rdbtn_lavagem, boolean rdbtn_otimizacao, boolean rdbtn_produto) throws TiposSelecionadosException{
+		TiposSelecionadosException e = new TiposSelecionadosException();
+		if(rdbtn_lavagem && rdbtn_otimizacao){
+			throw e;
+		}else if(rdbtn_lavagem && rdbtn_produto){
+			throw e;
+		}else if(rdbtn_produto && rdbtn_otimizacao){
+			throw e;
+		}else if(rdbtn_produto && rdbtn_otimizacao && rdbtn_lavagem){
+			throw e;
+		}
+	}
+	public void fecharJFrame() {
+		this.dispose();
 	}
 }

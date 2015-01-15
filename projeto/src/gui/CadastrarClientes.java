@@ -243,7 +243,6 @@ public class CadastrarClientes extends JFrame {
 
 				try{
 					OficinaFacade.adicionarConta(novaConta);
-
 					new Clientes().setVisible(true);
 					fecharJFrame();
 				}catch(ContaJaCadastradaException e1){

@@ -11,6 +11,10 @@ public abstract class Servico {
 		this.ID = ID;
 	}
 	
+	public Servico(){
+		
+	}
+	
 	public abstract double comissao(Compra compra);
 	
 	public String getNome(){

@@ -79,7 +79,7 @@ public class Oficina extends JFrame {
 		btnServios = new JButton("Servi\u00E7os");
 		btnServios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CadastrarServico().setVisible(true);
+				new ServicoGUI().setVisible(true);
 				fecharJFrame();
 			}
 		});

@@ -10,6 +10,10 @@ public class Produto extends Servico{
 	public Produto(String nome, double preco, String ID) {
 		super(nome, preco, ID);
 	}
+	
+	public Produto(){
+	
+	}
 
 	public double comissao(Compra compra) {
 		double r = (compra.totalCompra() * C1);

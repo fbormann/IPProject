@@ -8,6 +8,10 @@ public class Lavagem extends Servico {
 		super(nome,preco, ID);
 	}
 	
+	public Lavagem(){
+		
+	}
+	
 	public double comissao(Compra compra){
 		double r = (compra.totalCompra() * c1);
 		return r;

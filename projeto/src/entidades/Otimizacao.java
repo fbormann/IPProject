@@ -8,6 +8,10 @@ public class Otimizacao extends Servico {
 		super(nome,preco, ID);
 	}
 
+	public Otimizacao(){
+		
+	}
+	
 	public double comissao(Compra compra){
 		double r = (compra.totalCompra() * c2);
 		return r;

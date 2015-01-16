@@ -14,7 +14,7 @@ public class RepositorioComprasArray implements RepositorioCompras{
 			aux[i] = compras[i];
 
 		}
-		aux[aux.length -1] = compra; //Adiciona o último item ao final do array;
+		aux[aux.length -1] = compra; //Adiciona o ï¿½ltimo item ao final do array;
 
 		this.compras = aux;
 	}
@@ -22,9 +22,11 @@ public class RepositorioComprasArray implements RepositorioCompras{
 	public void remover(String ID){
 		Compra[] aux = new Compra[this.compras.length];
 
+		int indice = 0;
 		for(int i = 0; i < this.compras.length;i++){
 			if(!compras[i].getId().equals(ID)){ // If it is different do not remove
-				aux[i] = compras[i];
+				aux[indice] = compras[i];
+				indice++;
 			}
 		}
 		this.compras = aux;

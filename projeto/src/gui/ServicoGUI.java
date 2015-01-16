@@ -6,10 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+
+import comunicacao.OficinaFacade;
+import entidades.Compra;
+import entidades.Servico;
+import excecoes.CPFInvalidoException;
+import excecoes.ContaNaoExisteException;
+import excecoes.ServicoNaoEncontradoException;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -55,33 +64,45 @@ public class ServicoGUI extends JFrame {
 		lblServicos.setBounds(103, 11, 76, 14);
 		panel.add(lblServicos);
 		
-		JButton button = new JButton("Remover");
-		button.setBounds(294, 121, 89, 23);
-		panel.add(button);
+		JButton btn_Remover = new JButton("Remover");
 		
-		JButton button_1 = new JButton("Atualizar");
-		button_1.setBounds(294, 186, 89, 23);
-		panel.add(button_1);
+		btn_Remover.setBounds(294, 121, 89, 23);
+		panel.add(btn_Remover);
 		
-		JButton button_2 = new JButton("Cadastrar");
-		button_2.addActionListener(new ActionListener() {
+		JButton btn_Atualizar = new JButton("Atualizar");
+		btn_Atualizar.setBounds(294, 186, 89, 23);
+		panel.add(btn_Atualizar);
+		
+		JButton btn_Cadastrar = new JButton("Cadastrar");
+		btn_Cadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new CadastrarServico().setVisible(true);
 				fecharJFrame();
 			}
 		});
-		button_2.setBounds(294, 56, 89, 23);
-		panel.add(button_2);
+		btn_Cadastrar.setBounds(294, 56, 89, 23);
+		panel.add(btn_Cadastrar);
 		
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setBounds(26, 44, 204, 165);
-		panel.add(list);
+		final JList list_servicos = new JList();
+		list_servicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list_servicos.setBounds(26, 44, 204, 165);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setForeground(Color.RED);
-		label_1.setBounds(26, 237, 204, 14);
-		panel.add(label_1);
+		final DefaultListModel model = new DefaultListModel();
+		if(OficinaFacade.servicosArray != null){
+			Servico[] servicos = OficinaFacade.servicosArray.listar();
+			if(servicos != null){
+				for(int i = 0; i < servicos.length;i++){
+						model.addElement(servicos[i].getNome() + "(" + servicos[i].getID() +")"); 
+				}
+			}
+		}
+		list_servicos.setModel(model);
+		panel.add(list_servicos);
+		
+		final JLabel lbl_error = new JLabel("");
+		lbl_error.setForeground(Color.RED);
+		lbl_error.setBounds(26, 237, 204, 14);
+		panel.add(lbl_error);
 		
 		JButton button_3 = new JButton("Voltar");
 		button_3.addActionListener(new ActionListener() {
@@ -92,6 +113,26 @@ public class ServicoGUI extends JFrame {
 		});
 		button_3.setBounds(294, 7, 119, 23);
 		panel.add(button_3);
+		
+		btn_Remover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(list_servicos.getSelectedValue() != null){
+					String ID = list_servicos.getSelectedValue().toString().substring(list_servicos.getSelectedValue().toString().indexOf("(", 0)+1,list_servicos.getSelectedValue().toString().length()-1);
+					try {
+						OficinaFacade.removerServico(ID);
+						model.removeElement(list_servicos.getSelectedValue());
+					} catch (ServicoNaoEncontradoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+			
+				}else{
+					lbl_error.setText("Nenhum cliente selecionado.");
+				}
+			}
+		});
 	}
 	
 	public void fecharJFrame(){

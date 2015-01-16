@@ -139,7 +139,7 @@ public class CadastrarServico extends JFrame {
 					}
 					try {
 						OficinaFacade.adicionarServico(novoServico);
-						new CadastrarServico().setVisible(true);
+						new ServicoGUI().setVisible(true);
 						fecharJFrame();
 					} catch (ServicoJaCadastradoException e1) {
 						label_error.setText(e1.getMessage());

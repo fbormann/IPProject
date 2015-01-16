@@ -23,7 +23,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 		}
 
 		aux[aux.length-1] = servico;
-
+		this.servicos = aux;
 	}
 
 	public void remover(String ID) throws ServicoNaoEncontradoException{
@@ -39,11 +39,16 @@ public class RepositorioServicoArray implements RepositorioServico{
 			throw new ServicoNaoEncontradoException();
 		}
 
+		int indice = 0;
+		
 		for(int i = 0; i < this.servicos.length;i++){
 			if(!this.servicos[i].getID().equals(ID)){
-				aux[i] = this.servicos[i];
+				aux[indice] = this.servicos[i];
+				indice++;
 			}
 		}
+		
+		this.servicos = aux;
 	}
 	//marcela
 	public void update(Servico servico) throws ServicoNaoEncontradoException {
@@ -79,7 +84,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 	}
 
 	public Servico[] listar() {
-		return null;
+		return this.servicos;
 	}
 
 	//marcela

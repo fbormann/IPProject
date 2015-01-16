@@ -94,11 +94,15 @@ public class RepositorioContasArray implements RepositorioContas {
 			throw new ContaNaoExisteException();
 		}
 
+		int indice = 0;
 		for(int i = 0; i < this.contas.length;i++){
 			if(!this.contas[i].getCPF().equals(CPF)){
-				aux[i] = this.contas[i];
+				aux[indice] = this.contas[i];
+				indice++;
 			}
 		}
+		
+		this.contas = aux;
 
 	}
 

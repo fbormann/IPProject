@@ -25,10 +25,11 @@ import java.awt.event.ActionEvent;
 public class AtualizarServico extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField tf_codigo;
 	private JTextField tf_preco;
 	private JTextField tf_nome;
 	private String ID;
+	private int tipoServico;
 
 	/**
 	 * Launch the application.
@@ -71,11 +72,11 @@ public class AtualizarServico extends JFrame {
 		label_1.setBounds(10, 47, 58, 14);
 		panel.add(label_1);
 
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(66, 44, 86, 20);
-		panel.add(textField);
+		tf_codigo = new JTextField();
+		tf_codigo.setEditable(false);
+		tf_codigo.setColumns(10);
+		tf_codigo.setBounds(66, 44, 86, 20);
+		panel.add(tf_codigo);
 
 		JLabel label_preco = new JLabel("Pre\u00E7o:");
 		label_preco.setBounds(10, 78, 46, 14);
@@ -94,57 +95,35 @@ public class AtualizarServico extends JFrame {
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Lavagem novaLavagem = new Lavagem();
-				Otimizacao novaOtimizacao = new Otimizacao();
-				Produto novoProduto = new Produto();
-				
-				if(novaLavagem instanceof Servico){
-					if(!tf_nome.getText().equals("")){
-						((Servico) novaLavagem).setNome(tf_nome.getText());
-					}
-					if(!tf_preco.getText().equals("")){
-						((Servico) novaLavagem).setPreco(Double.parseDouble(tf_preco.getText()));
-					}
+				Servico servicoAtualizado = null;
+				switch(tipoServico){
+				case 1:
+					servicoAtualizado = new Lavagem();
+					break;
+				case 2:
+					servicoAtualizado = new Otimizacao();
 
-					try {
-						OficinaFacade.updateServico(novaLavagem);
-					} catch (ServicoNaoEncontradoException e1) {
-						lbl_error.setText(e1.getMessage());
-						e1.printStackTrace();
-					}
-
-				}else if(novaOtimizacao instanceof Servico){
-					if(!tf_nome.getText().equals("")){
-						((Servico) novaOtimizacao).setNome(tf_nome.getText());
-					}
-					if(!tf_preco.getText().equals("")){
-						((Servico) novaOtimizacao).setPreco(Double.parseDouble(tf_preco.getText()));
-					}
-
-					try {
-						OficinaFacade.updateServico(novaOtimizacao);
-					} catch (ServicoNaoEncontradoException e1) {
-						lbl_error.setText(e1.getMessage());
-						e1.printStackTrace();
-					}
-
-				}else if(novoProduto instanceof Servico){
-					if(!tf_nome.getText().equals("")){
-						((Servico) novoProduto).setNome(tf_nome.getText());
-					}
-					if(!tf_preco.getText().equals("")){
-						((Servico) novoProduto).setPreco(Double.parseDouble(tf_preco.getText()));
-					}
-
-					try {
-						OficinaFacade.updateServico(novoProduto);
-					} catch (ServicoNaoEncontradoException e1) {
-						lbl_error.setText(e1.getMessage());
-						e1.printStackTrace();
-					}
+					break;
+				case 3:
+					servicoAtualizado = new Produto();
+					break;
 				}
-				new ServicoGUI().setVisible(true);
-				fecharJFrame();
+				if(!tf_nome.getText().equals("")){
+					servicoAtualizado.setNome(tf_nome.getText());
+				}
+
+				if(!tf_preco.getText().equals("")){
+					servicoAtualizado.setPreco(Double.parseDouble(tf_preco.getText()));
+				}
+
+				try {
+					OficinaFacade.updateServico(servicoAtualizado);
+					new ServicoGUI().setVisible(true);
+					fecharJFrame();
+				} catch (ServicoNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnAtualizar.setBounds(335, 187, 89, 23);
@@ -190,4 +169,21 @@ public class AtualizarServico extends JFrame {
 	public void fecharJFrame(){
 		this.dispose();
 	}
+
+	public void selecionarDados(Servico servico){
+		if(servico instanceof Lavagem){
+			this.tipoServico = 1;
+		}else if(servico instanceof Otimizacao){
+			this.tipoServico = 2;
+		}else if(servico instanceof Produto){
+			this.tipoServico = 3;
+		}
+		tf_nome.setText(servico.getNome());
+		tf_codigo.setText(servico.getID());
+		tf_preco.setText(String.valueOf(servico.getPreco()));
+	}
+
+
+
+
 }

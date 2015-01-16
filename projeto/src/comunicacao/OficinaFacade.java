@@ -46,11 +46,7 @@ public class OficinaFacade {
 		}
 	}
 	public static boolean compraExiste(String ID){
-		boolean a = false;
-		if(compras.exist(ID)){
-			a = true;
-		}
-		return a;
+		return compras.exist(ID);
 	}
 	public static void removerCompra(String ID) throws CompraNaoExisteException {
 		if(compras.exist(ID)){
@@ -216,17 +212,7 @@ public class OficinaFacade {
 		}
 	}
 	public static boolean contaExiste(String CPF) throws CPFInvalidoException{
-		boolean a = false;
-		if(validadeCPF(CPF)){
-			if(contas.exist(CPF)){
-				a = true;
-			}else{
-				a = false;
-			}
-		}else{
-			throw new CPFInvalidoException();
-		}
-		return a;
+		return contas.exist(CPF);
 	}
 
 	//SERVICO
@@ -270,11 +256,7 @@ public class OficinaFacade {
 		}
 	}
 	public static boolean servicoExiste(String ID){
-		boolean a = false;
-		if(servicos.exist(ID)){
-			a = true;
-		}
-		return a;
+		return servicos.exist(ID);
 	}
 
 }

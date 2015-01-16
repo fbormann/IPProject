@@ -70,6 +70,7 @@ public class ServicoGUI extends JFrame {
 		panel.add(btn_Remover);
 		
 		JButton btn_Atualizar = new JButton("Atualizar");
+	
 		btn_Atualizar.setBounds(294, 186, 89, 23);
 		panel.add(btn_Atualizar);
 		
@@ -131,6 +132,21 @@ public class ServicoGUI extends JFrame {
 				}else{
 					lbl_error.setText("Nenhum cliente selecionado.");
 				}
+			}
+		});
+		
+		btn_Atualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String ID = list_servicos.getSelectedValue().toString().substring(list_servicos.getSelectedValue().toString().indexOf("(", 0)+1,list_servicos.getSelectedValue().toString().length()-1);
+				AtualizarServico frame = new AtualizarServico();
+				frame.setVisible(true);
+				try {
+					frame.selecionarDados(OficinaFacade.buscarServico(ID));
+				} catch (ServicoNaoEncontradoException e) {
+					lbl_error.setText("Servico Nao Encontrado");
+					e.printStackTrace();
+				}
+				fecharJFrame();
 			}
 		});
 	}

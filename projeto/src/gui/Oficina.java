@@ -1,5 +1,5 @@
 package gui;
-
+//TODO: Terminar GUI / Programa + Lista / Relatorio / Jakarta.
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 

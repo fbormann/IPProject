@@ -53,27 +53,27 @@ public class ServicoGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBounds(0, 0, 450, 278);
 		contentPane.add(panel);
-		
+
 		JLabel lblServicos = new JLabel("Servicos");
 		lblServicos.setBounds(103, 11, 76, 14);
 		panel.add(lblServicos);
-		
+
 		JButton btn_Remover = new JButton("Remover");
-		
+
 		btn_Remover.setBounds(294, 121, 89, 23);
 		panel.add(btn_Remover);
-		
+
 		JButton btn_Atualizar = new JButton("Atualizar");
-	
+
 		btn_Atualizar.setBounds(294, 186, 89, 23);
 		panel.add(btn_Atualizar);
-		
+
 		JButton btn_Cadastrar = new JButton("Cadastrar");
 		btn_Cadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,28 +83,28 @@ public class ServicoGUI extends JFrame {
 		});
 		btn_Cadastrar.setBounds(294, 56, 89, 23);
 		panel.add(btn_Cadastrar);
-		
+
 		final JList list_servicos = new JList();
 		list_servicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_servicos.setBounds(26, 44, 204, 165);
-		
+
 		final DefaultListModel model = new DefaultListModel();
 		if(OficinaFacade.servicosArray != null){
 			Servico[] servicos = OficinaFacade.servicosArray.listar();
 			if(servicos != null){
 				for(int i = 0; i < servicos.length;i++){
-						model.addElement(servicos[i].getNome() + "(" + servicos[i].getID() +")"); 
+					model.addElement(servicos[i].getNome() + "(" + servicos[i].getID() +")"); 
 				}
 			}
 		}
 		list_servicos.setModel(model);
 		panel.add(list_servicos);
-		
+
 		final JLabel lbl_error = new JLabel("");
 		lbl_error.setForeground(Color.RED);
 		lbl_error.setBounds(26, 237, 204, 14);
 		panel.add(lbl_error);
-		
+
 		JButton button_3 = new JButton("Voltar");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,10 +114,10 @@ public class ServicoGUI extends JFrame {
 		});
 		button_3.setBounds(294, 7, 119, 23);
 		panel.add(button_3);
-		
+
 		btn_Remover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if(list_servicos.getSelectedValue() != null){
 					String ID = list_servicos.getSelectedValue().toString().substring(list_servicos.getSelectedValue().toString().indexOf("(", 0)+1,list_servicos.getSelectedValue().toString().length()-1);
 					try {
@@ -127,16 +127,15 @@ public class ServicoGUI extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				
-			
 				}else{
 					lbl_error.setText("Nenhum cliente selecionado.");
 				}
 			}
 		});
-		
+
 		btn_Atualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//String p/ pegar o ID do servico dentro dos (...)
 				String ID = list_servicos.getSelectedValue().toString().substring(list_servicos.getSelectedValue().toString().indexOf("(", 0)+1,list_servicos.getSelectedValue().toString().length()-1);
 				AtualizarServico frame = new AtualizarServico();
 				frame.setVisible(true);
@@ -150,7 +149,7 @@ public class ServicoGUI extends JFrame {
 			}
 		});
 	}
-	
+
 	public void fecharJFrame(){
 		this.dispose();
 	}

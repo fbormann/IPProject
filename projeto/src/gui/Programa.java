@@ -391,6 +391,8 @@ public class Programa {
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
 						}
+						
+						//TODO: atualizar servico no array de servicos comprados
 					}else if(escolhaCompra==3){
 						System.out.print("Digite o ID da compra que voce quer atualizar: ");
 						String idAtualizar = str.nextLine();

@@ -102,26 +102,21 @@ public class AtualizarServico extends JFrame {
 					break;
 				case 2:
 					servicoAtualizado = new Otimizacao();
-
 					break;
 				case 3:
 					servicoAtualizado = new Produto();
 					break;
 				}
-				if(!tf_nome.getText().equals("")){
-					servicoAtualizado.setNome(tf_nome.getText());
-				}
+				servicoAtualizado.setNome(tf_nome.getText());
 
-				if(!tf_preco.getText().equals("")){
-					servicoAtualizado.setPreco(Double.parseDouble(tf_preco.getText()));
-				}
+				servicoAtualizado.setPreco(Double.parseDouble(tf_preco.getText()));
 
 				try {
 					OficinaFacade.updateServico(servicoAtualizado);
 					new ServicoGUI().setVisible(true);
 					fecharJFrame();
 				} catch (ServicoNaoEncontradoException e1) {
-					// TODO Auto-generated catch block
+					lbl_error.setText(e1.getMessage());
 					e1.printStackTrace();
 				}
 			}
@@ -148,11 +143,6 @@ public class AtualizarServico extends JFrame {
 		radioButton_2.setEnabled(false);
 		radioButton_2.setBounds(292, 120, 109, 23);
 		panel.add(radioButton_2);
-
-		JLabel label_3 = new JLabel("");
-		label_3.setForeground(Color.RED);
-		label_3.setBounds(41, 223, 178, 16);
-		panel.add(label_3);
 
 		JButton button_1 = new JButton("Voltar");
 		button_1.addActionListener(new ActionListener() {

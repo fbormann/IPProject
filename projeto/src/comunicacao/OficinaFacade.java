@@ -45,15 +45,13 @@ public class OficinaFacade {
 			throw new ContaNaoExisteException();
 		}
 	}
-	public boolean compraExiste(String ID) throws CompraNaoExisteException{
-		CompraNaoExisteException e = new CompraNaoExisteException();
+	public static boolean compraExiste(String ID){
+		boolean a = false;
 		if(compras.exist(ID)){
-			return true;
-		}else{
-			throw e;
+			a = true;
 		}
+		return a;
 	}
-
 	public static void removerCompra(String ID) throws CompraNaoExisteException {
 		if(compras.exist(ID)){
 			compras.removerCompra(ID);
@@ -64,6 +62,13 @@ public class OficinaFacade {
 	public static Compra buscarCompra(String ID) throws CompraNaoExisteException{
 		if(compras.exist(ID)){
 			return compras.buscarCompra(ID);
+		}else{
+			throw new CompraNaoExisteException();
+		}
+	}
+	public static void updateCompra(Compra compra) throws CompraNaoExisteException{
+		if(OficinaFacade.compraExiste(compra.getId())){
+			compras.updateCompra(compra);
 		}else{
 			throw new CompraNaoExisteException();
 		}
@@ -103,20 +108,18 @@ public class OficinaFacade {
 	}
 	public static void updateConta(Conta conta) throws CPFInvalidoException, ContaNaoExisteException, CEPInvalidoException, PlacaInvalidaException{
 		if(contas.exist(conta.getCPF())){
-		
+
 			if(!conta.getEndereco().getCEP().equals("")){
 				OficinaFacade.validadeCEP(conta.getEndereco().getCEP());
 			}
-			
+
 			if(!conta.getCarro().getPlaca().equals("")){
 				OficinaFacade.validadePlaca(conta.getCarro().getPlaca());
 			}
-			
+
 			contas.update(conta);
 		}
 	}
-
-
 	public static boolean validadeCPF(String CPF) throws CPFInvalidoException{
 		CPFInvalidoException e = new CPFInvalidoException();
 		//checar tamanho
@@ -131,7 +134,7 @@ public class OficinaFacade {
 					}
 				}
 			}
-			
+
 			int a = CPF.charAt(3);
 			int b = CPF.charAt(7);
 			int c = CPF.charAt(11);
@@ -212,16 +215,18 @@ public class OficinaFacade {
 			throw new CPFInvalidoException();
 		}
 	}
-	public static boolean contaExiste(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
+	public static boolean contaExiste(String CPF) throws CPFInvalidoException{
+		boolean a = false;
 		if(validadeCPF(CPF)){
 			if(contas.exist(CPF)){
-				return true;
+				a = true;
 			}else{
-				throw new ContaNaoExisteException();
+				a = false;
 			}
 		}else{
 			throw new CPFInvalidoException();
 		}
+		return a;
 	}
 
 	//SERVICO
@@ -264,13 +269,12 @@ public class OficinaFacade {
 			throw s;
 		}
 	}
-	public static boolean servicoExiste(String ID) throws ServicoNaoEncontradoException{
-		ServicoNaoEncontradoException e = new ServicoNaoEncontradoException();
+	public static boolean servicoExiste(String ID){
+		boolean a = false;
 		if(servicos.exist(ID)){
-			return true;
-		}else{
-			throw e;
+			a = true;
 		}
+		return a;
 	}
 
 }

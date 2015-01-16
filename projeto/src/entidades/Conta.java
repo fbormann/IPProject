@@ -59,9 +59,11 @@ public class Conta {
 	}
 
 	public String toString(){
-		String r = "Nome: " + this.nome + "\nCPF: " + this.CPF + "\nEndereco: " + "\nRua: " + this.endereco.getRua() + "\nNumero: " +
-				this.endereco.getNumero() + "\t" + this.endereco.getComplemento() + "\nCEP: " + this.endereco.getCEP() + "\nBairro: " +
-				this.endereco.getBairro() + "\nCidade: " + this.endereco.getCidade() + "\nEstado: " + this.endereco.getEstado();
+		String r = "Nome: " + this.nome + "\nCPF: " + this.CPF + "\nRua: " + this.endereco.getRua() + "\nNumero: " +
+				this.endereco.getNumero() + "\t" + "Complemento: " + this.endereco.getComplemento() + "\nCEP: " + this.endereco.getCEP() + "\nBairro: " +
+				this.endereco.getBairro() + "\nCidade: " + this.endereco.getCidade() + "\nEstado: " + this.endereco.getEstado() + "\nModelo: " + this.carro.getModelo() +
+				"\nMarca: " + this.carro.getMarca() + "\nCor: " + this.carro.getCor() + "\nPlaca: " + this.carro.getPlaca();
+				
 		return r;
 	}
 }

@@ -14,6 +14,10 @@ public class Produto extends Servico{
 	public Produto(){
 	
 	}
+	
+	public Produto(String nome, double preco){
+		super(nome, preco);
+	}
 
 	public double comissao(Compra compra) {
 		double r = (compra.totalCompra() * C1);

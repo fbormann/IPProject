@@ -24,7 +24,6 @@ public class RepositorioContasArray implements RepositorioContas {
 		this.contas = aux;
 	}
 
-
 	public void update(Conta conta) throws ContaNaoExisteException{
 		if(this.exist(conta.getCPF())){
 		for(int i = 0; i < this.contas.length;i++){

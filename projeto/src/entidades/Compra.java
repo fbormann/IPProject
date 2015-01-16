@@ -11,6 +11,10 @@ public class Compra {
 		this.servicos = new Servico[0];
 		this.valor = 0;
 	}
+	
+	public Compra(double valor){ //construtor usado para atualizar uma compra. ID e CPF nao podem ser alterados, nem a posicao dele no array servico
+		this.valor = valor;
+	}
 
 	public double getValor() {
 		return valor;

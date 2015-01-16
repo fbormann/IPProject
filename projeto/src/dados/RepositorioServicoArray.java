@@ -40,17 +40,17 @@ public class RepositorioServicoArray implements RepositorioServico{
 		}
 
 		int indice = 0;
-		
+
 		for(int i = 0; i < this.servicos.length;i++){
 			if(!this.servicos[i].getID().equals(ID)){
 				aux[indice] = this.servicos[i];
 				indice++;
 			}
 		}
-		
+
 		this.servicos = aux;
 	}
-	//marcela
+
 	public void update(Servico servico) throws ServicoNaoEncontradoException {
 		for(int i = 0; i<this.servicos.length; i++){
 			if(this.servicos[i].getID().equals(servico.getID())){
@@ -67,8 +67,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 			}
 		}
 	}
-	
-	//marcela
+
 	public double consultaPreco(String ID) throws ServicoNaoEncontradoException{
 		double a = 0;
 		if(this.exist(ID)){
@@ -87,7 +86,6 @@ public class RepositorioServicoArray implements RepositorioServico{
 		return this.servicos;
 	}
 
-	//marcela
 	public Servico buscar(String ID) throws ServicoNaoEncontradoException {
 		if(this.exist(ID)){
 			for(int i = 0; i<this.servicos.length; i++){
@@ -98,9 +96,9 @@ public class RepositorioServicoArray implements RepositorioServico{
 		}else{
 			throw new ServicoNaoEncontradoException();
 		}
-		
+
 		return null;
-		
+
 	}
 
 	public boolean exist(String ID){

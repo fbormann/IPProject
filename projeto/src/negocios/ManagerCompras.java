@@ -19,6 +19,10 @@ public class ManagerCompras {
 		this.compras.remover(ID);
 	}
 	
+	public void updateCompra(Compra compra) throws CompraNaoExisteException{
+		this.compras.update(compra);
+	}
+	
 	public Compra buscarCompra(String ID) throws CompraNaoExisteException{
 		return this.compras.buscar(ID);
 	}

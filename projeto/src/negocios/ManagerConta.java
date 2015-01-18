@@ -3,6 +3,7 @@ import dados.RepositorioContas;
 import entidades.Conta;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
+import excecoes.NenhumaContaCadastradaException;
 
 public class ManagerConta {
 	private RepositorioContas contas;
@@ -29,5 +30,13 @@ public class ManagerConta {
 	
 	public void update(Conta conta) throws ContaNaoExisteException{
 		this.contas.update(conta);
+	}
+	
+	public String listarConta() throws NenhumaContaCadastradaException{
+		return this.contas.listarConta();
+	}
+	
+	public Conta[] listar(){
+		return this.contas.listar();
 	}
 }

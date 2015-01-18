@@ -2,6 +2,7 @@ package dados;
 import entidades.Conta;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
+import excecoes.NenhumaContaCadastradaException;
 
 public interface RepositorioContas {
 
@@ -10,6 +11,8 @@ public interface RepositorioContas {
 	public void remover(String CPF) throws ContaNaoExisteException;
 	
 	public Conta[] listar();
+	
+	public String listarConta() throws NenhumaContaCadastradaException;
 	
 	public Conta buscar(String CPF) throws ContaNaoExisteException;
 	

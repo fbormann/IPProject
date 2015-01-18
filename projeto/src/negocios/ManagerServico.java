@@ -1,36 +1,45 @@
 package negocios;
 import entidades.Servico;
+import excecoes.NenhumServicoCadastradoException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 import excecoes.TipoNaoSelecionadoException;
 import dados.RepositorioServico;
 public class ManagerServico {
 	
-	private RepositorioServico produtos;
+	private RepositorioServico servicos;
 	
 	public ManagerServico(RepositorioServico produtos){
-		this.produtos = produtos;
+		this.servicos = produtos;
 	}
 	public void cadastrar(Servico servico) throws ServicoJaCadastradoException, TipoNaoSelecionadoException{
-		produtos.adicionar(servico);
+		servicos.adicionar(servico);
 	}
 	public void remover(String ID) throws ServicoNaoEncontradoException{
-		produtos.remover(ID);
+		servicos.remover(ID);
 	}
 	public double consultaPreco(String ID) throws ServicoNaoEncontradoException{
-		return produtos.consultaPreco(ID);
+		return servicos.consultaPreco(ID);
 	}
 	
 	public Servico buscar(String ID) throws ServicoNaoEncontradoException{
-		return produtos.buscar(ID);
+		return servicos.buscar(ID);
 	}
 
 	public boolean exist(String ID){
-		return this.produtos.exist(ID);
+		return this.servicos.exist(ID);
 	}
 	
 	public void update(Servico servico) throws ServicoNaoEncontradoException{
-		this.produtos.update(servico);
+		this.servicos.update(servico);
+	}
+	
+	public String listarServico() throws NenhumServicoCadastradoException{
+		return this.servicos.listarServico(); 
+	}
+	
+	public Servico[] listar(){
+		return this.servicos.listar();
 	}
 	
 }

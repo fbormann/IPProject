@@ -1,5 +1,6 @@
 package dados;
 import entidades.Servico;
+import excecoes.NenhumServicoCadastradoException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 public interface RepositorioServico {
@@ -13,6 +14,8 @@ public interface RepositorioServico {
 	double consultaPreco(String ID) throws ServicoNaoEncontradoException;
 		
 	Servico[] listar();
+	
+	String listarServico() throws NenhumServicoCadastradoException;
 	
 	Servico buscar(String ID) throws ServicoNaoEncontradoException;
 	

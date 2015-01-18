@@ -1,5 +1,6 @@
 package dados;
 import entidades.Compra;
+import excecoes.NenhumaCompraCadastradaException;
 
 public class RepositorioComprasArray implements RepositorioCompras{
 	private Compra[] compras;
@@ -65,6 +66,18 @@ public class RepositorioComprasArray implements RepositorioCompras{
 		return exist;
 	}
 
+	public String listarCompra() throws NenhumaCompraCadastradaException{
+		String r = "";
+		if(this.compras!=null){
+			for(int i = 0; i<this.compras.length; i++){
+				r = r + this.compras[i].toString();
+			}
+		}else{
+			throw new NenhumaCompraCadastradaException();
+		}
+		return r;
+	}
+	
 	public Compra[] listar() {
 		return this.compras;
 	}

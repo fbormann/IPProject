@@ -2,6 +2,7 @@ package dados;
 import entidades.Conta;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
+import excecoes.NenhumaContaCadastradaException;
 
 public class RepositorioContasArray implements RepositorioContas {
 	private Conta[] contas;
@@ -104,9 +105,22 @@ public class RepositorioContasArray implements RepositorioContas {
 		this.contas = aux;
 
 	}
-
-	public Conta[] listar() {
+	
+	public Conta[] listar() { //retorna a referencia do array
 		return this.contas;
+	}
+	
+	//vai retornar as descricoes de todas as contas cadastradas no array
+	public String listarConta() throws NenhumaContaCadastradaException{
+		String r = "";
+		if(this.contas != null){
+			for(int i = 0; i<this.contas.length; i++){
+				r = this.contas[i].toString();
+			}
+		}else{
+			throw new NenhumaContaCadastradaException();
+		}
+		return r;
 	}
 
 	public Conta buscar(String CPF) throws ContaNaoExisteException {

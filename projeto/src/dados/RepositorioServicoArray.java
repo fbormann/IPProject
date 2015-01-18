@@ -2,6 +2,7 @@ package dados;
 
 
 import entidades.Servico;
+import excecoes.NenhumServicoCadastradoException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 
@@ -81,9 +82,21 @@ public class RepositorioServicoArray implements RepositorioServico{
 		}
 		return a;
 	}
-
+	//esse metodo retorna a referencia do array
 	public Servico[] listar() {
 		return this.servicos;
+	}
+	//esse metodo vai retornar as descricoes de todos os servicos cadastrados no array
+	public String listarServico() throws NenhumServicoCadastradoException{
+		String r = "";
+		if(this.servicos != null){
+			for(int i = 0; i<this.servicos.length; i++){
+				r += r + this.servicos[i].toString();
+			}
+		}else{
+			throw new NenhumServicoCadastradoException();
+		}
+		return r;
 	}
 
 	public Servico buscar(String ID) throws ServicoNaoEncontradoException {

@@ -11,6 +11,9 @@ import excecoes.CPFInvalidoException;
 import excecoes.CompraNaoExisteException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
+import excecoes.NenhumServicoCadastradoException;
+import excecoes.NenhumaCompraCadastradaException;
+import excecoes.NenhumaContaCadastradaException;
 import excecoes.PlacaInvalidaException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
@@ -25,7 +28,7 @@ public class OficinaFacade {
 	public static RepositorioServicoArray servicosArray = new RepositorioServicoArray();
 	public static ManagerCompras compras = new ManagerCompras(comprasArray);
 	public static ManagerConta contas = new ManagerConta(contasArray);
-	public static ManagerServico servicos= new ManagerServico(servicosArray);
+	public static ManagerServico servicos = new ManagerServico(servicosArray);
 
 	public static void inicializar(){
 		OficinaFacade.comprasArray = new RepositorioComprasArray();
@@ -69,7 +72,11 @@ public class OficinaFacade {
 			throw new CompraNaoExisteException();
 		}
 	}
-
+	public static String listarCompra() throws NenhumaCompraCadastradaException{
+		return compras.listarCompra();
+	}
+	
+	
 	//CLIENTE
 	public static void adicionarConta(Conta conta) throws ContaJaCadastradaException, CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException {
 		if(!contas.exist(conta.getCPF())){
@@ -214,7 +221,10 @@ public class OficinaFacade {
 	public static boolean contaExiste(String CPF) throws CPFInvalidoException{
 		return contas.exist(CPF);
 	}
-
+	public static String listarConta() throws NenhumaContaCadastradaException{
+		return contas.listarConta();
+	}
+	
 	//SERVICO
 	public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException, TipoNaoSelecionadoException{
 		if(!servicos.exist(servico.getID())){
@@ -258,5 +268,7 @@ public class OficinaFacade {
 	public static boolean servicoExiste(String ID){
 		return servicos.exist(ID);
 	}
-
+	public static String listarServico() throws NenhumServicoCadastradoException{
+		return servicos.listarServico();
+	}
 }

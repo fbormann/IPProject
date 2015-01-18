@@ -2,6 +2,7 @@ package negocios;
 import dados.RepositorioCompras;
 import entidades.Compra;
 import excecoes.CompraNaoExisteException;
+import excecoes.NenhumaCompraCadastradaException;
 
 public class ManagerCompras {
 	
@@ -25,6 +26,14 @@ public class ManagerCompras {
 	
 	public Compra buscarCompra(String ID) throws CompraNaoExisteException{
 		return this.compras.buscar(ID);
+	}
+	
+	public String listarCompra() throws NenhumaCompraCadastradaException{
+		return this.compras.listarCompra();
+	}
+	
+	public Compra[] listar(){
+		return this.compras.listar();
 	}
 	
 	public boolean exist(String ID){

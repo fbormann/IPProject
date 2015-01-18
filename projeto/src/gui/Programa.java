@@ -15,14 +15,16 @@ import excecoes.CPFInvalidoException;
 import excecoes.CompraNaoExisteException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
+import excecoes.NenhumServicoCadastradoException;
+import excecoes.NenhumaCompraCadastradaException;
+import excecoes.NenhumaContaCadastradaException;
 import excecoes.PlacaInvalidaException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 import excecoes.TipoNaoSelecionadoException;
 import comunicacao.OficinaFacade;
-import dados.RepositorioComprasArray;
-import dados.RepositorioContasArray;
 import dados.RepositorioServicoArray;
+
 
 //classe que irá testar todos os métodos da fachada(OficinaFacade)
 public class Programa {
@@ -30,18 +32,16 @@ public class Programa {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		Scanner str = new Scanner(System.in);
-		RepositorioServicoArray rServico = new RepositorioServicoArray();
-		RepositorioContasArray rConta = new RepositorioContasArray();
-		RepositorioComprasArray rCompra = new RepositorioComprasArray();
-
+		
 		OficinaFacade.inicializar();
+		
 		int escolhaMenu;
 		int escolhaConta;
 		int escolhaServico;
 		int escolhaTipo;
 		int escolhaCompra;
 
-		System.out.print("Bem-vindo!");
+		System.out.println("Bem-vindo!");
 
 		do{
 			System.out.println("Menu: 1) Conta; 2) Servico; 3) Venda; 4) Sair");
@@ -194,7 +194,12 @@ public class Programa {
 							e.printStackTrace();
 						}
 					}else if(escolhaConta==5){
-						System.out.println(rConta.listar());
+						try {
+							System.out.println(OficinaFacade.listarConta());
+						} catch (NenhumaContaCadastradaException e) {
+							System.out.println("Erro: " + e.getMessage());
+							e.printStackTrace();
+						}
 					}
 				}while(escolhaConta!=6);
 
@@ -325,7 +330,7 @@ public class Programa {
 						System.out.print("Digite o ID do servico: ");
 						String ID = str.nextLine();
 						try {
-							OficinaFacade.consultaPreco(ID);
+							System.out.println(OficinaFacade.consultaPreco(ID));
 						} catch (ServicoNaoEncontradoException e) {
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
@@ -340,7 +345,12 @@ public class Programa {
 							e.printStackTrace();
 						}
 					}else if(escolhaServico == 6){
-						System.out.println(rServico.listar());
+						try {
+							System.out.println(OficinaFacade.listarServico());
+						} catch (NenhumServicoCadastradoException e) {
+							System.out.println("Erro: " + e.getMessage());
+							e.printStackTrace();
+						}
 					}
 
 				}while(escolhaServico!=7);		
@@ -392,7 +402,6 @@ public class Programa {
 							e.printStackTrace();
 						}
 						
-						//TODO: atualizar servico no array de servicos comprados
 					}else if(escolhaCompra==3){
 						System.out.print("Digite o ID da compra que voce quer atualizar: ");
 						String idAtualizar = str.nextLine();
@@ -420,7 +429,12 @@ public class Programa {
 							e.printStackTrace();
 						}
 					}else if(escolhaCompra==5){
-						System.out.println(rCompra.listar());
+						try {
+							System.out.println(OficinaFacade.listarCompra());
+						} catch (NenhumaCompraCadastradaException e) {
+							System.out.println("Erro: " + e.getMessage());
+							e.printStackTrace();
+						}
 					}
 				}while(escolhaCompra!=6);
 			}

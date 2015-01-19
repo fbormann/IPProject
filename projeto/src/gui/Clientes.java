@@ -100,7 +100,7 @@ public class Clientes extends JFrame {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(26, 44, 204, 165);
 		if(OficinaFacade.contasArray != null){
-			Conta[] contas = OficinaFacade.contasArray.listar();
+			Conta[] contas = OficinaFacade.listarContas();
 			if(contas != null){
 				for(int i = 0; i < contas.length;i++){
 					model.addElement(contas[i].getNome() + "(" + contas[i].getCPF() +")");
@@ -136,10 +136,10 @@ public class Clientes extends JFrame {
 						OficinaFacade.removerConta(CPF);
 						model.removeElement(list.getSelectedValue());
 					} catch (ContaNaoExisteException e) {
-						//Esses erros não acontecerão.
+						//Esses erros nï¿½o acontecerï¿½o.
 						e.printStackTrace();
 					} catch (CPFInvalidoException e) {
-						//Este erro não acontecerá.
+						//Este erro nï¿½o acontecerï¿½.
 						e.printStackTrace();
 					}			
 				}else{

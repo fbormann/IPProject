@@ -90,7 +90,7 @@ public class ServicoGUI extends JFrame {
 
 		final DefaultListModel model = new DefaultListModel();
 		if(OficinaFacade.servicosArray != null){
-			Servico[] servicos = OficinaFacade.servicosArray.listar();
+			Servico[] servicos = OficinaFacade.listarServicos();
 			if(servicos != null){
 				for(int i = 0; i < servicos.length;i++){
 					model.addElement(servicos[i].getNome() + "(" + servicos[i].getID() +")"); 

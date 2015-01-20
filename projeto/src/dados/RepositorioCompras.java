@@ -1,9 +1,9 @@
 package dados;
-import entidades.Compra;
-import excecoes.CompraNaoExisteException;
-import excecoes.NenhumaCompraCadastradaException;
+import java.util.Iterator;
 
-public interface RepositorioCompras {
+import entidades.Compra;
+
+public interface RepositorioCompras{
 	
 	public void adicionar(Compra compra);
 	
@@ -16,4 +16,6 @@ public interface RepositorioCompras {
 	public Compra buscar(String ID);
 	
 	public boolean exist(String ID);
+	
+	public Iterator getIterator();
 }

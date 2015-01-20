@@ -384,12 +384,7 @@ public class Programa {
 						int a = Integer.parseInt(eServico);
 
 						while(!eServico.equals("exit")){
-							try {
 								comprados.adicionar(aux[a]);
-							} catch (ServicoJaCadastradoException e) {
-								System.out.println("Erro: " + e.getMessage());
-								e.printStackTrace();
-							}
 						}
 					}else if(escolhaCompra==2){
 						System.out.print("Digite o ID da compra que voce quer remover: ");

@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,8 +22,6 @@ import entidades.Servico;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.TipoNaoSelecionadoException;
 import excecoes.TiposSelecionadosException;
-
-import javax.swing.JCheckBox;
 
 import java.awt.Color;
 

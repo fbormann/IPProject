@@ -34,7 +34,6 @@ public class CadastrarCompra extends JFrame {
 	private JTextField tf_nome;
 	private JTextField tf_CPF;
 	private JTextField tf_valorapagar;
-	private RepositorioServicoArray servicosComprados;
 	private double preco;
 
 	/**

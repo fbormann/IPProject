@@ -1,8 +1,5 @@
 package dados;
 import entidades.Conta;
-import excecoes.ContaJaCadastradaException;
-import excecoes.ContaNaoExisteException;
-import excecoes.NenhumaContaCadastradaException;
 
 public class RepositorioContasArray implements RepositorioContas {
 	private Conta[] contas;

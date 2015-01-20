@@ -1,9 +1,15 @@
 package dados;
+
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 import entidades.Compra;
-import excecoes.NenhumaCompraCadastradaException;
+
 
 public class RepositorioComprasArray implements RepositorioCompras{
 	private Compra[] compras;
+	
 
 	public RepositorioComprasArray(){
 		this.compras = new Compra[0];
@@ -79,5 +85,15 @@ public class RepositorioComprasArray implements RepositorioCompras{
 	public Compra[] listar() {
 		return this.compras;
 	}
+
+	public Iterator getIterator() {
+		return null;
+	}
+
+
+	
+
+	
+
 
 }

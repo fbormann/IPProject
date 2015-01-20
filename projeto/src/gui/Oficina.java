@@ -1,23 +1,13 @@
 package gui;
-//TODO: Terminar GUI / Programa + Lista / Relatorio / Jakarta.
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JTextPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
-
-import comunicacao.OficinaFacade;
 
 public class Oficina extends JFrame {
 
@@ -48,6 +38,7 @@ public class Oficina extends JFrame {
 	 * Create the frame.
 	 */
 	public Oficina() {
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 477, 324);

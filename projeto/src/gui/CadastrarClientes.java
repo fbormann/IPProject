@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,11 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JTextArea;
-import javax.swing.JEditorPane;
-import javax.swing.JSeparator;
 
-import dados.RepositorioContasArray;
 import entidades.Carro;
 import entidades.Conta;
 import entidades.Endereco;
@@ -25,15 +20,12 @@ import excecoes.PlacaInvalidaException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.CPFInvalidoException;
 import excecoes.CEPInvalidoException;
-import negocios.ManagerConta;
 
 import javax.swing.JPopupMenu;
 
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JScrollBar;
 
 import comunicacao.OficinaFacade;
 import java.awt.Color;
@@ -257,23 +249,6 @@ public class CadastrarClientes extends JFrame {
 			}
 		});
 
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 
 	public void fecharJFrame(){

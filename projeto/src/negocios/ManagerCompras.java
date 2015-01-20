@@ -5,37 +5,52 @@ import excecoes.CompraNaoExisteException;
 import excecoes.NenhumaCompraCadastradaException;
 
 public class ManagerCompras {
-	
+
 	private RepositorioCompras compras;
-	
+
 	public ManagerCompras(RepositorioCompras compras){
 		this.compras = compras;
 	}
-	
+
 	public void cadastrarCompra(Compra compra){
 		this.compras.adicionar(compra);
 	}
-	
+
 	public void removerCompra(String ID) throws CompraNaoExisteException{
-		this.compras.remover(ID);
+		if(this.compras.exist(ID)){
+			this.compras.remover(ID);
+		}else{
+			throw new CompraNaoExisteException();
+		}
 	}
-	
+
 	public void updateCompra(Compra compra) throws CompraNaoExisteException{
-		this.compras.update(compra);
+		if(this.compras.exist(compra.getId())){
+			this.compras.update(compra);
+		}else{
+			throw new CompraNaoExisteException();
+		}
 	}
-	
+
 	public Compra buscarCompra(String ID) throws CompraNaoExisteException{
-		return this.compras.buscar(ID);
+		Compra c = new Compra();
+		if(this.compras.exist(ID)){
+			c = this.compras.buscar(ID);
+		}else{
+			throw new CompraNaoExisteException();
+		}
+		return c;
 	}
-	
+
+	//esperando confirmacao
 	public String listarCompra() throws NenhumaCompraCadastradaException{
 		return this.compras.listarCompra();
 	}
-	
+
 	public Compra[] listar(){
 		return this.compras.listar();
 	}
-	
+
 	public boolean exist(String ID){
 		return this.compras.exist(ID);
 	}

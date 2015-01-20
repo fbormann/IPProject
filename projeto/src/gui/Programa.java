@@ -46,7 +46,7 @@ public class Programa {
 		do{
 			System.out.println("Menu: 1) Conta; 2) Servico; 3) Venda; 4) Sair");
 			escolhaMenu = in.nextInt();
-
+			
 			if(escolhaMenu==1){
 				//CONTA
 

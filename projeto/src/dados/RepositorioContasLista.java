@@ -142,13 +142,15 @@ public class RepositorioContasLista implements RepositorioContas{
 		}
 		return a;
 	}
-
+	//vai listar todas as contas que está na Lista
 	public String listarConta() throws NenhumaContaCadastradaException {
-		return null;
-	}
+		String a = "";
+		Conta c = new Conta();
+		while(c != null){
+			a = a + c.toString();
+			c = this.proximo.getConta();
+		}
 
-	public Conta[] listar() {
-		
 		return null;
 	}
 }

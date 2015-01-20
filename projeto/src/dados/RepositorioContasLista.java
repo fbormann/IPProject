@@ -8,8 +8,8 @@ import excecoes.NenhumaContaCadastradaException;
 public class RepositorioContasLista implements RepositorioContas{
 
 	private Conta conta;
-	private int contador;
 	private RepositorioContasLista proximo;
+	private int contador;
 
 	public RepositorioContasLista(){
 		this.conta = null;
@@ -26,7 +26,8 @@ public class RepositorioContasLista implements RepositorioContas{
 			this.proximo.adicionar(conta);
 		}
 	}
-	 
+	 //duvida: quando adicionarmos uma conta na lista, esse contador vai aumentar +1. 
+	//esse valor (+1) é guardado na memoria do computador pra depois ele reconhecer nesse outro metodo (listaVazia ?)
 	public boolean listaVazia(){
 		boolean resposta = false;
 		if(this.contador>0){

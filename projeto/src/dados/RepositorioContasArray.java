@@ -11,23 +11,21 @@ public class RepositorioContasArray implements RepositorioContas {
 		this.contas = new Conta[0];
 	}
 
-	public void adicionar(Conta conta) throws ContaJaCadastradaException {
+	public void adicionar(Conta conta){
 		Conta[] aux = new Conta[this.contas.length+1];
 
 		for(int i = 0; i < this.contas.length;i++){
-			if(this.contas[i].getCPF().equals(conta.getCPF())){
-				throw new ContaJaCadastradaException();
-			}else{
-				aux[i] = this.contas[i];
-			}
+
+			aux[i] = this.contas[i];
+
 		}
 		aux[aux.length-1] = conta;
 		this.contas = aux;
 	}
 
-	public void update(Conta conta) throws ContaNaoExisteException{
+	public void update(Conta conta){
 		if(this.exist(conta.getCPF())){
-		for(int i = 0; i < this.contas.length;i++){
+			for(int i = 0; i < this.contas.length;i++){
 				if(!conta.getNome().equals("")){
 					this.contas[i].setNome(conta.getNome());
 				}
@@ -58,41 +56,29 @@ public class RepositorioContasArray implements RepositorioContas {
 				if(!conta.getNome().equals("")){
 					this.contas[i].setNome(conta.getNome());
 				}
-				
+
 				if(!conta.getCarro().getCor().equals("")){
 					this.contas[i].getCarro().setCor(conta.getCarro().getCor());
 				}
-				
+
 				if(!conta.getCarro().getMarca().equals("")){
 					this.contas[i].getCarro().setMarca(conta.getCarro().getMarca());
 				}
-				
+
 				if(!conta.getCarro().getModelo().equals("")){
 					this.contas[i].getCarro().setModelo(conta.getCarro().getModelo());
 				}
-				
+
 				if(!conta.getCarro().getPlaca().equals("")){
 					this.contas[i].getCarro().setPlaca(conta.getCarro().getPlaca());
 				}
-				
+
 			}
-		}else{
-			throw new ContaNaoExisteException();
 		}
 	}
 
-	public void remover(String CPF) throws ContaNaoExisteException {
+	public void remover(String CPF) {
 		Conta[] aux = new Conta[this.contas.length-1];
-		boolean existe = false;
-		for(int i = 0; i < this.contas.length;i++){
-			if(this.contas[i].getCPF().equals(CPF)){
-				existe = true;
-			}
-		}
-
-		if(!existe){
-			throw new ContaNaoExisteException();
-		}
 
 		int indice = 0;
 		for(int i = 0; i < this.contas.length;i++){
@@ -101,40 +87,36 @@ public class RepositorioContasArray implements RepositorioContas {
 				indice++;
 			}
 		}
-		
+
 		this.contas = aux;
 
 	}
-	
+
 	public Conta[] listar() { //retorna a referencia do array
 		return this.contas;
 	}
-	
+
 	//vai retornar as descricoes de todas as contas cadastradas no array / para a classe Programa
-	public String listarConta() throws NenhumaContaCadastradaException{
+	public String listarConta(){
 		String r = "";
 		if(this.contas != null){
 			for(int i = 0; i<this.contas.length; i++){
 				r = r + this.contas[i].toString() + "\n";
 			}
-		}else{
-			throw new NenhumaContaCadastradaException();
 		}
 		return r;
 	}
 
-	public Conta buscar(String CPF) throws ContaNaoExisteException {
+	public Conta buscar(String CPF){
 		Conta contaProcurada = new Conta();
 		for(int i = 0; i < this.contas.length;i++){
 			if(this.contas[i].getCPF().equals(CPF)){
 				contaProcurada = this.contas[i]; 
 			}
 		}
-		if(contaProcurada == null){
-			throw new ContaNaoExisteException();
-		}else{
-			return contaProcurada;
-		}
+
+		return contaProcurada;
+
 	}
 
 	public boolean exist(String CPF) {

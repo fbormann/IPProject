@@ -6,16 +6,16 @@ import excecoes.NenhumaContaCadastradaException;
 
 public interface RepositorioContas {
 
-	void adicionar(Conta conta) throws ContaJaCadastradaException; 
+	void adicionar(Conta conta); 
 		
-	void remover(String CPF) throws ContaNaoExisteException;
+	void remover(String CPF);
 			
-	Conta buscar(String CPF) throws ContaNaoExisteException;
+	Conta buscar(String CPF);
 	
-	void update(Conta conta) throws ContaNaoExisteException;
+	void update(Conta conta);
 	
 	boolean exist(String CPF);
 	
-	String listarConta() throws NenhumaContaCadastradaException;
+	String listarConta();
 	
 }

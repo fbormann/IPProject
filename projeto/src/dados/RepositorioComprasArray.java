@@ -25,7 +25,7 @@ public class RepositorioComprasArray implements RepositorioCompras{
 
 		int indice = 0;
 		for(int i = 0; i < this.compras.length;i++){
-			if(!compras[i].getId().equals(ID)){ // If it is different do not remove
+			if(!compras[i].getId().equals(ID)){ // If it is different do not remover
 				aux[indice] = compras[i];
 				indice++;
 			}
@@ -66,14 +66,12 @@ public class RepositorioComprasArray implements RepositorioCompras{
 		return exist;
 	}
 
-	public String listarCompra() throws NenhumaCompraCadastradaException{
+	public String listarCompra(){
 		String r = "";
 		if(this.compras!=null){
 			for(int i = 0; i<this.compras.length; i++){
 				r = r + this.compras[i].toString();
 			}
-		}else{
-			throw new NenhumaCompraCadastradaException();
 		}
 		return r;
 	}

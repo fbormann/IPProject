@@ -13,32 +13,20 @@ public class RepositorioServicoArray implements RepositorioServico{
 		this.servicos = new Servico[0];
 	}
 
-	public void adicionar(Servico servico) throws ServicoJaCadastradoException {
+	public void adicionar(Servico servico){
 		Servico[] aux = new Servico[this.servicos.length+1];
 		for(int i = 0; i < this.servicos.length;i++){
-			if(this.servicos[i].getID().equals(servico.getID())){
-				throw new ServicoJaCadastradoException();
-			}else{
-				aux[i] = this.servicos[i];
-			}
+
+			aux[i] = this.servicos[i];
+
 		}
 
 		aux[aux.length-1] = servico;
 		this.servicos = aux;
 	}
 
-	public void remover(String ID) throws ServicoNaoEncontradoException{
+	public void remover(String ID){
 		Servico[] aux = new Servico[this.servicos.length-1];
-		boolean existe = false;
-		for(int i = 0; i < this.servicos.length;i++){
-			if(this.servicos[i].getID().equals(ID)){
-				existe = true;
-			}
-		}
-
-		if(!existe){
-			throw new ServicoNaoEncontradoException();
-		}
 
 		int indice = 0;
 
@@ -52,7 +40,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 		this.servicos = aux;
 	}
 
-	public void update(Servico servico) throws ServicoNaoEncontradoException {
+	public void update(Servico servico){
 		for(int i = 0; i<this.servicos.length; i++){
 			if(this.servicos[i].getID().equals(servico.getID())){
 				if(!servico.getNome().equals("")){
@@ -63,13 +51,11 @@ public class RepositorioServicoArray implements RepositorioServico{
 				}
 				//ID do produto nao pode ser alterado
 
-			}else{
-				throw new ServicoNaoEncontradoException();
 			}
 		}
 	}
 
-	public double consultaPreco(String ID) throws ServicoNaoEncontradoException{
+	public double consultaPreco(String ID){
 		double a = 0;
 		if(this.exist(ID)){
 			for(int i = 0; i<this.servicos.length; i++){
@@ -77,8 +63,6 @@ public class RepositorioServicoArray implements RepositorioServico{
 					a = this.servicos[i].getPreco();
 				}
 			}
-		}else{
-			throw new ServicoNaoEncontradoException();
 		}
 		return a;
 	}
@@ -87,32 +71,25 @@ public class RepositorioServicoArray implements RepositorioServico{
 		return this.servicos;
 	}
 	//esse metodo vai retornar as descricoes de todos os servicos cadastrados no array
-	public String listarServico() throws NenhumServicoCadastradoException{
+	public String listarServico(){
 		String r = "";
 		if(this.servicos != null){
 			for(int i = 0; i<this.servicos.length; i++){
 				r += r + this.servicos[i].toString();
 			}
-		}else{
-			throw new NenhumServicoCadastradoException();
 		}
 		return r;
 	}
-
-	public Servico buscar(String ID) throws ServicoNaoEncontradoException {
-		if(this.exist(ID)){
-			for(int i = 0; i<this.servicos.length; i++){
-				if(this.servicos[i].getID().equals(ID)){
-					return this.servicos[i];
-				}
+	
+	public Servico buscar(String ID){
+		for(int i = 0; i<this.servicos.length; i++){
+			if(this.servicos[i].getID().equals(ID)){
+				return this.servicos[i];
 			}
-		}else{
-			throw new ServicoNaoEncontradoException();
 		}
-
 		return null;
-
 	}
+
 
 	public boolean exist(String ID){
 		boolean exist = false;

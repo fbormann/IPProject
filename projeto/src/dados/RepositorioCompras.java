@@ -7,13 +7,13 @@ public interface RepositorioCompras {
 	
 	public void adicionar(Compra compra);
 	
-	public void remover(String ID) throws CompraNaoExisteException;
+	public void remover(String ID);
 	
-	public void update(Compra compra) throws CompraNaoExisteException;
+	public void update(Compra compra);
 		
-	String listarCompra() throws NenhumaCompraCadastradaException;
+	String listarCompra();
 	
-	public Compra buscar(String ID) throws CompraNaoExisteException;
+	public Compra buscar(String ID);
 	
 	public boolean exist(String ID);
 }

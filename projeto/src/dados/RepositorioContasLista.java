@@ -9,52 +9,55 @@ public class RepositorioContasLista implements RepositorioContas{
 
 	private Conta conta;
 	private RepositorioContasLista proximo;
-	private int contador;
 
 	public RepositorioContasLista(){
 		this.conta = null;
 		this.proximo = null;
-		this.contador = 0;
 	}
 
-	public void adicionar(Conta conta) throws ContaJaCadastradaException {
+	public Conta getConta(){
+		return this.conta;
+	}
+
+	public RepositorioContasLista getProximo(){
+		return this.proximo;
+	}
+
+	public void adicionar(Conta conta) throws ContaJaCadastradaException{
 		if(this.conta == null){
 			this.conta = conta;
 			this.proximo = new RepositorioContasLista(); //criando o objeto
-			contador++;
 		}else{
 			this.proximo.adicionar(conta);
 		}
 	}
-	 //duvida: quando adicionarmos uma conta na lista, esse contador vai aumentar +1. 
-	//esse valor (+1) é guardado na memoria do computador pra depois ele reconhecer nesse outro metodo (listaVazia ?)
-	public boolean listaVazia(){
-		boolean resposta = false;
-		if(this.contador>0){
-			resposta = true;
+
+	public int quantidade(){
+		int contador = 0;
+		Conta c = new Conta();
+		c = this.conta;
+		while(c != null){
+			contador++;
+			c = this.proximo.getConta();
 		}
-		return resposta;
+		return contador;
 	}
 
 	public void remover(String CPF) throws ContaNaoExisteException {
-		if(this.conta!=null){
+		if(this.conta != null){
 			if(this.conta.getCPF().equals(CPF)){
-				this.conta = this.proximo.conta;
+				this.conta = this.proximo.conta; 
 				this.proximo = this.proximo.proximo;
 			}else{
-				this.proximo.remover(CPF);
+				if(this.proximo.getConta() != null){ //conferir se o proximo nao eh null
+					this.proximo.remover(CPF);
+				}else{
+					throw new ContaNaoExisteException();
+				}
 			}
 		}else{
 			throw new ContaNaoExisteException();
 		}
-	}
-
-	public Conta[] listar() {
-		return null;
-	}
-	//nao precisaremos desse metodo pois ele so iria checar se a lista esta vazia, mas ja temos o metodo listaVazia();
-	public String listarConta() throws NenhumaContaCadastradaException {
-		return null;
 	}
 
 	public Conta buscar(String CPF) throws ContaNaoExisteException {
@@ -64,12 +67,16 @@ public class RepositorioContasLista implements RepositorioContas{
 				contaBuscada = this.conta;
 				return contaBuscada;
 			}else{
-				this.proximo.buscar(CPF);
+				if(this.proximo.getConta() != null){ //conferir se o proximo nao eh null
+					this.proximo.buscar(CPF);
+				}else{
+					throw new ContaNaoExisteException();
+				}
 			}
 		}else{
 			throw new ContaNaoExisteException();
 		}
-		
+
 		return null;
 	}
 
@@ -113,7 +120,11 @@ public class RepositorioContasLista implements RepositorioContas{
 					this.conta.getCarro().setPlaca(conta.getCarro().getPlaca());
 				}
 			}else{
-				this.proximo.update(conta);
+				if(this.proximo.getConta() != null){
+					this.proximo.update(conta);
+				}else{
+					throw new ContaNaoExisteException();
+				}
 			}
 		}else{
 			throw new ContaNaoExisteException();
@@ -125,8 +136,19 @@ public class RepositorioContasLista implements RepositorioContas{
 		if(this.conta.getCPF().equals(CPF)){
 			a = true;
 		}else{
-			this.proximo.exist(CPF);
+			if(this.proximo.getConta() != null){
+				this.proximo.exist(CPF);
+			}
 		}
 		return a;
+	}
+
+	public String listarConta() throws NenhumaContaCadastradaException {
+		return null;
+	}
+
+	public Conta[] listar() {
+		
+		return null;
 	}
 }

@@ -115,7 +115,7 @@ public class RepositorioContasArray implements RepositorioContas {
 		String r = "";
 		if(this.contas != null){
 			for(int i = 0; i<this.contas.length; i++){
-				r = this.contas[i].toString();
+				r = r + this.contas[i].toString();
 			}
 		}else{
 			throw new NenhumaContaCadastradaException();

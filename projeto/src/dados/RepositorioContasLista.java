@@ -23,7 +23,7 @@ public class RepositorioContasLista implements RepositorioContas{
 		return this.proximo;
 	}
 
-	public void adicionar(Conta conta) throws ContaJaCadastradaException{
+	public void adicionar(Conta conta){
 		if(this.conta == null){
 			this.conta = conta;
 			this.proximo = new RepositorioContasLista(); //criando o objeto
@@ -43,7 +43,7 @@ public class RepositorioContasLista implements RepositorioContas{
 		return contador;
 	}
 
-	public void remover(String CPF) throws ContaNaoExisteException {
+	public void remover(String CPF)  {
 		if(this.conta != null){
 			if(this.conta.getCPF().equals(CPF)){
 				this.conta = this.proximo.conta; 
@@ -51,16 +51,14 @@ public class RepositorioContasLista implements RepositorioContas{
 			}else{
 				if(this.proximo.getConta() != null){ //conferir se o proximo nao eh null
 					this.proximo.remover(CPF);
-				}else{
-					throw new ContaNaoExisteException();
+
 				}
 			}
-		}else{
-			throw new ContaNaoExisteException();
+
 		}
 	}
 
-	public Conta buscar(String CPF) throws ContaNaoExisteException {
+	public Conta buscar(String CPF)  {
 		Conta contaBuscada = new Conta();
 		if(this.exist(CPF)){
 			if(this.conta.getCPF().equals(CPF)){
@@ -69,18 +67,14 @@ public class RepositorioContasLista implements RepositorioContas{
 			}else{
 				if(this.proximo.getConta() != null){ //conferir se o proximo nao eh null
 					this.proximo.buscar(CPF);
-				}else{
-					throw new ContaNaoExisteException();
 				}
 			}
-		}else{
-			throw new ContaNaoExisteException();
 		}
 
 		return null;
 	}
 
-	public void update(Conta conta) throws ContaNaoExisteException {
+	public void update(Conta conta) {
 		if(this.exist(conta.getCPF())){
 			if(this.conta.getCPF().equals(conta.getCPF())){
 				if(!this.conta.getNome().equals(conta.getNome())){
@@ -122,12 +116,8 @@ public class RepositorioContasLista implements RepositorioContas{
 			}else{
 				if(this.proximo.getConta() != null){
 					this.proximo.update(conta);
-				}else{
-					throw new ContaNaoExisteException();
 				}
 			}
-		}else{
-			throw new ContaNaoExisteException();
 		}
 	}
 
@@ -143,7 +133,7 @@ public class RepositorioContasLista implements RepositorioContas{
 		return a;
 	}
 	//vai listar todas as contas que está na Lista
-	public String listarConta() throws NenhumaContaCadastradaException {
+	public String listarConta() {
 		String a = "";
 		Conta c = new Conta();
 		while(c != null){

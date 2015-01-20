@@ -26,13 +26,13 @@ public class RepositorioContasLista implements RepositorioContas{
 			this.proximo.adicionar(conta);
 		}
 	}
-
+	 
 	public boolean listaVazia(){
-		boolean a = false;
+		boolean resposta = false;
 		if(this.contador>0){
-			a = true;
+			resposta = true;
 		}
-		return a;
+		return resposta;
 	}
 
 	public void remover(String CPF) throws ContaNaoExisteException {

@@ -110,7 +110,7 @@ public class RepositorioContasArray implements RepositorioContas {
 		return this.contas;
 	}
 	
-	//vai retornar as descricoes de todas as contas cadastradas no array
+	//vai retornar as descricoes de todas as contas cadastradas no array / para a classe Programa
 	public String listarConta() throws NenhumaContaCadastradaException{
 		String r = "";
 		if(this.contas != null){

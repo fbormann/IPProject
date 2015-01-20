@@ -47,9 +47,7 @@ public class ManagerCompras {
 		return this.compras.listarCompra();
 	}
 
-	public Compra[] listar(){
-		return this.compras.listar();
-	}
+	
 
 	public boolean exist(String ID){
 		return this.compras.exist(ID);

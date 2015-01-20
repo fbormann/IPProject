@@ -41,8 +41,12 @@ public class OficinaFacade {
 
 
 	//VENDA
+	public static Compra[] listarCompras(){
+		return compras.listar();
+	}
+	
 	public static void adicionarCompra(Compra compra) throws ContaNaoExisteException{
-		if(compras.exist(compra.getId())){
+		if(!compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
 		}else{
 			throw new ContaNaoExisteException();
@@ -78,6 +82,10 @@ public class OficinaFacade {
 	
 	
 	//CLIENTE
+	public static Conta[] listarContas(){
+		return contas.listar();
+	}
+	
 	public static void adicionarConta(Conta conta) throws ContaJaCadastradaException, CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException {
 		if(!contas.exist(conta.getCPF())){
 			if(validadeCPF(conta.getCPF())){
@@ -129,7 +137,7 @@ public class OficinaFacade {
 		if(CPF.length()!=14){
 			throw e;
 		}else{
-			//checar se há somente números
+			//checar se hï¿½ somente nï¿½meros
 			for(int i = 0; i<CPF.length(); i++){
 				if(i!=3 && i!=7 && i!=11){
 					if(CPF.charAt(i)<48 && CPF.charAt(i)>57){
@@ -155,7 +163,7 @@ public class OficinaFacade {
 		//checar tamanho
 		if(CEP.length() != 9){
 			throw e;
-			//checando se há somente números
+			//checando se hï¿½ somente nï¿½meros
 		}else{
 			for(int i = 0; i<CEP.length(); i++){
 				if(i!=5){
@@ -177,7 +185,7 @@ public class OficinaFacade {
 		//checar tamanho
 		if(placa.length()!=8){
 			throw a;
-			//checando se há numeros onde deve haver números
+			//checando se hï¿½ numeros onde deve haver nï¿½meros
 		}else{
 			for(int i = 0; i <placa.length(); i++){
 				if(i>=4){
@@ -187,7 +195,7 @@ public class OficinaFacade {
 						throw a;
 					}
 				}
-				//checando se há letras onde deve haver letras
+				//checando se hï¿½ letras onde deve haver letras
 				if(i<=2){
 					if(placa.charAt(i)>=65 && placa.charAt(i)<=90){
 						return true;
@@ -196,7 +204,7 @@ public class OficinaFacade {
 					}
 				}
 			}
-			//checando se o hifen está na posicao correta
+			//checando se o hifen estï¿½ na posicao correta
 			String exemploPlaca = "AAA-0000";
 			int c = exemploPlaca.charAt(3);
 			if(c == 45){
@@ -270,5 +278,9 @@ public class OficinaFacade {
 	}
 	public static String listarServico() throws NenhumServicoCadastradoException{
 		return servicos.listarServico();
+	}
+	
+	public static Servico[] listarServicos(){
+		return servicos.listar();
 	}
 }

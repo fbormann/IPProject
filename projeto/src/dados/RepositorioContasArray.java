@@ -1,7 +1,6 @@
 package dados;
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
+
 
 import entidades.Conta;
 
@@ -145,8 +144,7 @@ public class RepositorioContasArray implements RepositorioContas {
 	         }
 	         return null;
 	      }		
-		public void forEachRemaining(Consumer arg0) {
-		}
+	
 	
 		public void remove() {
 		}
@@ -154,17 +152,13 @@ public class RepositorioContasArray implements RepositorioContas {
 	}
 	
 
-	public void forEach(Consumer arg0) {
-		
-	}
+	
 
 	public Iterator iterator() {
 		return new ContaIterator();
 	}
 
-	public Spliterator spliterator() {
-		return null;
-	}
+	
 
 	
 }

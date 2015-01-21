@@ -2,8 +2,7 @@ package dados;
 
 
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
+
 
 import entidades.Servico;
 
@@ -116,8 +115,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 	         }
 	         return null;
 	      }		
-		public void forEachRemaining(Consumer arg0) {
-		}
+		
 	
 		public void remove() {
 		}
@@ -125,16 +123,12 @@ public class RepositorioServicoArray implements RepositorioServico{
 	}
 	
 	
-	public void forEach(Consumer arg0) {
-		
-	}
+	
 
 	public Iterator iterator() {
 		return new ServicoIterator();
 	}
 
-	public Spliterator spliterator() {
-		return null;
-	}
+	
 
 }

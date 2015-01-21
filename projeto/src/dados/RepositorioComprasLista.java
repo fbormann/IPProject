@@ -1,8 +1,6 @@
 package dados;
 
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 import entidades.Compra;
 
@@ -101,16 +99,13 @@ public class RepositorioComprasLista implements RepositorioCompras {
 		return null;
 	}
 
-	public void forEach(Consumer arg0) {
-	}
+	
 
 	public Iterator iterator() {
 		return null;
 	}
 
-	public Spliterator spliterator() {
-		return null;
-	}
+	
 
 
 }

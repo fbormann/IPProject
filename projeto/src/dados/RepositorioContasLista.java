@@ -1,8 +1,6 @@
 package dados;
 
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 import entidades.Conta;
 
@@ -131,7 +129,7 @@ public class RepositorioContasLista implements RepositorioContas{
 		}
 		return a;
 	}
-	//vai listar todas as contas que está na Lista
+	//vai listar todas as contas que estï¿½ na Lista
 	public String listarConta() {
 		String a = "";
 		Conta c = new Conta();
@@ -143,15 +141,10 @@ public class RepositorioContasLista implements RepositorioContas{
 		return null;
 	}
 
-	public void forEach(Consumer arg0) {
-		
-	}
-
+	
 	public Iterator iterator() {
 		return null;
 	}
 
-	public Spliterator spliterator() {
-		return null;
-	}
+	
 }

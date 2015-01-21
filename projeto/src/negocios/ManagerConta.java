@@ -60,8 +60,5 @@ public class ManagerConta {
 		return a;
 	}
 
-	public Conta[] listar(){
-		return this.contas.listar();
-	}
-
+	
 }

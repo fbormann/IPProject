@@ -40,7 +40,8 @@ public class RepositorioContasLista implements RepositorioContas{
 		return contador;
 	}
 
-	public void remover(String CPF) {
+
+	public void remover(String CPF)  {
 		if(this.conta != null){
 			if(this.conta.getCPF().equals(CPF)){
 				this.conta = this.proximo.conta; 
@@ -48,12 +49,14 @@ public class RepositorioContasLista implements RepositorioContas{
 			}else{
 				if(this.proximo.getConta() != null){ //conferir se o proximo nao eh null
 					this.proximo.remover(CPF);
+
 				}
 			}
+
 		}
 	}
 
-	public Conta buscar(String CPF) {
+	public Conta buscar(String CPF)  {
 		Conta contaBuscada = new Conta();
 		if(this.conta.getCPF().equals(CPF)){
 			contaBuscada = this.conta;
@@ -102,11 +105,13 @@ public class RepositorioContasLista implements RepositorioContas{
 			}
 			if(!this.conta.getCarro().getPlaca().equals("")){
 				this.conta.getCarro().setPlaca(conta.getCarro().getPlaca());
+
 			}
 		}else{
 			if(this.proximo.getConta() != null){
 				this.proximo.update(conta);
 			}
+
 		}
 	}
 

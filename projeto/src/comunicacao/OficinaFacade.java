@@ -41,9 +41,7 @@ public class OficinaFacade {
 
 
 	//VENDA
-	public static Compra[] listarCompras(){
-		return compras.listar();
-	}
+	
 	
 	public static void adicionarCompra(Compra compra) throws ContaNaoExisteException{
 		if(!compras.exist(compra.getId())){
@@ -83,9 +81,7 @@ public class OficinaFacade {
 	
 	//CLIENTE
 	
-	public static Conta[] listarContas(){
-		return contas.listar();
-	}
+	
 	
 	public static void adicionarConta(Conta conta) throws ContaJaCadastradaException, CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException {
 		if(!contas.exist(conta.getCPF())){
@@ -281,7 +277,5 @@ public class OficinaFacade {
 		return servicos.listarServico();
 	}
 	
-	public static Servico[] listarServicos(){
-		return servicos.listar();
-	}
+	
 }

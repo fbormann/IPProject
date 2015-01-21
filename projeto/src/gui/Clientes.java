@@ -26,7 +26,6 @@ import excecoes.ContaNaoExisteException;
 import javax.swing.ListSelectionModel;
 
 
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractListModel;
 import java.awt.Color;
@@ -36,7 +35,6 @@ import java.awt.Color;
 public class Clientes extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 
 	/**
 	 * Launch the application.

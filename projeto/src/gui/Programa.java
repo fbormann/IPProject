@@ -385,6 +385,7 @@ public class Programa {
 
 						while(!eServico.equals("exit")){
 							comprados.adicionar(aux[a]);
+
 						}
 					}else if(escolhaCompra==2){
 						System.out.print("Digite o ID da compra que voce quer remover: ");

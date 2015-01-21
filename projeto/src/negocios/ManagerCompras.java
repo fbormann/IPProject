@@ -1,4 +1,6 @@
 package negocios;
+import java.util.Iterator;
+
 import dados.RepositorioCompras;
 import entidades.Compra;
 import excecoes.CompraNaoExisteException;
@@ -47,11 +49,13 @@ public class ManagerCompras {
 		return this.compras.listarCompra();
 	}
 
-	public Compra[] listar(){
-		return this.compras.listar();
-	}
-
 	public boolean exist(String ID){
 		return this.compras.exist(ID);
 	}
+	
+	public Iterator iterator(){
+		return this.compras.getIterator();
+	}
+	
+	
 }

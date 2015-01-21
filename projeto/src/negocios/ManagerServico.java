@@ -59,8 +59,6 @@ public class ManagerServico {
 		return this.servicos.listarServico(); 
 	}
 
-	public Servico[] listar(){
-		return this.servicos.listar();
-	}
+	
 
 }

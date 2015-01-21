@@ -1,5 +1,7 @@
 package dados;
 
+import java.util.Iterator;
+
 import entidades.Compra;
 
 public class RepositorioComprasLista implements RepositorioCompras {
@@ -91,6 +93,10 @@ public class RepositorioComprasLista implements RepositorioCompras {
 			}
 		}
 		return a;
+	}
+
+	public Iterator getIterator() {
+		return null;
 	}
 
 

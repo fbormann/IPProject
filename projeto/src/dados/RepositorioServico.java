@@ -1,8 +1,5 @@
 package dados;
 import entidades.Servico;
-import excecoes.NenhumServicoCadastradoException;
-import excecoes.ServicoJaCadastradoException;
-import excecoes.ServicoNaoEncontradoException;
 public interface RepositorioServico {
 	
 	void adicionar(Servico servico);

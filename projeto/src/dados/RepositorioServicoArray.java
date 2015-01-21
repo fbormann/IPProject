@@ -1,6 +1,10 @@
 package dados;
 
 
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 import entidades.Servico;
 
 public class RepositorioServicoArray implements RepositorioServico{
@@ -95,6 +99,42 @@ public class RepositorioServicoArray implements RepositorioServico{
 			}
 		}
 		return exist;
+	}
+
+	private class ServicoIterator implements Iterator{
+
+		int index = 0;
+
+	      public boolean hasNext() {
+	         return (index < servicos.length);
+	      }
+
+	      public Object next() {
+	      
+	         if(this.hasNext()){
+	            return servicos[index++];
+	         }
+	         return null;
+	      }		
+		public void forEachRemaining(Consumer arg0) {
+		}
+	
+		public void remove() {
+		}
+		
+	}
+	
+	
+	public void forEach(Consumer arg0) {
+		
+	}
+
+	public Iterator iterator() {
+		return new ServicoIterator();
+	}
+
+	public Spliterator spliterator() {
+		return null;
 	}
 
 }

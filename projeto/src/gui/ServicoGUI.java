@@ -22,6 +22,7 @@ import excecoes.ServicoNaoEncontradoException;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Iterator;
 
 public class ServicoGUI extends JFrame {
 
@@ -89,14 +90,19 @@ public class ServicoGUI extends JFrame {
 		list_servicos.setBounds(26, 44, 204, 165);
 
 		final DefaultListModel model = new DefaultListModel();
-		if(OficinaFacade.servicosArray != null){
-			Servico[] servicos = OficinaFacade.listarServicos();
-			if(servicos != null){
-				for(int i = 0; i < servicos.length;i++){
-					model.addElement(servicos[i].getNome() + "(" + servicos[i].getID() +")"); 
-				}
-			}
+		
+		for(Iterator iter = OficinaFacade.servicoIterator();iter.hasNext();){
+			Servico servico = (Servico)iter.next();
+			model.addElement(servico.getNome() + "(" + servico.getID() +")");
 		}
+		//		if(OficinaFacade.servicosArray != null){
+		//			Servico[] servicos = OficinaFacade.listarServicos();
+		//			if(servicos != null){
+		//				for(int i = 0; i < servicos.length;i++){
+		//					model.addElement(servicos[i].getNome() + "(" + servicos[i].getID() +")"); 
+		//				}
+		//			}
+		//		}
 		list_servicos.setModel(model);
 		panel.add(list_servicos);
 

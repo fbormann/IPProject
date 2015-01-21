@@ -1,4 +1,6 @@
 package negocios;
+import java.util.Iterator;
+
 import dados.RepositorioContas;
 import entidades.Conta;
 import excecoes.ContaJaCadastradaException;
@@ -58,6 +60,10 @@ public class ManagerConta {
 			throw new NenhumaContaCadastradaException();
 		}
 		return a;
+	}
+	
+	public Iterator iterator(){
+		return this.contas.iterator();
 	}
 
 	

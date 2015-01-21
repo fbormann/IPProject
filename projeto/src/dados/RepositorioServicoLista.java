@@ -1,5 +1,9 @@
 package dados;
 
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 import entidades.Servico;
 
 public class RepositorioServicoLista implements RepositorioServico{
@@ -112,6 +116,18 @@ public class RepositorioServicoLista implements RepositorioServico{
 			}
 		}
 		return a;
+	}
+
+	public void forEach(Consumer arg0) {
+		
+	}
+
+	public Iterator iterator() {
+		return null;
+	}
+
+	public Spliterator spliterator() {
+		return null;
 	}
 
 }

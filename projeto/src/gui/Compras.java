@@ -7,13 +7,16 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JList;
+
 import java.awt.Color;
+
 import javax.swing.JButton;
 
 import comunicacao.OficinaFacade;
-
 import entidades.Compra;
 import entidades.Conta;
 import excecoes.CPFInvalidoException;
@@ -21,6 +24,8 @@ import excecoes.ContaNaoExisteException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Iterator;
+
 import javax.swing.JLabel;
 
 public class Compras extends JFrame {
@@ -53,12 +58,12 @@ public class Compras extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btn_Cadastrar = new JButton("Cadastrar");
-		
+
 		btn_Cadastrar.setBounds(311, 47, 89, 23);
 		contentPane.add(btn_Cadastrar);
-		
+
 		JButton btn_Remover = new JButton("Remover");
 		btn_Remover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -66,7 +71,7 @@ public class Compras extends JFrame {
 		});
 		btn_Remover.setBounds(311, 110, 89, 23);
 		contentPane.add(btn_Remover);
-		
+
 		JButton btn_Atualizar = new JButton("Atualizar");
 		btn_Atualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -74,7 +79,7 @@ public class Compras extends JFrame {
 		});
 		btn_Atualizar.setBounds(311, 181, 89, 23);
 		contentPane.add(btn_Atualizar);
-		
+
 		JButton btn_Voltar = new JButton("Voltar");
 		btn_Voltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,34 +89,41 @@ public class Compras extends JFrame {
 		});
 		btn_Voltar.setBounds(296, 11, 114, 23);
 		contentPane.add(btn_Voltar);
-		
+
 		final JLabel lbl_error = new JLabel("");
 		lbl_error.setBounds(24, 242, 223, 16);
 		contentPane.add(lbl_error);
-		
+
 		JList list_compras = new JList();
 		list_compras.setBounds(24, 29, 252, 229);
 		final DefaultListModel model = new DefaultListModel();
-		if(OficinaFacade.comprasArray != null){
-			Compra[] compras = OficinaFacade.listarCompras();
-			if(compras != null){
-				for(int i = 0; i < compras.length;i++){
-					try {
-						model.addElement(compras[i].getId() + "(" + OficinaFacade.buscarConta(compras[i].getContaCPF()).getNome() +")"); //TODO: Checar as compras pois quando deletarmos uma conta, devemos deletar as compras relacionados � elas.
-					} catch (ContaNaoExisteException e1) {
-						e1.printStackTrace();
-					} catch (CPFInvalidoException e1) {
-						e1.printStackTrace();
-					}
-				}
+
+		for(Iterator iter = OficinaFacade.comprasIterator();iter.hasNext();){
+			Compra compra = (Compra)iter.next();
+			try {
+				model.addElement(compra.getId() + "(" + OficinaFacade.buscarConta(compra.getContaCPF()).getNome() +")");
+			} catch (ContaNaoExisteException e1) {
+				e1.printStackTrace();
+			} catch (CPFInvalidoException e1) {
+				e1.printStackTrace();
 			}
 		}
+//		for(int i = 0; i < compras.length;i++){
+//			try {
+//				model.addElement(compras[i].getId() + "(" + OficinaFacade.buscarConta(compras[i].getContaCPF()).getNome() +")"); //TODO: Checar as compras pois quando deletarmos uma conta, devemos deletar as compras relacionados � elas.
+//			} catch (ContaNaoExisteException e1) {
+//				e1.printStackTrace();
+//			} catch (CPFInvalidoException e1) {
+//				e1.printStackTrace();
+//			}
+//		}
+
 		list_compras.setModel(model);
 		contentPane.add(list_compras);
-		
+
 		btn_Cadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(OficinaFacade.listarCompras() == null){ //Pois senao a compra nao existira.
+				if(!OficinaFacade.contaIterator().hasNext()){ //Pois senao a compra nao existira.
 					lbl_error.setText("Nao Existem contas cadastradas para efetuarem compras.");
 				}else{
 					new CadastrarCompra().setVisible(true);
@@ -119,7 +131,7 @@ public class Compras extends JFrame {
 				}
 			}
 		});
-		
+
 		//TODO: Criar uma Lista Onde tem todos os Servicos chamda "Servicos" e outra chamada "Compra" 
 		//TODO: Criar Botao "Add" para uma segunda lista chamda "Compra"
 		//TODO: Criar Botao "Delete" que retira o item selecionado da lista "Compra"

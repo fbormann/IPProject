@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 
 
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -26,9 +27,13 @@ import excecoes.ContaNaoExisteException;
 import javax.swing.ListSelectionModel;
 
 
+
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractListModel;
+
 import java.awt.Color;
+import java.util.Iterator;
 
 
 
@@ -97,14 +102,20 @@ public class Clientes extends JFrame {
 		final JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(26, 44, 204, 165);
-		if(OficinaFacade.contasArray != null){
-			Conta[] contas = OficinaFacade.listarContas();
-			if(contas != null){
-				for(int i = 0; i < contas.length;i++){
-					model.addElement(contas[i].getNome() + "(" + contas[i].getCPF() +")");
-				}
-			}
+
+
+		for(Iterator iter = OficinaFacade.contaIterator(); iter.hasNext();){
+			Conta conta = (Conta)iter.next();
+			model.addElement(conta.getNome() + "(" + conta.getCPF() +")");
 		}
+
+		//			Conta[] contas = OficinaFacade.listarContas();
+		//			if(contas != null){
+		//				for(int i = 0; i < contas.length;i++){
+		//					model.addElement(contas[i].getNome() + "(" + contas[i].getCPF() +")");
+		//				}
+		//			}
+
 		list.setModel(model);
 		contentPane.add(list);
 
@@ -143,7 +154,7 @@ public class Clientes extends JFrame {
 				}else{
 					lbl_error.setText("Nenhum cliente selecionado.");
 				}
-				
+
 			}
 		});
 

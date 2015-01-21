@@ -3,7 +3,7 @@ import java.util.Iterator;
 
 import entidades.Compra;
 
-public interface RepositorioCompras{
+public interface RepositorioCompras extends Iterable{
 	
 	public void adicionar(Compra compra);
 	
@@ -17,5 +17,4 @@ public interface RepositorioCompras{
 	
 	public boolean exist(String ID);
 	
-	public Iterator getIterator();
 }

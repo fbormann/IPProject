@@ -53,9 +53,11 @@ public class ManagerCompras {
 		return this.compras.exist(ID);
 	}
 	
-	public Iterator iterator(){
-		return this.compras.getIterator();
+	public Iterator getIterator(){
+		return this.compras.iterator();
 	}
+	
+
 	
 	
 }

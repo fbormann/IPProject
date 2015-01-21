@@ -1,5 +1,7 @@
 package comunicacao;
 
+import java.util.Iterator;
+
 import dados.RepositorioComprasArray;
 import dados.RepositorioServicoArray;
 import dados.RepositorioContasArray;
@@ -42,6 +44,9 @@ public class OficinaFacade {
 
 	//VENDA
 	
+	public static Iterator comprasIterator(){
+		return  compras.getIterator();
+	}
 	
 	public static void adicionarCompra(Compra compra) throws ContaNaoExisteException{
 		if(!compras.exist(compra.getId())){
@@ -81,7 +86,9 @@ public class OficinaFacade {
 	
 	//CLIENTE
 	
-	
+	public static Iterator contaIterator(){
+		return contas.iterator();
+	}
 	
 	public static void adicionarConta(Conta conta) throws ContaJaCadastradaException, CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException {
 		if(!contas.exist(conta.getCPF())){
@@ -231,6 +238,11 @@ public class OficinaFacade {
 	}
 	
 	//SERVICO
+	
+	public static Iterator servicoIterator(){
+		return servicos.getIterator();
+	}
+	
 	public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException, TipoNaoSelecionadoException{
 		if(!servicos.exist(servico.getID())){
 			servicos.cadastrar(servico);

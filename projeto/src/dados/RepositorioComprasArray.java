@@ -1,6 +1,8 @@
 package dados;
 
 import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 import entidades.Compra;
 
@@ -81,14 +83,47 @@ public class RepositorioComprasArray implements RepositorioCompras{
 	public Compra[] listar() {
 		return this.compras;
 	}
+	
+	private class CompraIterator implements Iterator{
 
-	public Iterator getIterator() {
-		return null;
+		int index = 0;
+
+	      public boolean hasNext() {
+	         return (index < compras.length);
+	      }
+
+	      public Object next() {
+	      
+	         if(this.hasNext()){
+	            return compras[index++];
+	         }
+	         return null;
+	      }		
+		public void forEachRemaining(Consumer arg0) {
+		}
+	
+		public void remove() {
+		}
+		
 	}
-
-
 	
 
+	public Iterator getIterator() {
+		return new CompraIterator();
+	}
+
+	public void forEach(Consumer arg0) {
+		
+	}
+
+	public Iterator iterator() {
+		return new CompraIterator();
+	}
+
+	public Spliterator spliterator() {
+		return null;
+	}
+	
 	
 
 

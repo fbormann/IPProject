@@ -1,8 +1,10 @@
 package dados;
+import java.util.Iterator;
+
 import entidades.Conta;
 
 
-public interface RepositorioContas {
+public interface RepositorioContas extends Iterable{
 
 	void adicionar(Conta conta); 
 		
@@ -15,5 +17,7 @@ public interface RepositorioContas {
 	boolean exist(String CPF);
 	
 	String listarConta();
+
+	public Iterator iterator();
 	
 }

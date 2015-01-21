@@ -1,5 +1,9 @@
 package dados;
 
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 import entidades.Conta;
 
 public class RepositorioContasLista implements RepositorioContas{
@@ -136,6 +140,18 @@ public class RepositorioContasLista implements RepositorioContas{
 			c = this.proximo.getConta();
 		}
 
+		return null;
+	}
+
+	public void forEach(Consumer arg0) {
+		
+	}
+
+	public Iterator iterator() {
+		return null;
+	}
+
+	public Spliterator spliterator() {
 		return null;
 	}
 }

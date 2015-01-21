@@ -58,7 +58,6 @@ public class CadastrarCompra extends JFrame {
 	public CadastrarCompra() {
 
 
-		servicosComprados = new RepositorioServicoArray();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 477, 461);
 		contentPane = new JPanel();
@@ -118,7 +117,8 @@ public class CadastrarCompra extends JFrame {
 					}
 					
 					Compra novaCompra = new Compra();
-					novaCompra.setId(String.valueOf(OficinaFacade.listarCompras().length));
+					
+					//novaCompra.setId(String.valueOf(OficinaFacade));
 					novaCompra.setContaCPF(tf_CPF.getText());
 					novaCompra.setServicos(comprados);
 					novaCompra.setValor(preco);

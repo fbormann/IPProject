@@ -2,9 +2,7 @@ package dados;
 
 
 import entidades.Servico;
-import excecoes.NenhumServicoCadastradoException;
-import excecoes.ServicoJaCadastradoException;
-import excecoes.ServicoNaoEncontradoException;
+
 
 public class RepositorioServicoArray implements RepositorioServico{
 	private Servico[] servicos;
@@ -57,13 +55,12 @@ public class RepositorioServicoArray implements RepositorioServico{
 
 	public double consultaPreco(String ID){
 		double a = 0;
-		if(this.exist(ID)){
 			for(int i = 0; i<this.servicos.length; i++){
 				if(this.servicos[i].getID().equals(ID)){
 					a = this.servicos[i].getPreco();
 				}
 			}
-		}
+		
 		return a;
 	}
 	//esse metodo retorna a referencia do array

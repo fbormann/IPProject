@@ -1,8 +1,6 @@
 package dados;
 import entidades.Conta;
-import excecoes.ContaJaCadastradaException;
-import excecoes.ContaNaoExisteException;
-import excecoes.NenhumaContaCadastradaException;
+
 
 public class RepositorioContasArray implements RepositorioContas {
 	private Conta[] contas;
@@ -24,7 +22,6 @@ public class RepositorioContasArray implements RepositorioContas {
 	}
 
 	public void update(Conta conta){
-		if(this.exist(conta.getCPF())){
 			for(int i = 0; i < this.contas.length;i++){
 				if(!conta.getNome().equals("")){
 					this.contas[i].setNome(conta.getNome());
@@ -72,10 +69,9 @@ public class RepositorioContasArray implements RepositorioContas {
 				if(!conta.getCarro().getPlaca().equals("")){
 					this.contas[i].getCarro().setPlaca(conta.getCarro().getPlaca());
 				}
-
 			}
 		}
-	}
+	
 
 	public void remover(String CPF) {
 		Conta[] aux = new Conta[this.contas.length-1];

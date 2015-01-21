@@ -1,6 +1,5 @@
 package dados;
 import entidades.Compra;
-import excecoes.NenhumaCompraCadastradaException;
 
 public class RepositorioComprasArray implements RepositorioCompras{
 	private Compra[] compras;
@@ -22,7 +21,6 @@ public class RepositorioComprasArray implements RepositorioCompras{
 
 	public void remover(String ID){
 		Compra[] aux = new Compra[this.compras.length];
-
 		int indice = 0;
 		for(int i = 0; i < this.compras.length;i++){
 			if(!compras[i].getId().equals(ID)){ // If it is different do not remover
@@ -33,14 +31,13 @@ public class RepositorioComprasArray implements RepositorioCompras{
 		this.compras = aux;
 	}
 
-	public void update(Compra compra) {
+	public void update(Compra compra) { //apenas o valor de uma compra pode ser modificado depois 
 		
 		for(int i = 0; i < this.compras.length;i++){
 			if(this.compras[i].getId().equals(compra.getId())){
 				if(compra.getValor() != 0){
 					this.compras[i].setValor(compra.getValor());
 				}
-				//TODO: Entender o que pode ser modificado aqui.
 				this.compras[i] = compra;
 			}
 		}

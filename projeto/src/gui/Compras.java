@@ -53,7 +53,7 @@ public class Compras extends JFrame {
 	 */
 	public Compras() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 366);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -91,7 +91,7 @@ public class Compras extends JFrame {
 		contentPane.add(btn_Voltar);
 
 		final JLabel lbl_error = new JLabel("");
-		lbl_error.setBounds(24, 242, 223, 16);
+		lbl_error.setBounds(27, 301, 223, 16);
 		contentPane.add(lbl_error);
 
 		JList list_compras = new JList();
@@ -117,6 +117,8 @@ public class Compras extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!OficinaFacade.contaIterator().hasNext()){ //Pois senao a compra nao existira.
 					lbl_error.setText("Nao Existem contas cadastradas para efetuarem compras.");
+				}else if(!OficinaFacade.servicoIterator().hasNext()){
+					lbl_error.setText("Não existem serviços cadastrados para se constituir uma compra");
 				}else{
 					new CadastrarCompra().setVisible(true);
 					fecharJFrame();
@@ -124,10 +126,7 @@ public class Compras extends JFrame {
 			}
 		});
 
-		//TODO: Criar uma Lista Onde tem todos os Servicos chamda "Servicos" e outra chamada "Compra" 
-		//TODO: Criar Botao "Add" para uma segunda lista chamda "Compra"
-		//TODO: Criar Botao "Delete" que retira o item selecionado da lista "Compra"
-		//TODO: Criar Botao "Finalizar Compra" que finaliza a compra e abre a tela "Oficina"
+
 	}
 
 	protected void fecharJFrame() {

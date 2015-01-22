@@ -27,7 +27,6 @@ public class AtualizarServico extends JFrame {
 	private JTextField tf_codigo;
 	private JTextField tf_preco;
 	private JTextField tf_nome;
-	private String ID;
 	private int tipoServico;
 
 	/**

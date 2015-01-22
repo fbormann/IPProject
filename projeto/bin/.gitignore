@@ -1,4 +1,5 @@
-/dados/
-/comunicacao/
-/negocios/
-/gui/
+/gui
+/excecoes
+/dados
+/negocios
+/comunicacao

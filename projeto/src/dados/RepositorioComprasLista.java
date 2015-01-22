@@ -95,17 +95,15 @@ public class RepositorioComprasLista implements RepositorioCompras {
 		return a;
 	}
 
-	public Iterator getIterator() {
+	public Iterator<Compra> getIterator() {
 		return null;
 	}
 
-	
-
-	public Iterator iterator() {
+	public Iterator<Compra> iterator() {
 		return null;
 	}
 
-	
+
 
 
 }

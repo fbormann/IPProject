@@ -45,7 +45,7 @@ public class OficinaFacade {
 
 	//VENDA
 
-	public static Iterator comprasIterator(){
+	public static Iterator<Compra> comprasIterator(){
 		return  compras.getIterator();
 	}
 

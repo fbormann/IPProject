@@ -1,9 +1,7 @@
 package dados;
-import java.util.Iterator;
-
 import entidades.Compra;
 
-public interface RepositorioCompras extends Iterable{
+public interface RepositorioCompras extends Iterable<Compra>{
 	
 	public void adicionar(Compra compra);
 	

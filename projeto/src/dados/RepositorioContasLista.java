@@ -142,7 +142,7 @@ public class RepositorioContasLista implements RepositorioContas{
 	}
 
 	
-	public Iterator iterator() {
+	public Iterator<Conta> iterator() {
 		return null;
 	}
 

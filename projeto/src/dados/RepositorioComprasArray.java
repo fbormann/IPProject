@@ -98,9 +98,6 @@ public class RepositorioComprasArray implements RepositorioCompras{
 	         }
 	         return null;
 	      }		
-//		public void forEachRemaining(Consumer arg0) {
-//		}
-	
 		public void remove() {
 		}
 		

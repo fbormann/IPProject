@@ -27,6 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.Iterator;
 
 public class CadastrarCompra extends JFrame {
 
@@ -117,8 +118,11 @@ public class CadastrarCompra extends JFrame {
 					}
 					
 					Compra novaCompra = new Compra();
-					
-					//novaCompra.setId(String.valueOf(OficinaFacade));
+//					int id = 0;
+//					for(Iterator itr = OficinaFacade.comprasIterator(); itr.hasNext();){
+//						 id++;
+//					}
+//					novaCompra.setId(String.valueOf(id));
 					novaCompra.setContaCPF(tf_CPF.getText());
 					novaCompra.setServicos(comprados);
 					novaCompra.setValor(preco);

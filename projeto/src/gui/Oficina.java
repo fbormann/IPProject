@@ -91,7 +91,4 @@ public class Oficina extends JFrame {
 		this.dispose();
 	}
 	
-	//TODO: Criar Página do Relatório.
-	
-	
 }

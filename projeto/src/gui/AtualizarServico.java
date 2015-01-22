@@ -107,6 +107,7 @@ public class AtualizarServico extends JFrame {
 					break;
 				}
 				servicoAtualizado.setNome(tf_nome.getText());
+				servicoAtualizado.setID(tf_codigo.getText());
 
 				servicoAtualizado.setPreco(Double.parseDouble(tf_preco.getText()));
 

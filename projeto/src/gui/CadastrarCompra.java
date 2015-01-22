@@ -70,14 +70,11 @@ public class CadastrarCompra extends JFrame {
 		list_disponiveis.setBounds(27, 88, 173, 229);
 
 		final DefaultListModel model_Disponiveis = new DefaultListModel(); 
-		if(OficinaFacade.servicosArray != null){
-			Servico[] servicos = OficinaFacade.servicosArray.listar();//Lista de servicos disponiveis.
-			if(servicos != null){
-				for(int i = 0; i < servicos.length;i++){
-					model_Disponiveis.addElement(servicos[i].getNome() + "[" + servicos[i].getID() +"]" + " " + servicos[i].getPreco());
-				}
-			}
+		for(Iterator<Servico> itr = OficinaFacade.servicoIterator();itr.hasNext();){
+			Servico servico =  (Servico)itr.next();
+			model_Disponiveis.addElement(servico.getNome() + "[" + servico.getID() +"]" + " " + servico.getPreco() );
 		}
+		
 		list_disponiveis.setModel(model_Disponiveis);
 		contentPane.add(list_disponiveis);
 
@@ -108,7 +105,6 @@ public class CadastrarCompra extends JFrame {
 							}
 							if(aux == null){
 								aux[0] = OficinaFacade.buscarServico(ID);
-								
 							}else{
 								aux[aux.length-1] = OficinaFacade.buscarServico(ID);
 							}

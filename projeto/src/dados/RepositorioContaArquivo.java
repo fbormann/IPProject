@@ -1,30 +1,25 @@
 package dados;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
+
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import entidades.Conta;
 
 public class RepositorioContaArquivo implements RepositorioContas{
 
-	HSSFWorkbook wb;
+	HSSFSheet contaSheet;
 	
-	public RepositorioContaArquivo(){
-		wb = new HSSFWorkbook();
-		
+	
+	public RepositorioContaArquivo(HSSFWorkbook wb){
+       contaSheet = wb.createSheet("Contas");
 	}
 	
-	@Override
-	public void forEach(Consumer<? super Conta> arg0) {
-		
-	}
-
-	@Override
-	public Spliterator<Conta> spliterator() {
-		return null;
-	}
+	
 
 	@Override
 	public void adicionar(Conta conta) {

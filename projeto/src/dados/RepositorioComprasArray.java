@@ -79,10 +79,6 @@ public class RepositorioComprasArray implements RepositorioCompras{
 		return r;
 	}
 	
-	public Compra[] listar() {
-		return this.compras;
-	}
-	
 	private class CompraIterator implements Iterator<Compra>{
 
 		int index = 0;

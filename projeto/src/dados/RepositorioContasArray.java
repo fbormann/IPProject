@@ -91,10 +91,6 @@ public class RepositorioContasArray implements RepositorioContas {
 
 	}
 
-	public Conta[] listar() { //retorna a referencia do array
-		return this.contas;
-	}
-
 	//vai retornar as descricoes de todas as contas cadastradas no array / para a classe Programa
 	public String listarConta(){
 		String r = "";

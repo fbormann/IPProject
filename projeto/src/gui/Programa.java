@@ -26,7 +26,7 @@ import comunicacao.OficinaFacade;
 import dados.RepositorioServicoArray;
 
 
-//classe que irá testar todos os métodos da fachada(OficinaFacade)
+//classe que irï¿½ testar todos os mï¿½todos da fachada(OficinaFacade)
 public class Programa {
 
 	public static void main(String[] args) {
@@ -65,7 +65,7 @@ public class Programa {
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
 						}				
-						//endereço
+						//endereï¿½o
 						System.out.print("Rua: ");
 						String rua = str.nextLine();
 						System.out.print("Numero: ");
@@ -121,7 +121,7 @@ public class Programa {
 						}
 
 					}else if(escolhaConta==2){
-						System.out.print("CPF da conta que você quer remover: ");
+						System.out.print("CPF da conta que vocï¿½ quer remover: ");
 						String CPF = str.nextLine();
 						try {
 							OficinaFacade.removerConta(CPF);
@@ -133,7 +133,7 @@ public class Programa {
 							e.printStackTrace();
 						}
 					}else if(escolhaConta==3){
-						System.out.print("CPF da conta que você quer atualizar: ");
+						System.out.print("CPF da conta que vocï¿½ quer atualizar: ");
 						String CPF = str.nextLine();
 
 						System.out.print("Nome: ");

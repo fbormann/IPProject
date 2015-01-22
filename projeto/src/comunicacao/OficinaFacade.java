@@ -2,6 +2,8 @@ package comunicacao;
 
 import java.util.Iterator;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import dados.RepositorioComprasArray;
 import dados.RepositorioServicoArray;
 import dados.RepositorioContasArray;
@@ -30,6 +32,7 @@ public class OficinaFacade {
 	public static ManagerCompras compras;
 	public static ManagerConta contas;
 	public static ManagerServico servicos;
+	static HSSFWorkbook wb;
 
 	public static void inicializar(String repositoryType){
 		switch(repositoryType){
@@ -38,8 +41,13 @@ public class OficinaFacade {
 			contas = new ManagerConta(contasArray);
 			servicos = new ManagerServico(servicosArray);
 			break;
+		case "arquivo":
+			wb = new HSSFWorkbook();
+			
+			break;
 		}
 	
+		
 	}
 
 
@@ -240,7 +248,7 @@ public class OficinaFacade {
 
 	//SERVICO
 
-	public static Iterator servicoIterator(){
+	public static Iterator<Servico> servicoIterator(){
 		return servicos.getIterator();
 	}
 

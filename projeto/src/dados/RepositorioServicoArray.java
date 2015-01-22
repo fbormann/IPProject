@@ -65,10 +65,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 		
 		return a;
 	}
-	//esse metodo retorna a referencia do array
-	public Servico[] listar() {
-		return this.servicos;
-	}
+	
 	//esse metodo vai retornar as descricoes de todos os servicos cadastrados no array
 	public String listarServico(){
 		String r = "";

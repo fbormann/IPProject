@@ -33,7 +33,7 @@ public class Programa {
 		Scanner in = new Scanner(System.in);
 		Scanner str = new Scanner(System.in);
 		
-		OficinaFacade.inicializar();
+		OficinaFacade.inicializar("array");
 		
 		int escolhaMenu;
 		int escolhaConta;

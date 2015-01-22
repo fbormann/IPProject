@@ -118,7 +118,7 @@ public class RepositorioServicoLista implements RepositorioServico{
 
 	
 
-	public Iterator iterator() {
+	public Iterator<Servico> iterator() {
 		return null;
 	}
 

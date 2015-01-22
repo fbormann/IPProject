@@ -62,7 +62,7 @@ public class ManagerConta {
 		return a;
 	}
 	
-	public Iterator iterator(){
+	public Iterator<Conta> iterator(){
 		return this.contas.iterator();
 	}
 

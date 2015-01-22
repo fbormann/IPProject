@@ -4,7 +4,7 @@ import java.util.Iterator;
 import entidades.Conta;
 
 
-public interface RepositorioContas extends Iterable{
+public interface RepositorioContas extends Iterable<Conta>{
 
 	void adicionar(Conta conta); 
 		
@@ -18,6 +18,6 @@ public interface RepositorioContas extends Iterable{
 	
 	String listarConta();
 
-	public Iterator iterator();
+	public Iterator<Conta> iterator();
 	
 }

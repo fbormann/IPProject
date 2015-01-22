@@ -100,7 +100,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 		return exist;
 	}
 
-	private class ServicoIterator implements Iterator{
+	private class ServicoIterator implements Iterator<Servico>{
 
 		int index = 0;
 
@@ -108,7 +108,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 	         return (index < servicos.length);
 	      }
 
-	      public Object next() {
+	      public Servico next() {
 	      
 	         if(this.hasNext()){
 	            return servicos[index++];
@@ -125,7 +125,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 	
 	
 
-	public Iterator iterator() {
+	public Iterator<Servico> iterator() {
 		return new ServicoIterator();
 	}
 

@@ -1,6 +1,6 @@
 package dados;
 import entidades.Servico;
-public interface RepositorioServico extends Iterable{
+public interface RepositorioServico extends Iterable<Servico>{
 	
 	void adicionar(Servico servico);
 	

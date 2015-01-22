@@ -98,7 +98,7 @@ public class Compras extends JFrame {
 		list_compras.setBounds(24, 29, 252, 229);
 		final DefaultListModel model = new DefaultListModel();
 
-		for(Iterator iter = OficinaFacade.comprasIterator();iter.hasNext();){
+		for(Iterator<Compra> iter = OficinaFacade.comprasIterator();iter.hasNext();){
 			Compra compra = (Compra)iter.next();
 			try {
 				model.addElement(compra.getId() + "(" + OficinaFacade.buscarConta(compra.getContaCPF()).getNome() +")");
@@ -108,15 +108,7 @@ public class Compras extends JFrame {
 				e1.printStackTrace();
 			}
 		}
-//		for(int i = 0; i < compras.length;i++){
-//			try {
-//				model.addElement(compras[i].getId() + "(" + OficinaFacade.buscarConta(compras[i].getContaCPF()).getNome() +")"); //TODO: Checar as compras pois quando deletarmos uma conta, devemos deletar as compras relacionados � elas.
-//			} catch (ContaNaoExisteException e1) {
-//				e1.printStackTrace();
-//			} catch (CPFInvalidoException e1) {
-//				e1.printStackTrace();
-//			}
-//		}
+
 
 		list_compras.setModel(model);
 		contentPane.add(list_compras);

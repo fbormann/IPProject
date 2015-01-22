@@ -53,7 +53,7 @@ public class ManagerCompras {
 		return this.compras.exist(ID);
 	}
 	
-	public Iterator getIterator(){
+	public Iterator<Compra> getIterator(){
 		return this.compras.iterator();
 	}
 	

@@ -61,7 +61,7 @@ public class ManagerServico {
 		return this.servicos.listarServico(); 
 	}
 
-	public Iterator getIterator(){
+	public Iterator<Servico> getIterator(){
 		return this.servicos.iterator();
 	}
 	

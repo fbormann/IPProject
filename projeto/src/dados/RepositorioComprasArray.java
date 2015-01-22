@@ -83,7 +83,7 @@ public class RepositorioComprasArray implements RepositorioCompras{
 		return this.compras;
 	}
 	
-	private class CompraIterator implements Iterator{
+	private class CompraIterator implements Iterator<Compra>{
 
 		int index = 0;
 
@@ -91,7 +91,7 @@ public class RepositorioComprasArray implements RepositorioCompras{
 	         return (index < compras.length);
 	      }
 
-	      public Object next() {
+	      public Compra next() {
 	      
 	         if(this.hasNext()){
 	            return compras[index++];
@@ -104,15 +104,12 @@ public class RepositorioComprasArray implements RepositorioCompras{
 	}
 	
 
-	public Iterator getIterator() {
+	public Iterator<Compra> getIterator() {
 		return new CompraIterator();
 	}
 
-//	public void forEach(Consumer arg0) {
-//		
-//	}
 
-	public Iterator iterator() {
+	public Iterator<Compra> iterator() {
 		return new CompraIterator();
 	}
 

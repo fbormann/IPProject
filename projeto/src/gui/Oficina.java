@@ -80,6 +80,7 @@ public class Oficina extends JFrame {
 			OficinaFacade.inicializar(br.readLine());
 			br.close();
 		} catch (IOException e1) {
+			//TODO: tratar este erro.
 		}
 
 

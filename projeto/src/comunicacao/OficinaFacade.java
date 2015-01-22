@@ -24,30 +24,31 @@ import negocios.*;
 
 
 public class OficinaFacade {
-
 	public static RepositorioComprasArray comprasArray = new RepositorioComprasArray();
 	public static RepositorioContasArray contasArray = new RepositorioContasArray();
 	public static RepositorioServicoArray servicosArray = new RepositorioServicoArray();
-	public static ManagerCompras compras = new ManagerCompras(comprasArray);
-	public static ManagerConta contas = new ManagerConta(contasArray);
-	public static ManagerServico servicos = new ManagerServico(servicosArray);
+	public static ManagerCompras compras;
+	public static ManagerConta contas;
+	public static ManagerServico servicos;
 
-	public static void inicializar(){
-		OficinaFacade.comprasArray = new RepositorioComprasArray();
-		OficinaFacade.compras = new ManagerCompras(comprasArray);
-		OficinaFacade.contasArray = new RepositorioContasArray();
-		OficinaFacade.contas = new ManagerConta(contasArray);
-		OficinaFacade.servicosArray = new RepositorioServicoArray();
-		OficinaFacade.servicos = new ManagerServico(servicosArray);
+	public static void inicializar(String repositoryType){
+		switch(repositoryType){
+		case "array":
+			compras = new ManagerCompras(comprasArray);
+			contas = new ManagerConta(contasArray);
+			servicos = new ManagerServico(servicosArray);
+			break;
+		}
+	
 	}
 
 
 	//VENDA
-	
+
 	public static Iterator comprasIterator(){
 		return  compras.getIterator();
 	}
-	
+
 	public static void adicionarCompra(Compra compra) throws ContaNaoExisteException{
 		if(!compras.exist(compra.getId())){
 			compras.cadastrarCompra(compra);
@@ -82,14 +83,14 @@ public class OficinaFacade {
 	public static String listarCompra() throws NenhumaCompraCadastradaException{
 		return compras.listarCompra();
 	}
-	
-	
+
+
 	//CLIENTE
-	
-	public static Iterator contaIterator(){
+
+	public static Iterator<Conta> contaIterator(){
 		return contas.iterator();
 	}
-	
+
 	public static void adicionarConta(Conta conta) throws ContaJaCadastradaException, CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException {
 		if(!contas.exist(conta.getCPF())){
 			if(validadeCPF(conta.getCPF())){
@@ -236,13 +237,13 @@ public class OficinaFacade {
 	public static String listarConta() throws NenhumaContaCadastradaException{
 		return contas.listarConta();
 	}
-	
+
 	//SERVICO
-	
+
 	public static Iterator servicoIterator(){
 		return servicos.getIterator();
 	}
-	
+
 	public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException, TipoNaoSelecionadoException{
 		if(!servicos.exist(servico.getID())){
 			servicos.cadastrar(servico);
@@ -288,6 +289,6 @@ public class OficinaFacade {
 	public static String listarServico() throws NenhumServicoCadastradoException{
 		return servicos.listarServico();
 	}
-	
-	
+
+
 }

@@ -129,7 +129,7 @@ public class RepositorioContasArray implements RepositorioContas {
 		return existe;
 	}
 	
-	private class ContaIterator implements Iterator{
+	private class ContaIterator implements Iterator<Conta>{
 
 		int index = 0;
 
@@ -137,7 +137,7 @@ public class RepositorioContasArray implements RepositorioContas {
 	         return (index < contas.length);
 	      }
 
-	      public Object next() {
+	      public Conta next() {
 	      
 	         if(this.hasNext()){
 	            return contas[index++];
@@ -154,7 +154,7 @@ public class RepositorioContasArray implements RepositorioContas {
 
 	
 
-	public Iterator iterator() {
+	public Iterator<Conta> iterator() {
 		return new ContaIterator();
 	}
 

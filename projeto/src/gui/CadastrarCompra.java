@@ -118,11 +118,8 @@ public class CadastrarCompra extends JFrame {
 					}
 					
 					Compra novaCompra = new Compra();
-//					int id = 0;
-//					for(Iterator itr = OficinaFacade.comprasIterator(); itr.hasNext();){
-//						 id++;
-//					}
-//					novaCompra.setId(String.valueOf(id));
+				
+					//novaCompra.setId(String.valueOf(id));
 					novaCompra.setContaCPF(tf_CPF.getText());
 					novaCompra.setServicos(comprados);
 					novaCompra.setValor(preco);
@@ -138,9 +135,6 @@ public class CadastrarCompra extends JFrame {
 				
 					
 				}
-				//TODO: Finalizar Compra
-				//TODO: Pegar a lista de Servicos e adiciona � compra.
-				//TODO: Checar se o CPF � v�lido antes de cadastrar.
 			}
 		});
 		btnFinalizarCompra.setBounds(290, 375, 136, 23);

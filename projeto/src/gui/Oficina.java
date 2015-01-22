@@ -6,6 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import comunicacao.OficinaFacade;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -38,8 +41,8 @@ public class Oficina extends JFrame {
 	 * Create the frame.
 	 */
 	public Oficina() {
-		
-		
+		//Lê arquivo sobre qual tipo de armazenamento será utlizado.
+		OficinaFacade.inicializar("array");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 477, 324);
 		contentPane = new JPanel();

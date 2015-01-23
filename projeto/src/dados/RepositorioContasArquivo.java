@@ -2,18 +2,27 @@ package dados;
 
 import java.util.Iterator;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import entidades.Conta;
 
-public class RepositorioContaArquivo implements RepositorioContas{
+public  class RepositorioContasArquivo implements RepositorioContas{
 
 	private HSSFSheet contaSheet;
-	
-	public RepositorioContaArquivo(HSSFWorkbook wb){
+	private  HSSFRow[] row;
+	public RepositorioContasArquivo(HSSFWorkbook wb){
        contaSheet = wb.createSheet("Contas");
+       row = new HSSFRow[1];
+       row[0] = contaSheet.createRow(1);
+       HSSFCell teste = row[0].createCell((short) 2);
+       teste.setCellValue("Teste");
+       
 	}
+	
+	public RepositorioContasArquivo(){}
 	
 	
 
@@ -25,17 +34,14 @@ public class RepositorioContaArquivo implements RepositorioContas{
 		
 	}
 
-	@Override
 	public Conta buscar(String CPF) {
 		return null;
 	}
 
-	@Override
 	public void update(Conta conta) {
 		
 	}
 
-	@Override
 	public boolean exist(String CPF) {
 		return false;
 	}

@@ -7,7 +7,10 @@ import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import dados.RepositorioCompraArquivo;
 import dados.RepositorioComprasArray;
+import dados.RepositorioContasArquivo;
+import dados.RepositorioServicoArquivo;
 import dados.RepositorioServicoArray;
 import dados.RepositorioContasArray;
 import entidades.Compra;
@@ -18,9 +21,6 @@ import excecoes.CPFInvalidoException;
 import excecoes.CompraNaoExisteException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
-import excecoes.NenhumServicoCadastradoException;
-import excecoes.NenhumaCompraCadastradaException;
-import excecoes.NenhumaContaCadastradaException;
 import excecoes.PlacaInvalidaException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
@@ -35,6 +35,9 @@ public class OficinaFacade {
 	public static ManagerCompras compras;
 	public static ManagerConta contas;
 	public static ManagerServico servicos;
+	public static RepositorioContasArquivo contasArquivo;
+	public static RepositorioCompraArquivo comprasArquivo;
+	public static RepositorioServicoArquivo servicosArquivo;
 	static HSSFWorkbook wb;
 
 	public static void inicializar(String repositoryType){
@@ -46,12 +49,23 @@ public class OficinaFacade {
 			break;
 		case "arquivo":
 			wb = new HSSFWorkbook();
-			FileOutputStream stream;
+			FileOutputStream stream = null;
 			try {
-				stream = new FileOutputStream("/planilha.xls");
-				wb.write(stream);
+				stream = new FileOutputStream("planilha.xls"); 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
+			}
+
+			contasArquivo = new RepositorioContasArquivo(wb);
+			contas = new ManagerConta(contasArquivo);
+			comprasArquivo = new RepositorioCompraArquivo(wb);
+			compras = new ManagerCompras(comprasArquivo);
+			servicosArquivo = new RepositorioServicoArquivo(wb);
+			servicos = new ManagerServico(servicosArquivo);
+
+			try {
+				wb.write(stream);
+				stream.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -62,90 +76,90 @@ public class OficinaFacade {
 	}
 
 	//VENDA
-		public static Iterator<Compra> comprasIterator(){
-			return compras.getIterator();
-		}
-
-		public static void adicionarCompra(Compra compra){
-			compras.cadastrarCompra(compra);
-		}
-		public static boolean compraExiste(String ID){
-			return compras.exist(ID);
-		}
-		public static void removerCompra(String ID) throws CompraNaoExisteException {
-			compras.removerCompra(ID);
-		}
-		public static Compra buscarCompra(String ID) throws CompraNaoExisteException{
-			return compras.buscarCompra(ID);
-		}
-		public static void updateCompra(Compra compra) throws CompraNaoExisteException{
-			compras.updateCompra(compra);
-		}
-
-		//CLIENTE
-		
-		public static boolean validadeCEP(String CEP) throws CEPInvalidoException{
-			return contas.validadeCEP(CEP);
-		}
-		
-		public static Iterator<Conta> contaIterator(){
-			return contas.iterator();
-		}
-		public static void adicionarConta(Conta conta) throws CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException, ContaJaCadastradaException {
-			if(ManagerConta.validadeCPF(conta.getCPF()) && ManagerConta.validadeCEP(conta.getEndereco().getCEP()) && ManagerConta.validadePlaca(conta.getCarro().getPlaca())){
-				contas.cadastrar(conta);
-			}
-		}
-		public static void removerConta(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
-			contas.remover(CPF);
-		}
-		public static void updateConta(Conta conta) throws CPFInvalidoException, ContaNaoExisteException, CEPInvalidoException, PlacaInvalidaException{
-			if(!conta.getEndereco().getCEP().equals("")){
-				ManagerConta.validadeCEP(conta.getEndereco().getCEP());
-			}
-			if(!conta.getCarro().getPlaca().equals("")){
-				ManagerConta.validadePlaca(conta.getCarro().getPlaca());
-			}
-			contas.update(conta);
-		}
-
-		public static Conta buscarConta(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
-			Conta contaBuscada = new Conta();
-			if(ManagerConta.validadeCPF(CPF)){
-				contaBuscada = contas.buscar(CPF);
-			}else{
-				throw new CPFInvalidoException();
-			}
-			return contaBuscada;
-		}
-		public static boolean contaExiste(String CPF) throws CPFInvalidoException{
-			return contas.exist(CPF);
-		}
-	
-		//SERVICO
-		public static Iterator<Servico> servicoIterator(){
-			return servicos.getIterator();
-		}
-
-		//esses metodos a seguir nao vao checar as excecoes pois elas ja estao sendo checadas na camada de negocios
-		public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException, TipoNaoSelecionadoException{
-			servicos.cadastrar(servico);
-		} 
-		public static void removerServico(String ID) throws ServicoNaoEncontradoException{
-			servicos.remover(ID);
-		}
-		public static void updateServico(Servico servico) throws ServicoNaoEncontradoException{
-			servicos.update(servico);
-		}
-		public static double consultaPreco(String ID) throws ServicoNaoEncontradoException{
-			return servicos.consultaPreco(ID);
-		}
-		public static Servico buscarServico(String ID) throws ServicoNaoEncontradoException{
-			return servicos.buscar(ID);
-		}
-		public static boolean servicoExiste(String ID){
-			return servicos.exist(ID);
-		}
-		
-
+	public static Iterator<Compra> comprasIterator(){
+		return compras.getIterator();
 	}
+
+	public static void adicionarCompra(Compra compra){
+		compras.cadastrarCompra(compra);
+	}
+	public static boolean compraExiste(String ID){
+		return compras.exist(ID);
+	}
+	public static void removerCompra(String ID) throws CompraNaoExisteException {
+		compras.removerCompra(ID);
+	}
+	public static Compra buscarCompra(String ID) throws CompraNaoExisteException{
+		return compras.buscarCompra(ID);
+	}
+	public static void updateCompra(Compra compra) throws CompraNaoExisteException{
+		compras.updateCompra(compra);
+	}
+
+	//CLIENTE
+
+	public static boolean validadeCEP(String CEP) throws CEPInvalidoException{
+		return contas.validadeCEP(CEP);
+	}
+
+	public static Iterator<Conta> contaIterator(){
+		return contas.iterator();
+	}
+	public static void adicionarConta(Conta conta) throws CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException, ContaJaCadastradaException {
+		if(ManagerConta.validadeCPF(conta.getCPF()) && ManagerConta.validadeCEP(conta.getEndereco().getCEP()) && ManagerConta.validadePlaca(conta.getCarro().getPlaca())){
+			contas.cadastrar(conta);
+		}
+	}
+	public static void removerConta(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
+		contas.remover(CPF);
+	}
+	public static void updateConta(Conta conta) throws CPFInvalidoException, ContaNaoExisteException, CEPInvalidoException, PlacaInvalidaException{
+		if(!conta.getEndereco().getCEP().equals("")){
+			ManagerConta.validadeCEP(conta.getEndereco().getCEP());
+		}
+		if(!conta.getCarro().getPlaca().equals("")){
+			ManagerConta.validadePlaca(conta.getCarro().getPlaca());
+		}
+		contas.update(conta);
+	}
+
+	public static Conta buscarConta(String CPF) throws ContaNaoExisteException, CPFInvalidoException{
+		Conta contaBuscada = new Conta();
+		if(ManagerConta.validadeCPF(CPF)){
+			contaBuscada = contas.buscar(CPF);
+		}else{
+			throw new CPFInvalidoException();
+		}
+		return contaBuscada;
+	}
+	public static boolean contaExiste(String CPF) throws CPFInvalidoException{
+		return contas.exist(CPF);
+	}
+
+	//SERVICO
+	public static Iterator<Servico> servicoIterator(){
+		return servicos.getIterator();
+	}
+
+	//esses metodos a seguir nao vao checar as excecoes pois elas ja estao sendo checadas na camada de negocios
+	public static void adicionarServico(Servico servico) throws ServicoJaCadastradoException, TipoNaoSelecionadoException{
+		servicos.cadastrar(servico);
+	} 
+	public static void removerServico(String ID) throws ServicoNaoEncontradoException{
+		servicos.remover(ID);
+	}
+	public static void updateServico(Servico servico) throws ServicoNaoEncontradoException{
+		servicos.update(servico);
+	}
+	public static double consultaPreco(String ID) throws ServicoNaoEncontradoException{
+		return servicos.consultaPreco(ID);
+	}
+	public static Servico buscarServico(String ID) throws ServicoNaoEncontradoException{
+		return servicos.buscar(ID);
+	}
+	public static boolean servicoExiste(String ID){
+		return servicos.exist(ID);
+	}
+
+
+}

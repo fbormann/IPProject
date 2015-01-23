@@ -58,13 +58,9 @@ public class Oficina extends JFrame {
 
 			File f = new File("dados.txt");//RelativePath
 			if(f.exists()){
-				FileWriter fileWriter = new FileWriter(filename);
-				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-
-				bufferedWriter.write("array");
-
-				bufferedWriter.close();
+				BufferedReader br = new BufferedReader(new FileReader("dados.txt")); //READ DATA FROM FILE.
+				OficinaFacade.inicializar(br.readLine());
+				br.close();
 			}else{
 				//DEFAULT OPTION
 				f.createNewFile();
@@ -76,15 +72,13 @@ public class Oficina extends JFrame {
 
 				bufferedWriter.close();
 			}
-			BufferedReader br = new BufferedReader(new FileReader("dados.txt")); //READ DATA FROM FILE.
-			OficinaFacade.inicializar(br.readLine());
-			br.close();
+			
 		} catch (IOException e1) {
 			//TODO: tratar este erro.
 		}
 
 
-		//Lê arquivo sobre qual tipo de armazenamento será utlizado.
+		//Lï¿½ arquivo sobre qual tipo de armazenamento serï¿½ utlizado.
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 477, 324);

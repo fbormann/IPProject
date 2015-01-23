@@ -9,8 +9,6 @@ public interface RepositorioServico extends Iterable<Servico>{
 	void update(Servico servico);
 	
 	double consultaPreco(String ID);
-			
-	String listarServico();
 	
 	Servico buscar(String ID);
 	

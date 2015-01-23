@@ -16,8 +16,6 @@ public interface RepositorioContas extends Iterable<Conta>{
 	
 	boolean exist(String CPF);
 	
-	String listarConta();
-
 	public Iterator<Conta> iterator();
 	
 }

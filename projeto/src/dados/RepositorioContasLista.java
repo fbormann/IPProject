@@ -129,18 +129,6 @@ public class RepositorioContasLista implements RepositorioContas{
 		}
 		return a;
 	}
-	//vai listar todas as contas que est� na Lista
-	public String listarConta() {
-		String a = "";
-		Conta c = new Conta();
-		while(c != null){
-			a = a + c.toString();
-			c = this.proximo.getConta();
-		}
-
-		return null;
-	}
-
 	
 	public Iterator<Conta> iterator() {
 		return null;

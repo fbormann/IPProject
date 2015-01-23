@@ -51,21 +51,15 @@ public class Programa {
 				//CONTA
 
 				do{
-					System.out.println("Menu: 1) Cadastrar; 2) Remover; 3) Update; 4) Buscar; 5) Listar; 6) Exit");
+					System.out.println("Menu: 1) Cadastrar; 2) Remover; 3) Update; 4) Buscar; 5) Exit");
 					escolhaConta = in.nextInt();
 					if(escolhaConta==1){
 						System.out.println("Cadastre a conta do cliente:");
 						System.out.print("Nome: ");
 						String nome = str.nextLine();
 						System.out.print("CPF: ");
-						String CPF = str.nextLine();
-						try {
-							OficinaFacade.validadeCPF(CPF);
-						} catch (CPFInvalidoException e) {
-							System.out.println("Erro: " + e.getMessage());
-							e.printStackTrace();
-						}				
-						//endere�o
+						String CPF = str.nextLine();				
+						//endereco
 						System.out.print("Rua: ");
 						String rua = str.nextLine();
 						System.out.print("Numero: ");
@@ -74,12 +68,6 @@ public class Programa {
 						String complemento = str.nextLine();
 						System.out.print("CEP: ");
 						String CEP = str.nextLine();
-						try {
-							OficinaFacade.validadeCEP(CEP);
-						} catch (CEPInvalidoException e){
-							System.out.println("Erro: " + e.getMessage());
-							e.printStackTrace();
-						}
 						System.out.print("Bairro: ");
 						String bairro = str.nextLine();
 						System.out.print("Cidade: ");
@@ -96,32 +84,28 @@ public class Programa {
 						String cor = str.nextLine();
 						System.out.print("Placa: ");
 						String placa = str.nextLine();
-						try {
-							OficinaFacade.validadePlaca(placa);
-						} catch (PlacaInvalidaException e){
-							System.out.println("Erro: " + e.getMessage());
-							e.printStackTrace();
-						}
-
+		
 						Carro carro = new Carro(modelo, marca, cor, placa);
 						Conta conta = new Conta(nome, CPF, endereco, carro);
 
-						try {
+						try{
 							OficinaFacade.adicionarConta(conta);
-						} catch (ContaJaCadastradaException e) {
+						}catch(ContaJaCadastradaException e){
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
-							//os proximos erros nao irao acontecer pois ja foram checados
-						} catch (CPFInvalidoException e) {
-							e.printStackTrace();
-						} catch (CEPInvalidoException e) {
-							e.printStackTrace();
-						} catch (PlacaInvalidaException e) {
-							e.printStackTrace();
+						}catch(CEPInvalidoException e1){
+							System.out.println("Erro: " + e1.getMessage());
+							e1.printStackTrace();
+						}catch(CPFInvalidoException e2){
+							System.out.println("Erro: " + e2.getMessage());
+							e2.printStackTrace();
+						}catch(PlacaInvalidaException e3){
+							System.out.println("Erro: " + e3.getMessage());
+							e3.printStackTrace();
 						}
 
 					}else if(escolhaConta==2){
-						System.out.print("CPF da conta que voc� quer remover: ");
+						System.out.print("CPF da conta que voce quer remover: ");
 						String CPF = str.nextLine();
 						try {
 							OficinaFacade.removerConta(CPF);
@@ -133,7 +117,7 @@ public class Programa {
 							e.printStackTrace();
 						}
 					}else if(escolhaConta==3){
-						System.out.print("CPF da conta que voc� quer atualizar: ");
+						System.out.print("CPF da conta que voce quer atualizar: ");
 						String CPF = str.nextLine();
 
 						System.out.print("Nome: ");
@@ -193,20 +177,13 @@ public class Programa {
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
 						}
-					}else if(escolhaConta==5){
-						try {
-							System.out.println(OficinaFacade.listarConta());
-						} catch (NenhumaContaCadastradaException e) {
-							System.out.println("Erro: " + e.getMessage());
-							e.printStackTrace();
-						}
 					}
-				}while(escolhaConta!=6);
+				}while(escolhaConta!=5);
 
 				//SERVICO
 			}else if(escolhaMenu == 2){
 				do{
-					System.out.println("Menu: 1) Adicionar; 2) Remover; 3) Update; 4) Consultar preco; 5) Buscar; 6) Listar; 7) Exit.");
+					System.out.println("Menu: 1) Adicionar; 2) Remover; 3) Update; 4) Consultar preco; 5) Buscar; 6) Exit.");
 					escolhaServico = in.nextInt();
 					if(escolhaServico==1){
 						System.out.print("Qual tipo de servico voce quer adicionar? 1) Lavagem; 2) Otimizacao; 3) Produto.");
@@ -344,21 +321,13 @@ public class Programa {
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
 						}
-					}else if(escolhaServico == 6){
-						try {
-							System.out.println(OficinaFacade.listarServico());
-						} catch (NenhumServicoCadastradoException e) {
-							System.out.println("Erro: " + e.getMessage());
-							e.printStackTrace();
-						}
 					}
-
-				}while(escolhaServico!=7);		
+				}while(escolhaServico!=6);		
 
 				//COMPRA
 			}else if(escolhaMenu == 3){
 				do{
-					System.out.println("1) Adicionar; 2) Remover; 3) Update; 4) Buscar; 5) Listar; 6) Exit.");
+					System.out.println("1) Adicionar; 2) Remover; 3) Update; 4) Buscar; 5) Exit.");
 					escolhaCompra = in.nextInt();
 
 					if(escolhaCompra==1){
@@ -424,15 +393,8 @@ public class Programa {
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
 						}
-					}else if(escolhaCompra==5){
-						try {
-							System.out.println(OficinaFacade.listarCompra());
-						} catch (NenhumaCompraCadastradaException e) {
-							System.out.println("Erro: " + e.getMessage());
-							e.printStackTrace();
-						}
 					}
-				}while(escolhaCompra!=6);
+				}while(escolhaCompra!=5);
 			}
 		}while(escolhaMenu!=4);
 	}

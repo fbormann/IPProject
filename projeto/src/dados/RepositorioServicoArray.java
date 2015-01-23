@@ -65,18 +65,7 @@ public class RepositorioServicoArray implements RepositorioServico{
 		
 		return a;
 	}
-	
-	//esse metodo vai retornar as descricoes de todos os servicos cadastrados no array
-	public String listarServico(){
-		String r = "";
-		if(this.servicos != null){
-			for(int i = 0; i<this.servicos.length; i++){
-				r += r + this.servicos[i].toString();
-			}
-		}
-		return r;
-	}
-	
+		
 	public Servico buscar(String ID){
 		for(int i = 0; i<this.servicos.length; i++){
 			if(this.servicos[i].getID().equals(ID)){

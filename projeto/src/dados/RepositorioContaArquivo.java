@@ -17,16 +17,15 @@ public class RepositorioContaArquivo implements RepositorioContas{
 	
 	public RepositorioContaArquivo(HSSFWorkbook wb){
        contaSheet = wb.createSheet("Contas");
+       
 	}
 	
 	
 
-	@Override
 	public void adicionar(Conta conta) {
 		
 	}
 
-	@Override
 	public void remover(String CPF) {
 		
 	}

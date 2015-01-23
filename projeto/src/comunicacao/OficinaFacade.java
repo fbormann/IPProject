@@ -1,5 +1,8 @@
 package comunicacao;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -43,11 +46,19 @@ public class OficinaFacade {
 			break;
 		case "arquivo":
 			wb = new HSSFWorkbook();
-			
+			FileOutputStream stream;
+			try {
+				stream = new FileOutputStream("/planilha.xls");
+				wb.write(stream);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			break;
 		}
-	
-		
+
+
 	}
 
 

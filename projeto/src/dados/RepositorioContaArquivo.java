@@ -1,8 +1,5 @@
 package dados;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -12,12 +9,10 @@ import entidades.Conta;
 
 public class RepositorioContaArquivo implements RepositorioContas{
 
-	HSSFSheet contaSheet;
-	
+	private HSSFSheet contaSheet;
 	
 	public RepositorioContaArquivo(HSSFWorkbook wb){
        contaSheet = wb.createSheet("Contas");
-       
 	}
 	
 	
@@ -46,7 +41,6 @@ public class RepositorioContaArquivo implements RepositorioContas{
 	}
 
 
-	@Override
 	public Iterator<Conta> iterator() {
 		return null;
 	}

@@ -62,7 +62,7 @@ public class OficinaFacade {
 	}
 
 	//VENDA
-		public static Iterator comprasIterator(){
+		public static Iterator<Compra> comprasIterator(){
 			return compras.getIterator();
 		}
 
@@ -83,7 +83,12 @@ public class OficinaFacade {
 		}
 
 		//CLIENTE
-		public static Iterator contaIterator(){
+		
+		public static boolean validadeCEP(String CEP) throws CEPInvalidoException{
+			return contas.validadeCEP(CEP);
+		}
+		
+		public static Iterator<Conta> contaIterator(){
 			return contas.iterator();
 		}
 		public static void adicionarConta(Conta conta) throws CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException, ContaJaCadastradaException {
@@ -118,7 +123,7 @@ public class OficinaFacade {
 		}
 	
 		//SERVICO
-		public static Iterator servicoIterator(){
+		public static Iterator<Servico> servicoIterator(){
 			return servicos.getIterator();
 		}
 

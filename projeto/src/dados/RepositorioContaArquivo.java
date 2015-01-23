@@ -45,10 +45,6 @@ public class RepositorioContaArquivo implements RepositorioContas{
 		return false;
 	}
 
-	@Override
-	public String listarConta() {
-		return null;
-	}
 
 	@Override
 	public Iterator<Conta> iterator() {

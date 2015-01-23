@@ -120,13 +120,9 @@ public class CadastrarCompra extends JFrame {
 					novaCompra.setServicos(comprados);
 					novaCompra.setValor(preco);
 					
-					try {
-						OficinaFacade.adicionarCompra(novaCompra);
-						new Compras().setVisible(true);
-						fecharJFrame();
-					} catch (ContaNaoExisteException e1) {
-						e1.printStackTrace();
-					}
+					OficinaFacade.adicionarCompra(novaCompra);
+					new Compras().setVisible(true);
+					fecharJFrame();
 					
 				
 					

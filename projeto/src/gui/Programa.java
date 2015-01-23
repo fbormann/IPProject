@@ -1,5 +1,6 @@
 package gui;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 import entidades.Compra;
@@ -340,8 +341,19 @@ public class Programa {
 							System.out.println("Erro: " + e1.getMessage());
 							e1.printStackTrace();
 						}
+						
+						Servico[] aux = null;
+						for(Iterator<Servico> itr = OficinaFacade.servicoIterator(); itr.hasNext();){
+							Servico[] aux2 = new Servico[aux.length+1];
+							for(int i = 0; i < aux.length;i++){
+								aux2[i] = aux[i]; 
+							}
+							
+							aux2[aux2.length-1] = itr.next();
+							aux = aux2;
+						}
 
-						Servico[] aux = OficinaFacade.servicosArray.listar();
+						
 						for(int i = 0; i < aux.length; i++ ){
 							System.out.println(i + " - " + aux[i].getNome());
 						}

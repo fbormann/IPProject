@@ -68,16 +68,6 @@ public class RepositorioComprasArray implements RepositorioCompras{
 		}
 		return exist;
 	}
-
-	public String listarCompra(){
-		String r = "";
-		if(this.compras!=null){
-			for(int i = 0; i<this.compras.length; i++){
-				r = r + this.compras[i].toString();
-			}
-		}
-		return r;
-	}
 	
 	private class CompraIterator implements Iterator<Compra>{
 

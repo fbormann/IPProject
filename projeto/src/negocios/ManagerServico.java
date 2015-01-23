@@ -56,10 +56,6 @@ public class ManagerServico {
 			throw new ServicoNaoEncontradoException();
 		}
 	}
-	//vou esperar a gente discutir sobre esse metodo pra depois implementar!
-	public String listarServico() throws NenhumServicoCadastradoException{
-		return this.servicos.listarServico(); 
-	}
 
 	public Iterator<Servico> getIterator(){
 		return this.servicos.iterator();

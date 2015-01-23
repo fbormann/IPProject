@@ -79,19 +79,6 @@ public class RepositorioServicoLista implements RepositorioServico{
 		}
 		return a;
 	}
-	//listar todos os servicos da lista
-	public String listarServico() {
-		String a = "";
-		String b = "";
-		if(this.servico != null){
-			a = this.servico.toString();
-			while(this.proximo.getServico() != null){  
-				b = a + this.proximo.getServico().toString();
-				this.proximo = this.proximo.proximo;
-			}
-		}
-		return b;
-	}
 
 	public Servico buscar(String ID) {
 		if(this.servico.getID().equals(ID)){
@@ -101,7 +88,7 @@ public class RepositorioServicoLista implements RepositorioServico{
 				this.proximo.buscar(ID);
 			}
 		}
-		return null; //em negocio -> lancar a excecao se for null
+		return null; 
 	}
 
 	public boolean exist(String ID) {

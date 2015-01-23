@@ -91,17 +91,6 @@ public class RepositorioContasArray implements RepositorioContas {
 
 	}
 
-	//vai retornar as descricoes de todas as contas cadastradas no array / para a classe Programa
-	public String listarConta(){
-		String r = "";
-		if(this.contas != null){
-			for(int i = 0; i<this.contas.length; i++){
-				r = r + this.contas[i].toString() + "\n";
-			}
-		}
-		return r;
-	}
-
 	public Conta buscar(String CPF){
 		Conta contaProcurada = new Conta();
 		for(int i = 0; i < this.contas.length;i++){

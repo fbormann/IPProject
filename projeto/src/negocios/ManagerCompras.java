@@ -44,11 +44,6 @@ public class ManagerCompras {
 		return c;
 	}
 
-	//esperando confirmacao
-	public String listarCompra() throws NenhumaCompraCadastradaException{
-		return this.compras.listarCompra();
-	}
-
 	public boolean exist(String ID){
 		return this.compras.exist(ID);
 	}

@@ -56,16 +56,6 @@ public class RepositorioComprasLista implements RepositorioCompras {
 			}
 		}
 	}
-	//listar todas as compras da lista
-	public String listarCompra() {
-		String a = "";
-		Compra compraListar = new Compra();
-		while(compraListar != null){
-			a = a + compraListar.toString();
-			compraListar = this.proximo.getCompra();
-		}
-		return a;
-	}
 
 	public Compra buscar(String ID) {
 		Compra compraBuscada = new Compra();

@@ -10,10 +10,12 @@ import entidades.Servico;
 public class RepositorioServicoArquivo implements RepositorioServico{
 
 	private HSSFSheet servicosSheet;
-
+	private HSSFWorkbook wb;
 	public RepositorioServicoArquivo(HSSFWorkbook wb){
-		servicosSheet = wb.createSheet("servicos");
 
+		setServicosSheet(wb.createSheet("servicos"));
+
+		this.wb = wb;
 
 	}
 
@@ -51,6 +53,14 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 	public boolean exist(String ID) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public HSSFSheet getServicosSheet() {
+		return servicosSheet;
+	}
+
+	public void setServicosSheet(HSSFSheet servicosSheet) {
+		this.servicosSheet = servicosSheet;
 	}
 
 }

@@ -10,10 +10,14 @@ import entidades.Compra;
 public class RepositorioCompraArquivo implements RepositorioCompras{
 
 	private HSSFSheet compraSheet;
+	private HSSFWorkbook wb;
 	public RepositorioCompraArquivo(HSSFWorkbook wb){
+
 		compraSheet = wb.createSheet("compras");
+
+		this.wb = wb;
 	}
-	
+
 	@Override
 	public Iterator<Compra> iterator() {
 		return null;
@@ -21,17 +25,17 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 
 	@Override
 	public void adicionar(Compra compra) {
-		
+
 	}
 
 	@Override
 	public void remover(String ID) {
-		
+
 	}
 
 	@Override
 	public void update(Compra compra) {
-		
+
 	}
 
 	@Override

@@ -1,11 +1,18 @@
 package comunicacao;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import dados.RepositorioCompraArquivo;
 import dados.RepositorioComprasArray;
@@ -48,14 +55,25 @@ public class OficinaFacade {
 			servicos = new ManagerServico(servicosArray);
 			break;
 		case "arquivo":
-			wb = new HSSFWorkbook();
-			FileOutputStream stream = null;
-			try {
-				stream = new FileOutputStream("planilha.xls"); 
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+
+			File file = new File("planilha.xls");
+			InputStream inputStream = null;
+			try
+			{
+				if(file.exists()){
+					inputStream = new FileInputStream ("planilha.xls");
+				}else{
+					inputStream = new FileInputStream (new File("planilha.xls"));
+				}
+			}
+			catch (FileNotFoundException e)
+			{
+				System.out.println ("File not found in the specified path.");
+				e.printStackTrace ();
 			}
 
+
+			wb = new HSSFWorkbook();
 			contasArquivo = new RepositorioContasArquivo(wb);
 			contas = new ManagerConta(contasArquivo);
 			comprasArquivo = new RepositorioCompraArquivo(wb);
@@ -64,10 +82,51 @@ public class OficinaFacade {
 			servicos = new ManagerServico(servicosArquivo);
 
 			try {
+				inputStream.close(); //Fechamos um input para utilizarmos o output.
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			FileOutputStream stream = null;
+			try {
+				stream = new FileOutputStream("planilha.xls"); 
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+
+		
+
+			try {
 				wb.write(stream);
 				stream.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+
+			
+			try {
+			    FileInputStream file1 = new FileInputStream(new File("planilha.xls"));
+			 
+			    HSSFWorkbook workbook = new HSSFWorkbook(file1);
+			    HSSFSheet sheet = workbook.getSheetAt(0);
+			    HSSFCell cell = null;
+			 
+//			    //Update the value of cell
+//			    HSSFRow row = sheet.createRow(1);
+//			    cell = row.createCell((short) 2);
+//			    cell.setCellValue("Teste");
+//			
+			     
+			    file1.close();
+			     
+			    FileOutputStream outFile =new FileOutputStream(new File("planilha.xls"));
+			    workbook.write(outFile);
+			    outFile.close();
+			     
+			} catch (FileNotFoundException e) {
+			    e.printStackTrace();
+			} catch (IOException e) {
+			    e.printStackTrace();
 			}
 			break;
 		}

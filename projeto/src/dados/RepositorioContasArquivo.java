@@ -1,7 +1,13 @@
 package dados;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 
+import org.apache.poi.hssf.model.Workbook;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -12,26 +18,30 @@ import entidades.Conta;
 public  class RepositorioContasArquivo implements RepositorioContas{
 
 	private HSSFSheet contaSheet;
-	private  HSSFRow[] row;
+	private int rows = 0;
+	private HSSFWorkbook wb;
 	public RepositorioContasArquivo(HSSFWorkbook wb){
-       contaSheet = wb.createSheet("Contas");
-       row = new HSSFRow[1];
-       row[0] = contaSheet.createRow(1);
-       HSSFCell teste = row[0].createCell((short) 2);
-       teste.setCellValue("Teste");
-       
+
+		contaSheet = wb.createSheet("contas");
+
+		this.wb = wb;
+		
+		
+	
 	}
-	
-	public RepositorioContasArquivo(){}
-	
-	
+
+
+
 
 	public void adicionar(Conta conta) {
-		
+	
+
+
+
 	}
 
 	public void remover(String CPF) {
-		
+
 	}
 
 	public Conta buscar(String CPF) {
@@ -39,7 +49,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 	}
 
 	public void update(Conta conta) {
-		
+
 	}
 
 	public boolean exist(String CPF) {
@@ -48,7 +58,25 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 
 
 	public Iterator<Conta> iterator() {
-		return null;
+		return new ContaIterator();
+	}
+
+
+	private class ContaIterator implements Iterator<Conta>{
+		int index = 0;
+		@Override
+		public boolean hasNext() {
+			return (index < rows);
+		}
+
+		@Override
+		public Conta next() {
+			if(hasNext()){
+				//return rows[index++];
+			}
+			return null;
+		}
+
 	}
 
 }

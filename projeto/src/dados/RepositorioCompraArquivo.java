@@ -13,8 +13,9 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 	private HSSFWorkbook wb;
 	public RepositorioCompraArquivo(HSSFWorkbook wb){
 
+		compraSheet = wb.getSheetAt(1);
+		if(compraSheet == null)
 		compraSheet = wb.createSheet("compras");
-
 		this.wb = wb;
 	}
 

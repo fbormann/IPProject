@@ -104,17 +104,12 @@ public class Clientes extends JFrame {
 		list.setBounds(26, 44, 204, 165);
 
 
-//		for(Iterator<Conta> iter = OficinaFacade.contaIterator(); iter.hasNext();){
-//			Conta conta = iter.next();
-//			model.addElement(conta.getNome() + "(" + conta.getCPF() +")");
-//		}
+		for(Iterator<Conta> iter = OficinaFacade.contaIterator(); iter.hasNext();){
+			Conta conta = iter.next();
+			model.addElement(conta.getNome() + "(" + conta.getCPF() +")");
+		}
 
-		//			Conta[] contas = OficinaFacade.listarContas();
-		//			if(contas != null){
-		//				for(int i = 0; i < contas.length;i++){
-		//					model.addElement(contas[i].getNome() + "(" + contas[i].getCPF() +")");
-		//				}
-		//			}
+
 
 		list.setModel(model);
 		contentPane.add(list);

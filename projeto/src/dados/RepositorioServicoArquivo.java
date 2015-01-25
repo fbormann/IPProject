@@ -12,8 +12,10 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 	private HSSFSheet servicosSheet;
 	private HSSFWorkbook wb;
 	public RepositorioServicoArquivo(HSSFWorkbook wb){
-
-		setServicosSheet(wb.createSheet("servicos"));
+		servicosSheet = wb.getSheetAt(2);
+		if(servicosSheet == null){
+			servicosSheet = wb.createSheet("servicos");
+		}
 
 		this.wb = wb;
 

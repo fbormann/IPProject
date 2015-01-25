@@ -55,27 +55,38 @@ public class OficinaFacade {
 			servicos = new ManagerServico(servicosArray);
 			break;
 		case "arquivo":
-
-			File file = new File("planilha.xls");
+			String pathname = "planilha.xls"; //Guarda o caminho relativo ate a planilha.
+			File file = new File(pathname);
+			POIFSFileSystem fs;
 			InputStream inputStream = null;
 			try
 			{
 				if(file.exists()){
-					inputStream = new FileInputStream ("planilha.xls");
+					inputStream = new FileInputStream (pathname);
+					fs = new POIFSFileSystem(inputStream);
+					wb = new HSSFWorkbook(fs);
+					contasArquivo = new RepositorioContasArquivo(wb);
+					contas = new ManagerConta(contasArquivo);
 				}else{
+					file.createNewFile();
 					inputStream = new FileInputStream (new File("planilha.xls"));
+					wb = new HSSFWorkbook(inputStream);
+					wb.createSheet("contas");
+					contasArquivo = new RepositorioContasArquivo(wb);
+					contas = new ManagerConta(contasArquivo);
+
 				}
 			}
 			catch (FileNotFoundException e)
 			{
 				System.out.println ("File not found in the specified path.");
 				e.printStackTrace ();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 
 
-			wb = new HSSFWorkbook();
-			contasArquivo = new RepositorioContasArquivo(wb);
-			contas = new ManagerConta(contasArquivo);
+
 			comprasArquivo = new RepositorioCompraArquivo(wb);
 			compras = new ManagerCompras(comprasArquivo);
 			servicosArquivo = new RepositorioServicoArquivo(wb);
@@ -94,7 +105,7 @@ public class OficinaFacade {
 				e.printStackTrace();
 			}
 
-		
+
 
 			try {
 				wb.write(stream);
@@ -103,31 +114,7 @@ public class OficinaFacade {
 				e.printStackTrace();
 			}
 
-			
-			try {
-			    FileInputStream file1 = new FileInputStream(new File("planilha.xls"));
-			 
-			    HSSFWorkbook workbook = new HSSFWorkbook(file1);
-			    HSSFSheet sheet = workbook.getSheetAt(0);
-			    HSSFCell cell = null;
-			 
-//			    //Update the value of cell
-//			    HSSFRow row = sheet.createRow(1);
-//			    cell = row.createCell((short) 2);
-//			    cell.setCellValue("Teste");
-//			
-			     
-			    file1.close();
-			     
-			    FileOutputStream outFile =new FileOutputStream(new File("planilha.xls"));
-			    workbook.write(outFile);
-			    outFile.close();
-			     
-			} catch (FileNotFoundException e) {
-			    e.printStackTrace();
-			} catch (IOException e) {
-			    e.printStackTrace();
-			}
+
 			break;
 		}
 

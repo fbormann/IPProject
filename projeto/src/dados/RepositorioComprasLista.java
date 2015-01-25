@@ -9,7 +9,7 @@ public class RepositorioComprasLista implements RepositorioCompras {
 	private Compra compra;
 	private RepositorioComprasLista proximo;
 
-	private RepositorioComprasLista(){
+	public RepositorioComprasLista(){
 		this.compra = null;
 		this.proximo = null;
 	}

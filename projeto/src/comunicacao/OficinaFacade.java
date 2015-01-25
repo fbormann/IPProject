@@ -16,10 +16,13 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import dados.RepositorioCompraArquivo;
 import dados.RepositorioComprasArray;
+import dados.RepositorioComprasLista;
 import dados.RepositorioContasArquivo;
+import dados.RepositorioContasLista;
 import dados.RepositorioServicoArquivo;
 import dados.RepositorioServicoArray;
 import dados.RepositorioContasArray;
+import dados.RepositorioServicoLista;
 import entidades.Compra;
 import entidades.Conta;
 import entidades.Servico;
@@ -113,6 +116,17 @@ public class OficinaFacade {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
+
+			break;
+		case "lista": //IF HE CHOOSES TO USE LISTS INSTEAD.
+
+			RepositorioComprasLista comprasLista = new RepositorioComprasLista();
+			RepositorioContasLista 	contasLista = new RepositorioContasLista();
+			RepositorioServicoLista servicosLista = new RepositorioServicoLista();
+			compras = new ManagerCompras(comprasLista);
+			contas = new ManagerConta(contasLista);
+			servicos = new ManagerServico(servicosLista);
 
 
 			break;

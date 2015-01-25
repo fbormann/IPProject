@@ -2,7 +2,6 @@ package negocios;
 import java.util.Iterator;
 
 import entidades.Servico;
-import excecoes.NenhumServicoCadastradoException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
 import excecoes.TipoNaoSelecionadoException;

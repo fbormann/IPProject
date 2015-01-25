@@ -4,7 +4,6 @@ import java.util.Iterator;
 import dados.RepositorioCompras;
 import entidades.Compra;
 import excecoes.CompraNaoExisteException;
-import excecoes.NenhumaCompraCadastradaException;
 
 public class ManagerCompras {
 

@@ -7,7 +7,6 @@ import excecoes.CEPInvalidoException;
 import excecoes.CPFInvalidoException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
-import excecoes.NenhumaContaCadastradaException;
 import excecoes.PlacaInvalidaException;
 
 public class ManagerConta {

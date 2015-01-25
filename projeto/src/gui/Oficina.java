@@ -54,27 +54,30 @@ public class Oficina extends JFrame {
 
 		// TEXT FILE.
 		String filename = "dados.txt";
-		try {
+		if(!OficinaFacade.hasStarted){
+			try {
 
-			File f = new File("dados.txt");//RelativePath
-			if(f.exists()){
-				BufferedReader br = new BufferedReader(new FileReader("dados.txt")); //READ DATA FROM FILE.
-				OficinaFacade.inicializar(br.readLine());
-				br.close();
-			}else{
-				//DEFAULT OPTION
-				f.createNewFile();
-				FileWriter fileWriter = new FileWriter(filename);
-				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+				File f = new File("dados.txt");//RelativePath
+				if(f.exists()){
+					BufferedReader br = new BufferedReader(new FileReader("dados.txt")); //READ DATA FROM FILE.
+					OficinaFacade.inicializar(br.readLine());
+					br.close();
+				}else{
+					//DEFAULT OPTION
+					f.createNewFile();
+					FileWriter fileWriter = new FileWriter(filename);
+					BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
 
-				bufferedWriter.write("array");
+					bufferedWriter.write("array");
 
-				bufferedWriter.close();
+					bufferedWriter.close();
+				}
+				
+				OficinaFacade.hasStarted = true;
+			} catch (IOException e1) {
+				//TODO: tratar este erro.
 			}
-			
-		} catch (IOException e1) {
-			//TODO: tratar este erro.
 		}
 
 

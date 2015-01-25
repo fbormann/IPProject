@@ -48,6 +48,7 @@ public class OficinaFacade {
 	public static RepositorioContasArquivo contasArquivo;
 	public static RepositorioCompraArquivo comprasArquivo;
 	public static RepositorioServicoArquivo servicosArquivo;
+	public static boolean hasStarted = false;
 	static HSSFWorkbook wb;
 
 	public static void inicializar(String repositoryType){
@@ -70,14 +71,25 @@ public class OficinaFacade {
 					wb = new HSSFWorkbook(fs);
 					contasArquivo = new RepositorioContasArquivo(wb);
 					contas = new ManagerConta(contasArquivo);
+					comprasArquivo = new RepositorioCompraArquivo(wb);
+					compras = new ManagerCompras(comprasArquivo);
+					servicosArquivo = new RepositorioServicoArquivo(wb);
+					servicos = new ManagerServico(servicosArquivo);
 				}else{
 					file.createNewFile();
 					inputStream = new FileInputStream (new File("planilha.xls"));
-					wb = new HSSFWorkbook(inputStream);
+					FileOutputStream output = new FileOutputStream(new File(pathname));
+					wb = new HSSFWorkbook();
 					wb.createSheet("contas");
+					wb.createSheet("compras");
+					wb.createSheet("servicos");
+					wb.write(output);
 					contasArquivo = new RepositorioContasArquivo(wb);
 					contas = new ManagerConta(contasArquivo);
-
+					comprasArquivo = new RepositorioCompraArquivo(wb);
+					compras = new ManagerCompras(comprasArquivo);
+					servicosArquivo = new RepositorioServicoArquivo(wb);
+					servicos = new ManagerServico(servicosArquivo);
 				}
 			}
 			catch (FileNotFoundException e)
@@ -90,10 +102,7 @@ public class OficinaFacade {
 
 
 
-			comprasArquivo = new RepositorioCompraArquivo(wb);
-			compras = new ManagerCompras(comprasArquivo);
-			servicosArquivo = new RepositorioServicoArquivo(wb);
-			servicos = new ManagerServico(servicosArquivo);
+			
 
 			try {
 				inputStream.close(); //Fechamos um input para utilizarmos o output.

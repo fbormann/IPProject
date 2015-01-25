@@ -9,8 +9,8 @@ import java.util.Iterator;
 
 import javafx.scene.control.Cell;
 
-import org.apache.poi.hssf.model.Workbook;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -22,6 +22,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 	private HSSFSheet contaSheet = null;
 	private int rows = 0;
 	HSSFWorkbook wb;
+	
 	public RepositorioContasArquivo(HSSFWorkbook wb){
 		this.wb = wb;
 		contaSheet = wb.getSheetAt(0);
@@ -51,7 +52,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 
 
 		for(int i = 0; i < accountData.length;i++){
-			cell =  row.createCell((short) i);
+			cell =  row.createCell(i);
 			cell.setCellValue(accountData[i]);
 		}
 
@@ -66,6 +67,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 			e.printStackTrace();
 		}
 
+		rows++;
 	}
 
 	public void remover(String CPF) {
@@ -101,7 +103,15 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		public Conta next() {
 			if(hasNext()){
 				index++;
-				return new Conta();//TODO:Preencher essa conta.
+				HSSFRow row = contaSheet.getRow(index);
+				HSSFCell cell = row.getCell( 0);
+				Conta conta = new Conta();
+				if(cell != null){
+					conta.setCPF(cell.getStringCellValue()); //Get the CPF.
+					conta.setNome(row.getCell(1).getStringCellValue());//Get the name
+				}
+				return conta;//TODO:Preencher essa conta.
+
 			}
 			return null;
 		}

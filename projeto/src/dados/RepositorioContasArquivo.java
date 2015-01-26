@@ -21,6 +21,8 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 
 	private HSSFSheet contaSheet = null;
 	private int rows = 0;
+	private int rowBegins = 0;
+	private int rowsEnds = 0;
 	HSSFWorkbook wb;
 	private FileOutputStream stream = null;
 
@@ -30,6 +32,8 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		if(contaSheet == null)
 			contaSheet = wb.createSheet("contas");
 		rows = contaSheet.getLastRowNum();
+		rowBegins = contaSheet.getFirstRowNum();
+		rowsEnds = contaSheet.getLastRowNum();
 	}
 
 	public void adicionar(Conta conta) {
@@ -69,6 +73,9 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		}
 
 		rows++;
+		
+		rowBegins = contaSheet.getFirstRowNum();
+		rowsEnds = contaSheet.getLastRowNum(); //Update rows index;
 	}
 
 	public void remover(String CPF) {
@@ -102,6 +109,9 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		}catch(IOException e){
 
 		}
+		
+		rowBegins = contaSheet.getFirstRowNum();
+		rowsEnds = contaSheet.getLastRowNum();//Update Rows Index.
 	}
 
 	public Conta buscar(String CPF) {
@@ -144,7 +154,6 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 	}
 
 	public void update(Conta conta) {
-		Conta ContaAntiga = buscar(conta.getCPF());
 		String[] accountData = new String[13];
 		accountData[0] = conta.getCPF();
 		accountData[1] = conta.getNome();
@@ -173,6 +182,21 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 				}
 			}
 		}
+		
+		try {
+			stream = new FileOutputStream("planilha.xls"); 
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+
+
+		try {
+			wb.write(stream);
+			stream.close();
+		}catch(IOException e){
+
+		}
 
 	}
 
@@ -199,10 +223,22 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 
 
 	private class ContaIterator implements Iterator<Conta>{
-		int index = 0;
+		int index = rowBegins;
+		
+		private ContaIterator(){
+			if(rowBegins == rowsEnds && rowsEnds != 0){
+				index = rowBegins-1;
+			}else{
+				if(rowBegins != 0){
+					index = rowBegins-1;
+				}else{
+				index = rowBegins;
+				}
+			}
+		}
 
 		public boolean hasNext() {
-			return (index < rows);
+			return (index < rowsEnds);
 		}
 
 
@@ -210,7 +246,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 			if(hasNext()){
 				index++;
 				HSSFRow row = contaSheet.getRow(index);
-				HSSFCell cell = row.getCell( 0);
+				HSSFCell cell = row.getCell(0);
 				Conta conta = new Conta();
 				if(cell != null){
 					conta.setCPF(cell.getStringCellValue()); //Get the CPF.
@@ -224,4 +260,6 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 
 	}
 
+
+	
 }

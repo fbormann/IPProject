@@ -1,28 +1,29 @@
 package dados;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
-import javafx.scene.control.Cell;
-
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 
+import entidades.Carro;
 import entidades.Conta;
+import entidades.Endereco;
 
 public  class RepositorioContasArquivo implements RepositorioContas{
 
 	private HSSFSheet contaSheet = null;
 	private int rows = 0;
 	HSSFWorkbook wb;
-	
+	private FileOutputStream stream = null;
+
 	public RepositorioContasArquivo(HSSFWorkbook wb){
 		this.wb = wb;
 		contaSheet = wb.getSheetAt(0);
@@ -71,11 +72,75 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 	}
 
 	public void remover(String CPF) {
+		Iterator<Row> rowItr = contaSheet.rowIterator();
+		Row removingRow = null;
 
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			Iterator<Cell> cells = row.cellIterator();
+			while(cells.hasNext()){
+				Cell cell = cells.next();
+				if(cell.getStringCellValue().equals(CPF)){
+					removingRow = row;
+				}
+			}
+		}
+
+		contaSheet.removeRow(removingRow);
+		
+		try {
+			stream = new FileOutputStream("planilha.xls"); 
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+
+
+		try {
+			wb.write(stream);
+			stream.close();
+		}catch(IOException e){
+			
+		}
 	}
 
 	public Conta buscar(String CPF) {
-		return null;
+
+		Iterator<Row> rowItr = contaSheet.rowIterator();
+
+		Conta conta = null;
+		String[] accountData = new String[13];
+		int index = 0;
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			if(row.getCell(0).getStringCellValue().equals(CPF)){
+				Iterator<Cell> cells = row.cellIterator();
+				while(cells.hasNext()){
+					Cell cell = cells.next();
+					accountData[index] = cell.getStringCellValue();
+					index++;
+				}
+			}
+		}
+		conta = new Conta();
+		Endereco endereco = new Endereco();
+		endereco.setBairro(accountData[2]);
+		endereco.setCEP(accountData[3]);
+		endereco.setCidade(accountData[4]);
+		endereco.setEstado(accountData[5]);
+		endereco.setRua(accountData[6]);
+		endereco.setComplemento(accountData[7]);
+		endereco.setNumero(Integer.parseInt(accountData[8]));
+		conta.setCPF(accountData[0]);
+		conta.setNome(accountData[1]);
+		conta.setEndereco(endereco);
+		Carro carro = new Carro();
+		carro.setCor(accountData[9]);
+		carro.setMarca(accountData[10]);
+		carro.setModelo(accountData[11]);
+		carro.setPlaca(accountData[12]);
+		conta.setCarro(carro);
+		return conta;
 	}
 
 	public void update(Conta conta) {
@@ -83,7 +148,19 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 	}
 
 	public boolean exist(String CPF) {
-		return false;
+		Iterator<Row> rowItr = contaSheet.rowIterator();
+		boolean result = false;
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			Iterator<Cell> cells = row.cellIterator();
+			while(cells.hasNext()){
+				Cell cell = cells.next();
+				if(cell.getStringCellValue().equals(CPF)){
+					result = true;
+				}
+			}
+		}
+		return result;
 	}
 
 

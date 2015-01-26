@@ -90,6 +90,7 @@ public class OficinaFacade {
 					compras = new ManagerCompras(comprasArquivo);
 					servicosArquivo = new RepositorioServicoArquivo(wb);
 					servicos = new ManagerServico(servicosArquivo);
+					
 				}
 			}
 			catch (FileNotFoundException e)

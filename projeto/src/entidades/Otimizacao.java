@@ -12,10 +12,6 @@ public class Otimizacao extends Servico {
 		
 	}
 	
-	public Otimizacao(String nome, double preco){
-		super(nome, preco);
-	}
-	
 	public double comissao(Compra compra){
 		double r = (compra.totalCompra() * c2);
 		return r;

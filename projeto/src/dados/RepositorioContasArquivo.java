@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
-import javafx.scene.control.Cell;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
@@ -114,6 +113,13 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 
 			}
 			return null;
+		}
+
+
+		@Override
+		public void remove() {
+			// TODO Auto-generated method stub
+			
 		}
 
 	}

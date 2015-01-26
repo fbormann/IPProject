@@ -16,9 +16,6 @@ import excecoes.CPFInvalidoException;
 import excecoes.CompraNaoExisteException;
 import excecoes.ContaJaCadastradaException;
 import excecoes.ContaNaoExisteException;
-import excecoes.NenhumServicoCadastradoException;
-import excecoes.NenhumaCompraCadastradaException;
-import excecoes.NenhumaContaCadastradaException;
 import excecoes.PlacaInvalidaException;
 import excecoes.ServicoJaCadastradoException;
 import excecoes.ServicoNaoEncontradoException;
@@ -27,15 +24,14 @@ import comunicacao.OficinaFacade;
 import dados.RepositorioServicoArray;
 
 
-//classe que ir� testar todos os m�todos da fachada(OficinaFacade)
 public class Programa {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		Scanner str = new Scanner(System.in);
-		
+
 		OficinaFacade.inicializar("array");
-		
+
 		int escolhaMenu;
 		int escolhaConta;
 		int escolhaServico;
@@ -47,12 +43,12 @@ public class Programa {
 		do{
 			System.out.println("Menu: 1) Conta; 2) Servico; 3) Venda; 4) Sair");
 			escolhaMenu = in.nextInt();
-			
+
 			if(escolhaMenu==1){
 				//CONTA
 
 				do{
-					System.out.println("Menu: 1) Cadastrar; 2) Remover; 3) Update; 4) Buscar; 5) Exit");
+					System.out.println("Menu Conta: 1) Cadastrar; 2) Remover; 3) Update; 4) Buscar; 5) Exit");
 					escolhaConta = in.nextInt();
 					if(escolhaConta==1){
 						System.out.println("Cadastre a conta do cliente:");
@@ -85,7 +81,7 @@ public class Programa {
 						String cor = str.nextLine();
 						System.out.print("Placa: ");
 						String placa = str.nextLine();
-		
+
 						Carro carro = new Carro(modelo, marca, cor, placa);
 						Conta conta = new Conta(nome, CPF, endereco, carro);
 
@@ -184,10 +180,10 @@ public class Programa {
 				//SERVICO
 			}else if(escolhaMenu == 2){
 				do{
-					System.out.println("Menu: 1) Adicionar; 2) Remover; 3) Update; 4) Consultar preco; 5) Buscar; 6) Exit.");
+					System.out.println("Menu Servico: 1) Adicionar; 2) Remover; 3) Update; 4) Consultar preco; 5) Buscar; 6) Exit.");
 					escolhaServico = in.nextInt();
 					if(escolhaServico==1){
-						System.out.print("Qual tipo de servico voce quer adicionar? 1) Lavagem; 2) Otimizacao; 3) Produto.");
+						System.out.println("Qual tipo de servico voce quer adicionar? 1) Lavagem; 2) Otimizacao; 3) Produto.");
 						escolhaTipo = in.nextInt();
 						//nao podemos instanciar Servico por ela ser uma classe abstrata
 						if(escolhaTipo == 1){
@@ -260,11 +256,21 @@ public class Programa {
 						System.out.println("Que servico voce quer atualizar? 1) Lavagem; 2) Otimizacao; 3) Produto");
 						int escolhaAtualizar = in.nextInt();
 						if(escolhaAtualizar == 1){
+							System.out.print("ID do servico que voce quer atualizar: ");
+							String IDbuscar = str.nextLine();
+
+							try {
+								System.out.println(OficinaFacade.buscarServico(IDbuscar));
+							} catch (ServicoNaoEncontradoException e1) {
+								System.out.println("Erro: " + e1.getMessage());
+								e1.printStackTrace();
+							}
+
 							System.out.print("Nome: ");
 							String nome = str.nextLine();
 							System.out.print("Preco: ");
 							double preco = in.nextDouble();
-							Lavagem servicoLavagem = new Lavagem(nome, preco);
+							Lavagem servicoLavagem = new Lavagem(nome, preco, IDbuscar);
 
 							try {
 								OficinaFacade.updateServico(servicoLavagem);
@@ -274,12 +280,22 @@ public class Programa {
 							}
 
 						}else if(escolhaAtualizar == 2){
+							System.out.print("ID do servico que voce quer atualizar: ");
+							String IDBuscar = str.nextLine();
+
+							try {
+								System.out.println(OficinaFacade.buscarServico(IDBuscar));
+							} catch (ServicoNaoEncontradoException e1) {
+								System.out.println("Erro: " + e1.getMessage());
+								e1.printStackTrace();
+							}
+
 							System.out.print("Nome: ");
 							String nome = str.nextLine();
 							System.out.print("Preco: ");
 							double preco = in.nextDouble();
 
-							Otimizacao servicoOtimizacao = new Otimizacao(nome, preco);
+							Otimizacao servicoOtimizacao = new Otimizacao(nome, preco, IDBuscar);
 							try {
 								OficinaFacade.updateServico(servicoOtimizacao);
 							} catch (ServicoNaoEncontradoException e) {
@@ -288,12 +304,22 @@ public class Programa {
 							}
 
 						}else if (escolhaAtualizar == 3){
+							System.out.print("ID do servico que voce quer atualizar: ");
+							String IDBuscar = str.nextLine();
+
+							try {
+								System.out.println(OficinaFacade.buscarServico(IDBuscar));
+							} catch (ServicoNaoEncontradoException e1) {
+								System.out.println("Erro: " + e1.getMessage());
+								e1.printStackTrace();
+							}
+
 							System.out.print("Nome: ");
 							String nome = str.nextLine();
 							System.out.print("Preco: ");
 							double preco = in.nextDouble();
 
-							Produto servicoProduto = new Produto(nome, preco);
+							Produto servicoProduto = new Produto(nome, preco, IDBuscar);
 
 							try {
 								OficinaFacade.updateServico(servicoProduto);
@@ -317,7 +343,7 @@ public class Programa {
 						System.out.print("Digite o ID do servico que voce quer buscar: ");
 						String ID = str.nextLine();
 						try {
-							OficinaFacade.buscarServico(ID);
+							System.out.println(OficinaFacade.buscarServico(ID));
 						} catch (ServicoNaoEncontradoException e) {
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
@@ -326,34 +352,33 @@ public class Programa {
 				}while(escolhaServico!=6);		
 
 				//COMPRA
+				//TODO: falta testar o buscar compra (pra isso, falta colocar o ID da compra)
 			}else if(escolhaMenu == 3){
 				do{
-					System.out.println("1) Adicionar; 2) Remover; 3) Update; 4) Buscar; 5) Exit.");
+					System.out.println("Menu Compra: 1) Adicionar; 2) Remover; 3) Update; 4) Buscar; 5) Exit.");
 					escolhaCompra = in.nextInt();
 
 					if(escolhaCompra==1){
 						System.out.print("CPF: ");
 						String CPF = str.nextLine();
-			
+
 						try {
 							OficinaFacade.contaExiste(CPF);
 						} catch (CPFInvalidoException e1) {
 							System.out.println("Erro: " + e1.getMessage());
 							e1.printStackTrace();
 						}
-						
-						Servico[] aux = null;
+
+						Servico[] aux = new Servico[0];
 						for(Iterator<Servico> itr = OficinaFacade.servicoIterator(); itr.hasNext();){
 							Servico[] aux2 = new Servico[aux.length+1];
 							for(int i = 0; i < aux.length;i++){
 								aux2[i] = aux[i]; 
 							}
-							
+
 							aux2[aux2.length-1] = itr.next();
 							aux = aux2;
 						}
-
-						
 						for(int i = 0; i < aux.length; i++ ){
 							System.out.println(i + " - " + aux[i].getNome());
 						}
@@ -361,24 +386,26 @@ public class Programa {
 						RepositorioServicoArray comprados = new RepositorioServicoArray();
 
 						System.out.println("Escolha o servico. (Digite 'exit' caso nao queira adicionar mais servicos): ");
-						String eServico = str.nextLine();
-						int a = Integer.parseInt(eServico);
+						String eServico;
+						do{
+							eServico = str.nextLine();
+							if(!eServico.equalsIgnoreCase("exit")){ //para ter certeza que o programa nao vai querer passar 'exit' pra inteiro
+								int b = Integer.parseInt(eServico);
+								comprados.adicionar(aux[b]);	
+							}
+						}while(!eServico.equalsIgnoreCase("exit"));
 
-						while(!eServico.equals("exit")){
-							comprados.adicionar(aux[a]);
-
-						}
 					}else if(escolhaCompra==2){
 						System.out.print("Digite o ID da compra que voce quer remover: ");
 						String idRemover = str.nextLine();
-						
+
 						try {
 							OficinaFacade.removerCompra(idRemover);
 						} catch (CompraNaoExisteException e) {
 							System.out.println("Erro: " + e.getMessage());
 							e.printStackTrace();
 						}
-						
+
 					}else if(escolhaCompra==3){
 						System.out.print("Digite o ID da compra que voce quer atualizar: ");
 						String idAtualizar = str.nextLine();
@@ -395,7 +422,7 @@ public class Programa {
 						}else{
 							System.out.println("Essa compra nao existe!");
 						}
-						
+
 					}else if(escolhaCompra==4){
 						System.out.print("Digite o ID da compra que voce quer buscar: ");
 						String idBuscar = str.nextLine();
@@ -409,6 +436,9 @@ public class Programa {
 				}while(escolhaCompra!=5);
 			}
 		}while(escolhaMenu!=4);
+		
+		in.close();
+		str.close();
 	}
 }
 

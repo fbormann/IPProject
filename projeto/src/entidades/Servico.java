@@ -15,11 +15,6 @@ public abstract class Servico {
 		
 	}
 	
-	public Servico(String nome, double preco){ //construtor feito para o metodo ATUALIZAR na classe Programa(GUI), ja que o ID nao pode ser atualizado;
-		this.nome = nome;
-		this.preco = preco;
-	}
-	
 	public abstract double comissao(Compra compra);
 	
 	public String getNome(){

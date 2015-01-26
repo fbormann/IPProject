@@ -11,11 +11,7 @@ public class Lavagem extends Servico {
 	public Lavagem(){
 		
 	}
-	
-	public Lavagem(String nome, double preco){
-		super(nome, preco);
-	}
-	
+
 	public double comissao(Compra compra){
 		double r = (compra.totalCompra() * c1);
 		return r;

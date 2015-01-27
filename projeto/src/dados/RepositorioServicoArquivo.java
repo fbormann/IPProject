@@ -83,10 +83,64 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 	}
 
 	public void remover(String ID) {
+		Iterator<Row> rowItr = servicosSheet.rowIterator();
+		Row removingRow = null;
 
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			Iterator<Cell> cells = row.cellIterator();
+			while(cells.hasNext()){ //TODO:Checar somente Index 0
+				Cell cell = cells.next();
+				if(cell.getStringCellValue().equals(ID)){
+					removingRow = row;
+				}
+			}
+		}
+
+		servicosSheet.removeRow(removingRow);
+		rows--; //To fix the index counter at the Iterator.
+		FileOutputStream stream = null;
+		try {
+			stream = new FileOutputStream("planilha.xls");
+			wb.write(stream);
+			stream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+		rowBegins = servicosSheet.getFirstRowNum();
+		rowsEnds = servicosSheet.getLastRowNum();//Update Rows Index.
 	}
 
 	public void update(Servico servico) {
+		int index = 0;
+		String[] serviceData = new String[4];
+		Iterator<Row> rowItr = servicosSheet.rowIterator();
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			if(row.getCell(0).getStringCellValue().equals(servico.getID())){
+				Iterator<Cell> cells = row.cellIterator();
+				while(cells.hasNext()){
+					Cell cell = cells.next();
+					cell.setCellValue(serviceData[index]);
+					index++;
+				}
+			}
+		}
+		FileOutputStream stream;
+		try {
+			stream = new FileOutputStream("planilha.xls"); 
+			wb.write(stream);
+			stream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 
 	}
 
@@ -96,7 +150,42 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 
 	@Override
 	public Servico buscar(String ID) {
-		return null;
+		Iterator<Row> rowItr = servicosSheet.rowIterator();
+
+		Servico servico = null;
+		String tipo = "";
+		String[] serviceData = new String[4];
+		int index = 0;
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			if(row.getCell(0).getStringCellValue().equals(ID)){
+				Iterator<Cell> cells = row.cellIterator();
+				while(cells.hasNext()){
+					Cell cell = cells.next();
+					serviceData[index] = cell.getStringCellValue();
+					index++;
+				}
+			}
+		}
+		tipo = serviceData[3];
+
+		switch(tipo){
+		case "Otimizacao":
+			servico = new Otimizacao();
+			break;
+		case "Produto":
+			servico = new Produto();
+			break;
+		case "Lavagem":
+			servico = new Lavagem();
+			break;
+		}
+
+		servico.setID(serviceData[0]);
+		servico.setNome(serviceData[1]);
+		servico.setPreco(Double.parseDouble(serviceData[2]));
+
+		return servico;
 	}
 
 	@Override
@@ -164,7 +253,7 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 					break;
 				}
 
-				if(cell != null){
+				if(!cell.getStringCellValue().equals("")){
 					servico.setID(cell.getStringCellValue()); //Get the CPF.
 					servico.setNome(row.getCell(1).getStringCellValue());//Get the name
 				}

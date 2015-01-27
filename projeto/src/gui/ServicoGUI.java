@@ -85,7 +85,7 @@ public class ServicoGUI extends JFrame {
 		btn_Cadastrar.setBounds(294, 56, 89, 23);
 		panel.add(btn_Cadastrar);
 
-		final JList<Servico> list_servicos = new JList();
+		final JList list_servicos = new JList();
 		list_servicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_servicos.setBounds(26, 44, 204, 165);
 

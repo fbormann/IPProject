@@ -53,7 +53,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 
 		for(int i = 0; i < compra.getServicos().length;i++){
 			Servico servico = compra.getServicos()[i];
-			compraData[3+i] = servico.toString(); //3+i because it needs to go over all other elements.
+			compraData[3+i] = servico.toString() + "\n:"+ servico.getClass().toString().substring(servico.getClass().toString().indexOf(".")+1); //3+i because it needs to go over all other elements.
 		}
 
 
@@ -147,12 +147,25 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 		compra.setId(compraData[0]);
 		compra.setContaCPF(compraData[1]);
 		compra.setValor(Double.parseDouble(compraData[2]));
-		
-		Servico[] servicos;
-		
+		Servico servicoadc;
+
+		Servico[] servicos = new Servico[compraData.length-3];
 		for(int i = 3; i < compraData.length;i++){
+			String servico = compraData[i];
+			switch(servico.substring(servico.lastIndexOf("."))){
+			case "Lavagem":
+				servicoadc = new Lavagem();
+				break;
+			case "Otimizacao":
+				servicoadc = new Otimizacao();
+				break;
+			case "Produto":
+				servicoadc = new Produto();
+				break;
+			}
+
 		}
-		
+
 
 		return compra;
 	}
@@ -200,7 +213,8 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 				HSSFCell cell = row.getCell(0);
 				Compra compra = new Compra();
 				if(cell != null){
-
+					compra.setId(cell.getStringCellValue());
+					compra.setContaCPF(row.getCell(1).getStringCellValue());
 				}
 				return compra;
 
@@ -211,7 +225,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 		@Override
 		public void remove() {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 	}

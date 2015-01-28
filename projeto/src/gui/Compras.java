@@ -75,6 +75,7 @@ public class Compras extends JFrame {
 		JButton btn_Atualizar = new JButton("Atualizar");
 		btn_Atualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btn_Atualizar.setBounds(311, 181, 89, 23);
@@ -118,7 +119,7 @@ public class Compras extends JFrame {
 				if(!OficinaFacade.contaIterator().hasNext()){ //Pois senao a compra nao existira.
 					lbl_error.setText("Nao Existem contas cadastradas para efetuarem compras.");
 				}else if(!OficinaFacade.servicoIterator().hasNext()){
-					lbl_error.setText("Não existem serviços cadastrados para se constituir uma compra");
+					lbl_error.setText("Nï¿½o existem serviï¿½os cadastrados para se constituir uma compra");
 				}else{
 					new CadastrarCompra().setVisible(true);
 					fecharJFrame();

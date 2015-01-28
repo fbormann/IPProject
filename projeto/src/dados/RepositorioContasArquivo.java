@@ -264,11 +264,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		}
 
 
-		@Override
-		public void remove() {
-			// TODO Auto-generated method stub
-			
-		}
+		
 
 	}
 

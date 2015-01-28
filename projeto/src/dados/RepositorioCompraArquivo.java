@@ -72,7 +72,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		rows++;
 		rowsBegins = compraSheet.getFirstRowNum();
 		rowsEnds = compraSheet.getLastRowNum(); //Update rows index;
@@ -125,13 +125,52 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 
 	@Override
 	public Compra buscar(String ID) {
+		Compra compra;
+		compra = new Compra();
+		Iterator<Row> rowItr = compraSheet.rowIterator();
+		Row rowData;
+		String[] compraData = null;
+		int index = 0;
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			if(row.getCell(0).getStringCellValue().equals(ID)){
+				Iterator<Cell> cells = row.cellIterator();
+				compraData = new String[row.getLastCellNum()];
+				while(cells.hasNext()){
+					Cell cell = cells.next();
+					compraData[index] = cell.getStringCellValue();
+					index++;
+				}
+			}
+		}
+
+		compra.setId(compraData[0]);
+		compra.setContaCPF(compraData[1]);
+		compra.setValor(Double.parseDouble(compraData[2]));
 		
-		return null;
+		Servico[] servicos;
+		
+		for(int i = 3; i < compraData.length;i++){
+		}
+		
+
+		return compra;
 	}
 
 	@Override
 	public boolean exist(String ID) {
-		return false;
+		Iterator<Row> rowItr = compraSheet.rowIterator();
+		boolean result = false;
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			Cell cellID = row.getCell(0);
+			if(cellID.getStringCellValue().equals(ID)){
+				result = true;
+			}
+		}
+
+		return result;
+
 	}
 
 	private class CompraIterator implements Iterator<Compra>{
@@ -161,7 +200,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 				HSSFCell cell = row.getCell(0);
 				Compra compra = new Compra();
 				if(cell != null){
-					
+
 				}
 				return compra;
 

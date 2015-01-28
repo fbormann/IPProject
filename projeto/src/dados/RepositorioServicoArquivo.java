@@ -199,14 +199,12 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 		boolean result = false;
 		while(rowItr.hasNext()){
 			Row row = rowItr.next();
-			Iterator<Cell> cells = row.cellIterator();
-			while(cells.hasNext()){
-				Cell cell = cells.next();
-				if(cell.getStringCellValue().equals(ID)){
-					result = true;
-				}
+			Cell cellID = row.getCell(0);
+			if(cellID.getStringCellValue().equals(ID)){
+				result = true;
 			}
 		}
+
 		return result;
 
 	}

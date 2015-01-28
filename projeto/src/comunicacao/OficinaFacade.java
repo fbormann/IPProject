@@ -103,8 +103,6 @@ public class OficinaFacade {
 
 
 
-			
-
 			try {
 				inputStream.close(); //Fechamos um input para utilizarmos o output.
 			} catch (IOException e) {

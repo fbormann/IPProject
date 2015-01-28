@@ -259,10 +259,10 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 				}
 
 				if(!cell.getStringCellValue().equals("")){
-					servico.setID(cell.getStringCellValue()); //Get the CPF.
-					servico.setNome(row.getCell(1).getStringCellValue());//Get the name
+					servico.setID(cell.getStringCellValue());
+					servico.setNome(row.getCell(1).getStringCellValue());
 				}
-				return servico;//TODO:Preencher essa conta.
+				return servico;
 
 			}
 			return null;

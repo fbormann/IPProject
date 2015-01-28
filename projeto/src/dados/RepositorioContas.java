@@ -1,5 +1,4 @@
 package dados;
-import java.util.Iterator;
 
 import entidades.Conta;
 
@@ -15,7 +14,5 @@ public interface RepositorioContas extends Iterable<Conta>{
 	void update(Conta conta);
 	
 	boolean exist(String CPF);
-	
-	public Iterator<Conta> iterator();
 	
 }

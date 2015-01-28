@@ -74,36 +74,39 @@ public class RepositorioServicoLista implements RepositorioServico{
 			a = this.servico.getPreco();
 		}else{
 			if(this.proximo.getServico() != null){
-				this.proximo.consultaPreco(ID);
+				a = this.proximo.consultaPreco(ID);
 			}
 		}
 		return a;
 	}
 
 	public Servico buscar(String ID) {
+		Servico servicoBuscado = null;
 		if(this.servico.getID().equals(ID)){
-			return this.servico;
+			servicoBuscado = this.servico;
 		}else{
 			if(this.proximo.getServico() != null){
-				this.proximo.buscar(ID);
+				servicoBuscado = this.proximo.buscar(ID);
 			}
 		}
-		return null; 
+		return servicoBuscado; 
 	}
 
 	public boolean exist(String ID) {
 		boolean a = false;
-		if(this.servico.getID().equals(ID)){
-			a = true;
+		if(this.servico == null){
+			a = false;
 		}else{
-			if(this.proximo.getServico() != null){
-				this.proximo.exist(ID);
+			if(this.servico.getID().equals(ID)){
+				a = true;
+			}else{
+				if(this.proximo.getServico() != null){
+					a = this.proximo.exist(ID); //retornar a chamada do metodo = recursao
+				}
 			}
 		}
 		return a;
 	}
-
-	
 
 	public Iterator<Servico> iterator() {
 		return null;

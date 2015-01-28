@@ -169,6 +169,12 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 			return null;
 		}
 
+		@Override
+		public void remove() {
+			// TODO Auto-generated method stub
+			
+		}
+
 	}
 }
 

@@ -268,6 +268,12 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 			return null;
 		}
 
+		@Override
+		public void remove() {
+			// TODO Auto-generated method stub
+			
+		}
+
 	}
 
 }

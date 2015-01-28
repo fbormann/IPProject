@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JLabel;
 
 public class Oficina extends JFrame {
 
@@ -29,7 +30,6 @@ public class Oficina extends JFrame {
 	private JButton btnClientes;
 	private JButton btnServios;
 	private JButton btnHistrico;
-	private JTextField txtNomeLogo;
 
 	/**
 	 * Launch the application.
@@ -123,15 +123,8 @@ public class Oficina extends JFrame {
 		btnHistrico = new JButton("Hist\u00F3rico");
 		btnHistrico.setBounds(327, 231, 117, 29);
 		contentPane.add(btnHistrico);
-
-		txtNomeLogo = new JTextField();
-		txtNomeLogo.setText("nome + logo");
-		txtNomeLogo.setBounds(180, 119, 134, 28);
-		contentPane.add(txtNomeLogo);
-		txtNomeLogo.setColumns(10);
 	}
 	public void fecharJFrame(){
 		this.dispose();
 	}
-
 }

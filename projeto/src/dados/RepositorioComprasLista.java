@@ -64,7 +64,7 @@ public class RepositorioComprasLista implements RepositorioCompras {
 				compraBuscada = this.compra;
 			}else{
 				if(this.proximo.getCompra() != null){
-					this.proximo.buscar(ID);
+					compraBuscada = this.proximo.buscar(ID);
 				}
 			}
 		}
@@ -78,7 +78,7 @@ public class RepositorioComprasLista implements RepositorioCompras {
 				a = true;
 			}else{
 				if(this.proximo.getCompra() != null){
-					this.proximo.buscar(ID);
+					a = this.proximo.exist(ID);
 				}
 			}
 		}
@@ -92,8 +92,5 @@ public class RepositorioComprasLista implements RepositorioCompras {
 	public Iterator<Compra> iterator() {
 		return null;
 	}
-
-
-
 
 }

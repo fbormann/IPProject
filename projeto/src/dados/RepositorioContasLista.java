@@ -13,7 +13,7 @@ public class RepositorioContasLista implements RepositorioContas{
 		this.conta = null;
 		this.proximo = null;
 	}
-	
+
 	public Conta getConta(){
 		return this.conta;
 	}
@@ -51,7 +51,6 @@ public class RepositorioContasLista implements RepositorioContas{
 			}else{
 				if(this.proximo.getConta() != null){ //conferir se o proximo nao eh null
 					this.proximo.remover(CPF);
-
 				}
 			}
 
@@ -120,19 +119,23 @@ public class RepositorioContasLista implements RepositorioContas{
 
 	public boolean exist(String CPF) {
 		boolean a = false;
-		if(this.conta.getCPF().equals(CPF)){
-			a = true;
+		if(this.conta == null){
+			a = false;
 		}else{
-			if(this.proximo.getConta() != null){
-				this.proximo.exist(CPF);
+			if(this.conta.getCPF().equals(CPF)){
+				a = true;
+			}else{
+				if(this.proximo.getConta() != null){
+					a = this.proximo.exist(CPF);
+				}
 			}
 		}
 		return a;
 	}
-	
+
 	public Iterator<Conta> iterator() {
 		return null;
 	}
 
-	
+
 }

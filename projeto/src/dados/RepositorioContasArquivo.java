@@ -73,7 +73,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		}
 
 		rows++;
-		
+
 		rowBegins = contaSheet.getFirstRowNum();
 		rowsEnds = contaSheet.getLastRowNum(); //Update rows index;
 	}
@@ -94,6 +94,11 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		}
 
 		contaSheet.removeRow(removingRow);
+		int rowIndex = removingRow.getRowNum();
+
+		if(rowIndex>=0 && rowIndex<rowsEnds){
+			contaSheet.shiftRows(rowIndex+1,rowsEnds, -1);
+		}
 		rows--; //To fix the index counter at the Iterator.
 		try {
 			stream = new FileOutputStream("planilha.xls"); 
@@ -102,14 +107,13 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		}
 
 
-
 		try {
 			wb.write(stream);
 			stream.close();
 		}catch(IOException e){
 
 		}
-		
+
 		rowBegins = contaSheet.getFirstRowNum();
 		rowsEnds = contaSheet.getLastRowNum();//Update Rows Index.
 	}
@@ -169,7 +173,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		accountData[11] = conta.getCarro().getModelo();
 		accountData[12] = conta.getCarro().getPlaca();
 		int index = 0;
-		
+
 		Iterator<Row> rowItr = contaSheet.rowIterator();
 		while(rowItr.hasNext()){
 			Row row = rowItr.next();
@@ -182,7 +186,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 				}
 			}
 		}
-		
+
 		try {
 			stream = new FileOutputStream("planilha.xls"); 
 		} catch (FileNotFoundException e) {
@@ -224,7 +228,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 
 	private class ContaIterator implements Iterator<Conta>{
 		int index = rowBegins;
-		
+
 		private ContaIterator(){
 			if(rowBegins == rowsEnds && rowsEnds != 0){
 				index = rowBegins-1;
@@ -232,7 +236,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 				if(rowBegins != 0){
 					index = rowBegins-1;
 				}else{
-				index = rowBegins;
+					index = rowBegins;
 				}
 			}
 		}
@@ -261,5 +265,5 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 	}
 
 
-	
+
 }

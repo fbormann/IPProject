@@ -98,6 +98,11 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 		}
 
 		servicosSheet.removeRow(removingRow);
+		int rowIndex = removingRow.getRowNum();
+
+		if(rowIndex>=0 && rowIndex<rowsEnds){
+			servicosSheet.shiftRows(rowIndex+1,rowsEnds, -1);
+		}
 		rows--; //To fix the index counter at the Iterator.
 		FileOutputStream stream = null;
 		try {

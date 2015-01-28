@@ -39,7 +39,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 
 	@Override
 	public Iterator<Compra> iterator() {
-		return null;
+		return new CompraIterator();
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 
 		for(int i = 0; i < compra.getServicos().length;i++){
 			Servico servico = compra.getServicos()[i];
-			compraData[i] = servico.toString();
+			compraData[3+i] = servico.toString(); //3+i because it needs to go over all other elements.
 		}
 
 
@@ -72,9 +72,8 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		rows++;
-
 		rowsBegins = compraSheet.getFirstRowNum();
 		rowsEnds = compraSheet.getLastRowNum(); //Update rows index;
 
@@ -126,6 +125,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 
 	@Override
 	public Compra buscar(String ID) {
+		
 		return null;
 	}
 
@@ -161,8 +161,9 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 				HSSFCell cell = row.getCell(0);
 				Compra compra = new Compra();
 				if(cell != null){
+					
 				}
-				return compra;//TODO:Preencher essa conta.
+				return compra;
 
 			}
 			return null;

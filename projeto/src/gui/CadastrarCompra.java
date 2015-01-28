@@ -36,6 +36,7 @@ public class CadastrarCompra extends JFrame {
 	private JTextField tf_CPF;
 	private JTextField tf_valorapagar;
 	private double preco;
+	private JTextField tf_compraID;
 
 	/**
 	 * Launch the application.
@@ -74,12 +75,12 @@ public class CadastrarCompra extends JFrame {
 			Servico servico =  (Servico)itr.next();
 			model_Disponiveis.addElement(servico.getNome() + "[" + servico.getID() +"]" + " " + servico.getPreco() );
 		}
-		
+
 		list_disponiveis.setModel(model_Disponiveis);
 		contentPane.add(list_disponiveis);
 
 		JLabel lblListaDeServios = new JLabel("Lista de Servi\u00E7os Dispon\u00EDveis");
-		lblListaDeServios.setBounds(27, 53, 145, 24);
+		lblListaDeServios.setBounds(27, 53, 173, 24);
 		contentPane.add(lblListaDeServios);
 
 		final JList list_comprados = new JList();
@@ -89,46 +90,11 @@ public class CadastrarCompra extends JFrame {
 		contentPane.add(list_comprados);
 
 		JLabel lblListaDeServios_1 = new JLabel("Lista de Servi\u00E7os Comprados");
-		lblListaDeServios_1.setBounds(253, 53, 145, 24);
+		lblListaDeServios_1.setBounds(253, 53, 173, 24);
 		contentPane.add(lblListaDeServios_1);
 
 		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
-		btnFinalizarCompra.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Servico[] comprados = new Servico[0];
-				for(int i = 0; i < model_Comprados.getSize();i++){
-					String ID = model_Comprados.get(i).toString().substring(model_Comprados.get(i).toString().indexOf("[", 0)+1,model_Comprados.get(i).toString().lastIndexOf("]"));
-					try {
-							Servico[] aux = new Servico[comprados.length+1];
-							for(int j = 0; j < comprados.length;j++){
-								aux[j] =  comprados[j];
-							}
-							if(aux == null){
-								aux[0] = OficinaFacade.buscarServico(ID);
-							}else{
-								aux[aux.length-1] = OficinaFacade.buscarServico(ID);
-							}
-							comprados = aux;
-					} catch (ServicoNaoEncontradoException e1) {
-						e1.printStackTrace();
-					}
-					
-					Compra novaCompra = new Compra();
-				
-					//novaCompra.setId(String.valueOf(id));
-					novaCompra.setContaCPF(tf_CPF.getText());
-					novaCompra.setServicos(comprados);
-					novaCompra.setValor(preco);
-					
-					OficinaFacade.adicionarCompra(novaCompra);
-					new Compras().setVisible(true);
-					fecharJFrame();
-					
-				
-					
-				}
-			}
-		});
+
 		btnFinalizarCompra.setBounds(290, 375, 136, 23);
 		contentPane.add(btnFinalizarCompra);
 
@@ -163,13 +129,13 @@ public class CadastrarCompra extends JFrame {
 		tf_CPF.setColumns(10);
 
 		JLabel lblValorPagar = new JLabel("Valor \u00E0 Pagar:");
-		lblValorPagar.setBounds(27, 378, 105, 14);
+		lblValorPagar.setBounds(27, 388, 105, 14);
 		contentPane.add(lblValorPagar);
 
 		tf_valorapagar = new JTextField();
 		tf_valorapagar.setEditable(false);
 		tf_valorapagar.setColumns(10);
-		tf_valorapagar.setBounds(128, 375, 104, 20);
+		tf_valorapagar.setBounds(128, 385, 104, 20);
 		contentPane.add(tf_valorapagar);
 
 		JButton btnAdicionarLista = new JButton("Adicionar \u00E0 Lista");
@@ -217,6 +183,15 @@ public class CadastrarCompra extends JFrame {
 		lbl_error.setBounds(27, 417, 399, 16);
 		contentPane.add(lbl_error);
 
+		JLabel lblId = new JLabel("ID da compra:");
+		lblId.setBounds(27, 360, 116, 16);
+		contentPane.add(lblId);
+
+		tf_compraID = new JTextField();
+		tf_compraID.setColumns(10);
+		tf_compraID.setBounds(128, 356, 104, 20);
+		contentPane.add(tf_compraID);
+
 		tf_CPF.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
 				try {
@@ -228,6 +203,47 @@ public class CadastrarCompra extends JFrame {
 				} catch (CPFInvalidoException e1) {
 					lbl_error.setText(e1.getMessage());
 				}
+			}
+		});
+
+		btnFinalizarCompra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+
+				Servico[] comprados = new Servico[0];
+				for(int i = 0; i < model_Comprados.getSize();i++){
+					String ID = model_Comprados.get(i).toString().substring(model_Comprados.get(i).toString().indexOf("[", 0)+1,model_Comprados.get(i).toString().lastIndexOf("]"));
+					try {
+						Servico[] aux = new Servico[comprados.length+1];
+						for(int j = 0; j < comprados.length;j++){
+							aux[j] =  comprados[j];
+						}
+						if(aux == null){
+							aux[0] = OficinaFacade.buscarServico(ID);
+						}else{
+							aux[aux.length-1] = OficinaFacade.buscarServico(ID);
+						}
+						comprados = aux;
+					} catch (ServicoNaoEncontradoException e1) {
+						e1.printStackTrace();
+					}
+
+				}
+				Compra novaCompra = new Compra();
+
+				novaCompra.setId(tf_compraID.getText());
+				novaCompra.setContaCPF(tf_CPF.getText());
+				novaCompra.setServicos(comprados);
+				novaCompra.setValor(preco);
+
+				if(tf_compraID.getText().equals("")){
+					lbl_error.setText("ID da compra nao pode ser algo vazio");
+				}else{
+					OficinaFacade.adicionarCompra(novaCompra);
+					new Compras().setVisible(true);
+					fecharJFrame();
+				}
+
 			}
 		});
 	}

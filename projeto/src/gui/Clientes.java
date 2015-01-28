@@ -109,8 +109,6 @@ public class Clientes extends JFrame {
 			model.addElement(conta.getNome() + "(" + conta.getCPF() +")");
 		}
 
-
-
 		list.setModel(model);
 		contentPane.add(list);
 

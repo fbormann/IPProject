@@ -89,20 +89,13 @@ public class ServicoGUI extends JFrame {
 		list_servicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_servicos.setBounds(26, 44, 204, 165);
 
-		final DefaultListModel model = new DefaultListModel();
+		final DefaultListModel model = new DefaultListModel<Servico>();
 		
-		for(Iterator iter = OficinaFacade.servicoIterator();iter.hasNext();){
+		for(Iterator<Servico> iter = OficinaFacade.servicoIterator();iter.hasNext();){
 			Servico servico = (Servico)iter.next();
 			model.addElement(servico.getNome() + "(" + servico.getID() +")");
 		}
-		//		if(OficinaFacade.servicosArray != null){
-		//			Servico[] servicos = OficinaFacade.listarServicos();
-		//			if(servicos != null){
-		//				for(int i = 0; i < servicos.length;i++){
-		//					model.addElement(servicos[i].getNome() + "(" + servicos[i].getID() +")"); 
-		//				}
-		//			}
-		//		}
+		
 		list_servicos.setModel(model);
 		panel.add(list_servicos);
 

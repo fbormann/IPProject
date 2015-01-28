@@ -90,6 +90,7 @@ public class OficinaFacade {
 					compras = new ManagerCompras(comprasArquivo);
 					servicosArquivo = new RepositorioServicoArquivo(wb);
 					servicos = new ManagerServico(servicosArquivo);
+					
 				}
 			}
 			catch (FileNotFoundException e)
@@ -101,8 +102,6 @@ public class OficinaFacade {
 			}
 
 
-
-			
 
 			try {
 				inputStream.close(); //Fechamos um input para utilizarmos o output.
@@ -172,7 +171,7 @@ public class OficinaFacade {
 	}
 
 	public static Iterator<Conta> contaIterator(){
-		return contas.iterator();
+		return contas.getIterator();
 	}
 	public static void adicionarConta(Conta conta) throws CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException, ContaJaCadastradaException {
 		if(ManagerConta.validadeCPF(conta.getCPF()) && ManagerConta.validadeCEP(conta.getEndereco().getCEP()) && ManagerConta.validadePlaca(conta.getCarro().getPlaca())){

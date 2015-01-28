@@ -54,7 +54,7 @@ public class ManagerConta {
 		}
 	}
 	
-	public Iterator<Conta> iterator(){
+	public Iterator<Conta> getIterator(){
 		return this.contas.iterator();
 	}
 

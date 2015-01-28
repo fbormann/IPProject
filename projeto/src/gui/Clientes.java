@@ -69,7 +69,7 @@ public class Clientes extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblClientes = new JLabel("Clientes");
-		lblClientes.setBounds(103, 11, 46, 14);
+		lblClientes.setBounds(77, 10, 73, 14);
 		contentPane.add(lblClientes);
 
 		JButton btnRemover = new JButton("Remover");

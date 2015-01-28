@@ -171,7 +171,7 @@ public class OficinaFacade {
 	}
 
 	public static Iterator<Conta> contaIterator(){
-		return contas.iterator();
+		return contas.getIterator();
 	}
 	public static void adicionarConta(Conta conta) throws CPFInvalidoException, CEPInvalidoException, PlacaInvalidaException, ContaJaCadastradaException {
 		if(ManagerConta.validadeCPF(conta.getCPF()) && ManagerConta.validadeCEP(conta.getEndereco().getCEP()) && ManagerConta.validadePlaca(conta.getCarro().getPlaca())){

@@ -15,4 +15,5 @@ public interface RepositorioContas extends Iterable<Conta>{
 	
 	boolean exist(String CPF);
 	
+	
 }

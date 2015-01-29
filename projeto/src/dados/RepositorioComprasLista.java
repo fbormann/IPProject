@@ -3,11 +3,13 @@ package dados;
 import java.util.Iterator;
 
 import entidades.Compra;
+import entidades.Conta;
 
 public class RepositorioComprasLista implements RepositorioCompras {
 
 	private Compra compra;
 	private RepositorioComprasLista proximo;
+	int size = 0;
 
 	public RepositorioComprasLista(){
 		this.compra = null;
@@ -29,6 +31,8 @@ public class RepositorioComprasLista implements RepositorioCompras {
 		}else{
 			this.proximo.adicionar(compra);
 		}
+
+		size++;
 	}
 
 	public void remover(String ID) {
@@ -43,6 +47,7 @@ public class RepositorioComprasLista implements RepositorioCompras {
 			}
 		}
 
+		size--;
 	}
 
 	public void update(Compra compra) {
@@ -85,12 +90,40 @@ public class RepositorioComprasLista implements RepositorioCompras {
 		return a;
 	}
 
-	public Iterator<Compra> getIterator() {
-		return null;
+	public Compra get(int index){
+		Compra compra = this.compra;
+		int i = 0;
+		while(i < index){
+			compra = this.proximo.compra;
+		}
+
+		return compra;
 	}
 
+	public Iterator<Compra> getIterator() {
+		return new CompraIterator();
+	}
+
+	private class CompraIterator implements Iterator<Compra>{
+		int index = 0;
+
+		@Override
+		public boolean hasNext() {
+			return (index < size);
+		}
+
+		@Override
+		public Compra next() {
+			Compra compra = get(index);
+			index++;
+			return compra;
+		}
+
+	}
+
+	@Override
 	public Iterator<Compra> iterator() {
-		return null;
+		return new CompraIterator();
 	}
 
 }

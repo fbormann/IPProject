@@ -21,6 +21,7 @@ import entidades.Compra;
 import entidades.Conta;
 import excecoes.CPFInvalidoException;
 import excecoes.ContaNaoExisteException;
+import excecoes.ServicoNaoEncontradoException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -65,10 +66,7 @@ public class Compras extends JFrame {
 		contentPane.add(btn_Cadastrar);
 
 		JButton btn_Remover = new JButton("Remover");
-		btn_Remover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btn_Remover.setBounds(311, 110, 89, 23);
 		contentPane.add(btn_Remover);
 
@@ -95,7 +93,7 @@ public class Compras extends JFrame {
 		lbl_error.setBounds(27, 301, 223, 16);
 		contentPane.add(lbl_error);
 
-		JList list_compras = new JList();
+		final JList list_compras = new JList();
 		list_compras.setBounds(24, 29, 252, 229);
 		final DefaultListModel model = new DefaultListModel();
 
@@ -123,6 +121,22 @@ public class Compras extends JFrame {
 				}else{
 					new CadastrarCompra().setVisible(true);
 					fecharJFrame();
+				}
+			}
+		});
+		
+		btn_Remover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(list_compras.getSelectedValue() != null){
+					String ID = list_compras.getSelectedValue().toString().substring(list_compras.getSelectedValue().toString().indexOf("(", 0)+1,list_compras.getSelectedValue().toString().length()-1);
+					try {
+						OficinaFacade.removerServico(ID);
+						model.removeElement(list_compras.getSelectedValue());
+					} catch (ServicoNaoEncontradoException e1) {
+						e1.printStackTrace();
+					}
+				}else{
+					lbl_error.setText("Nenhum cliente selecionado.");
 				}
 			}
 		});

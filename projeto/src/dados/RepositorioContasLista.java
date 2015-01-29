@@ -8,6 +8,7 @@ public class RepositorioContasLista implements RepositorioContas{
 
 	private Conta conta;
 	private RepositorioContasLista proximo;
+	int size = 0;
 
 	public RepositorioContasLista(){
 		this.conta = null;
@@ -29,19 +30,19 @@ public class RepositorioContasLista implements RepositorioContas{
 		}else{
 			this.proximo.adicionar(conta);
 		}
+		
+		size++;
 	}
 
-	public int quantidade(){
-		int contador = 0;
-		Conta c = new Conta();
-		c = this.conta;
-		while(c != null){
-			contador++;
-			c = this.proximo.getConta();
+	public Conta get(int index){
+		Conta conta = this.conta;
+		int i = 0;
+		while(i < index){
+			conta = this.proximo.conta;
 		}
-		return contador;
-	}
 
+		return conta;
+	}
 
 	public void remover(String CPF)  {
 		if(this.conta != null){
@@ -55,6 +56,8 @@ public class RepositorioContasLista implements RepositorioContas{
 			}
 
 		}
+		
+		size--;
 	}
 
 	public Conta buscar(String CPF)  {
@@ -134,7 +137,21 @@ public class RepositorioContasLista implements RepositorioContas{
 	}
 
 	public Iterator<Conta> iterator() {
-		return null;
+		return new ContaIterator();
+	}
+
+	private class ContaIterator implements Iterator<Conta>{
+		int index = 0;
+		public boolean hasNext() {
+			return (index < size);
+		}
+
+		@Override
+		public Conta next() {
+			Conta conta = get(index);
+			index++;
+			return conta;
+		}
 	}
 
 

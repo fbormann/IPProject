@@ -2,13 +2,15 @@ package dados;
 
 import java.util.Iterator;
 
+import entidades.Conta;
 import entidades.Servico;
 
 public class RepositorioServicoLista implements RepositorioServico{
 
 	private Servico servico;
 	private RepositorioServicoLista proximo;
-
+	int size = 0;
+	
 	public RepositorioServicoLista(){
 		this.servico = null;
 		this.proximo = null;
@@ -22,14 +24,6 @@ public class RepositorioServicoLista implements RepositorioServico{
 		return this.servico;
 	}
 
-	public int quantidade(){
-		int contador = 0;
-		if(this.servico != null){
-			contador++;
-			this.servico = this.proximo.getServico();
-		}
-		return contador;
-	}
 
 	public void adicionar(Servico servico){
 		if(this.servico == null){
@@ -38,6 +32,7 @@ public class RepositorioServicoLista implements RepositorioServico{
 		}else{
 			this.proximo.adicionar(servico);
 		}
+		size++;
 	}
 
 	public void remover(String ID) {
@@ -51,6 +46,7 @@ public class RepositorioServicoLista implements RepositorioServico{
 				}
 			}
 		}
+		size--;
 	}
 
 	public void update(Servico servico) {
@@ -66,6 +62,16 @@ public class RepositorioServicoLista implements RepositorioServico{
 				this.proximo.update(servico);
 			}
 		}
+	}
+	
+	public Servico get(int index){
+		Servico conta = this.servico;
+		int i = 0;
+		while(i < index){
+			conta = this.proximo.servico;
+		}
+
+		return conta;
 	}
 
 	public double consultaPreco(String ID) {
@@ -109,7 +115,24 @@ public class RepositorioServicoLista implements RepositorioServico{
 	}
 
 	public Iterator<Servico> iterator() {
-		return null;
+		return new ServicoIterator();
+	}
+	
+	private class ServicoIterator implements Iterator<Servico>{
+		int index = 0;
+		@Override
+		public boolean hasNext() {
+			return (index < size);
+		}
+
+		@Override
+		public Servico next() {
+			Servico servico;
+			servico = get(index);
+			
+			return servico;
+		}
+		
 	}
 
 }

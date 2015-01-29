@@ -150,7 +150,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 				}
 			}
 		}
-		FileOutputStream stream;
+		FileOutputStream stream = null;
 		try {
 			stream = new FileOutputStream("planilha.xls"); 
 		} catch (FileNotFoundException e) {

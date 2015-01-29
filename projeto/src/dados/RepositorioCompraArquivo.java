@@ -120,6 +120,52 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 
 	@Override
 	public void update(Compra compra) {
+		Compra compraAntiga = this.buscar(compra.getId());
+
+		if(!compraAntiga.getContaCPF().equals(compra.getContaCPF())){
+			compraAntiga.setContaCPF(compra.getContaCPF());
+		}
+
+		if(!(compraAntiga.getValor() == compra.getValor())){
+			compraAntiga.setValor(compra.getValor());
+		}
+
+		String[] compraData = new String[3];
+		compraData[0] = compraAntiga.getId();
+		compraData[1] = compraAntiga.getContaCPF();
+		compraData[2] = String.valueOf(compraAntiga.getValor());
+
+
+		int index = 0;
+
+		Iterator<Row> rowItr = compraSheet.rowIterator();
+		while(rowItr.hasNext()){
+			Row row = rowItr.next();
+			if(row.getCell(0).getStringCellValue().equals(compra.getId())){
+				Iterator<Cell> cells = row.cellIterator();
+				while(cells.hasNext()){
+					Cell cell = cells.next();
+					cell.setCellValue(compraData[index]);
+					index++;
+				}
+			}
+		}
+		FileOutputStream stream;
+		try {
+			stream = new FileOutputStream("planilha.xls"); 
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+
+
+		try {
+			wb.write(stream);
+			stream.close();
+		}catch(IOException e){
+
+		}
+
 
 	}
 
@@ -147,32 +193,31 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 		compra.setId(compraData[0]);
 		compra.setContaCPF(compraData[1]);
 		compra.setValor(Double.parseDouble(compraData[2]));
-		Servico servicoadc = null;
-
-		Servico[] servicos = new Servico[compraData.length-3];
-		for(int i = 3; i < compraData.length;i++){
-			String servico = compraData[i];
-			switch(servico.substring(servico.lastIndexOf("."))){
-			case "Lavagem":
-				servicoadc = new Lavagem();
-				break;
-			case "Otimizacao":
-				servicoadc = new Otimizacao();
-				break;
-			case "Produto":
-				servicoadc = new Produto();
-				break;
-			}
-			int beginIndex = 0;
-			//servicoadc.setID(compraData[i].substring(beginIndex, ));
-			servicos[i-3] = servicoadc;
-		}
+		//		Servico servicoadc = null;
+		//
+		//		Servico[] servicos = new Servico[compraData.length-3];
+		//		for(int i = 3; i < compraData.length;i++){
+		//			String servico = compraData[i];
+		//			switch(servico.substring(servico.lastIndexOf("."))){
+		//			case "Lavagem":
+		//				servicoadc = new Lavagem();
+		//				break;
+		//			case "Otimizacao":
+		//				servicoadc = new Otimizacao();
+		//				break;
+		//			case "Produto":
+		//				servicoadc = new Produto();
+		//				break;
+		//			}
+		//			int beginIndex = 0;
+		//			//servicoadc.setID(compraData[i].substring(beginIndex, ));
+		//			servicos[i-3] = servicoadc;
+		//		}
 
 
 		return compra;
 	}
 
-	@Override
 	public boolean exist(String ID) {
 		Iterator<Row> rowItr = compraSheet.rowIterator();
 		boolean result = false;

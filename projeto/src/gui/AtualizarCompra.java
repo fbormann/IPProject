@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-<<<<<<< HEAD
-=======
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
@@ -18,7 +16,6 @@ import excecoes.CompraNaoExisteException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
->>>>>>> 01546120dfb5ad71dedd28e50e8fa52d4aa34cf4
 
 public class AtualizarCompra extends JFrame {
 

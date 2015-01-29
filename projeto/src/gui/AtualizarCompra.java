@@ -12,6 +12,10 @@ import javax.swing.JButton;
 
 import comunicacao.OficinaFacade;
 import entidades.Compra;
+import entidades.Lavagem;
+import entidades.Otimizacao;
+import entidades.Produto;
+import entidades.Servico;
 import excecoes.CompraNaoExisteException;
 
 import java.awt.event.ActionListener;
@@ -21,8 +25,8 @@ public class AtualizarCompra extends JFrame {
 
 	private JPanel contentPane;
 
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tf_compraCPF;
+	private JTextField tf_ID;
 	private JTextField tf_valor;
 
 	/**
@@ -52,11 +56,11 @@ public class AtualizarCompra extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(76, 6, 166, 20);
-		contentPane.add(textField);
+		tf_compraCPF = new JTextField();
+		tf_compraCPF.setEditable(false);
+		tf_compraCPF.setColumns(10);
+		tf_compraCPF.setBounds(76, 6, 166, 20);
+		contentPane.add(tf_compraCPF);
 
 		JLabel lblCpf = new JLabel("CPF:");
 		lblCpf.setBounds(6, 8, 61, 16);
@@ -66,11 +70,11 @@ public class AtualizarCompra extends JFrame {
 		lblId.setBounds(6, 40, 61, 16);
 		contentPane.add(lblId);
 
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		textField_1.setBounds(76, 38, 166, 20);
-		contentPane.add(textField_1);
+		tf_ID = new JTextField();
+		tf_ID.setEditable(false);
+		tf_ID.setColumns(10);
+		tf_ID.setBounds(76, 38, 166, 20);
+		contentPane.add(tf_ID);
 
 		JLabel lblValor = new JLabel("Valor:");
 		lblValor.setBounds(6, 71, 61, 16);
@@ -90,7 +94,7 @@ public class AtualizarCompra extends JFrame {
 		});
 		btnVoltar.setBounds(294, 216, 117, 29);
 		contentPane.add(btnVoltar);
-		
+
 		final JLabel lbl_error = new JLabel("");
 		lbl_error.setBounds(45, 172, 208, 16);
 		contentPane.add(lbl_error);
@@ -100,12 +104,15 @@ public class AtualizarCompra extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Compra novaCompra = new Compra();
 				novaCompra.setValor(Double.parseDouble(tf_valor.getText()));
+				novaCompra.setContaCPF(tf_compraCPF.getText());
+				novaCompra.setId(tf_ID.getText());
 				try {
 					OficinaFacade.updateCompra(novaCompra);
 				} catch (CompraNaoExisteException e1) {
 					lbl_error.setText(e1.getMessage());
 					e1.printStackTrace();
 				}
+				new Compras().setVisible(true);
 			}
 		});
 		btnAtualizar.setBounds(259, 105, 117, 29);
@@ -114,5 +121,12 @@ public class AtualizarCompra extends JFrame {
 
 	public void fecharJFrame(){
 		this.dispose();
+	}
+
+	public void selecionarDados(Compra compra){
+
+		tf_valor.setText(String.valueOf(compra.getValor()));
+		tf_ID.setText(compra.getId());
+		tf_compraCPF.setText(compra.getContaCPF());
 	}
 }

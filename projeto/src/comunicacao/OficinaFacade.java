@@ -65,8 +65,8 @@ public class OficinaFacade {
 			InputStream inputStream = null;
 			try
 			{
-				if(file.exists()){
-					inputStream = new FileInputStream (pathname);
+				if(file.exists()){ 
+					inputStream = new FileInputStream (pathname); //Cria um InputStream e seta o WorkBook.
 					fs = new POIFSFileSystem(inputStream);
 					wb = new HSSFWorkbook(fs);
 					contasArquivo = new RepositorioContasArquivo(wb);
@@ -76,10 +76,10 @@ public class OficinaFacade {
 					servicosArquivo = new RepositorioServicoArquivo(wb);
 					servicos = new ManagerServico(servicosArquivo);
 				}else{
-					file.createNewFile();
-					inputStream = new FileInputStream (new File("planilha.xls"));
+					file.createNewFile(); //Cria o arquivo planilha.xls.
+					inputStream = new FileInputStream (new File("planilha.xls")); 
 					FileOutputStream output = new FileOutputStream(new File(pathname));
-					wb = new HSSFWorkbook();
+					wb = new HSSFWorkbook(); //Seta o novo workBook e as workSheets padrao.
 					wb.createSheet("contas");
 					wb.createSheet("compras");
 					wb.createSheet("servicos");
@@ -119,7 +119,7 @@ public class OficinaFacade {
 
 
 			try {
-				wb.write(stream);
+				wb.write(stream); //Executar as modificacoes de fato.
 				stream.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -182,7 +182,7 @@ public class OficinaFacade {
 		contas.remover(CPF);
 	}
 	public static void updateConta(Conta conta) throws CPFInvalidoException, ContaNaoExisteException, CEPInvalidoException, PlacaInvalidaException{
-		if(!conta.getEndereco().getCEP().equals("")){
+		if(!conta.getEndereco().getCEP().equals("")){ //Validacoes
 			ManagerConta.validadeCEP(conta.getEndereco().getCEP());
 		}
 		if(!conta.getCarro().getPlaca().equals("")){

@@ -145,14 +145,13 @@ public class CadastrarCompra extends JFrame {
 					String ID = list_disponiveis.getSelectedValue().toString().substring(list_disponiveis.getSelectedValue().toString().indexOf("[", 0)+1,list_disponiveis.getSelectedValue().toString().lastIndexOf("]"));
 					try {
 						Servico aux = OficinaFacade.buscarServico(ID);
-						model_Comprados.addElement(aux.getNome() + "[" + aux.getID() +"]" + " " + aux.getPreco());
+						model_Comprados.addElement(aux.getNome() + "[" + aux.getID() +"]" + " " + aux.getPreco()); //String formatada para apresenter o nome, o ID e o preco dos Servicos
 						preco += aux.getPreco();//Atualiza o preco da compra.
 						tf_valorapagar.setText(String.valueOf(preco));//Seta o preco na GUI.
 					} catch (ServicoNaoEncontradoException e1) {
 
 					} 
 				}else{
-					//TODO: Error_Label
 				}
 
 			}
@@ -165,7 +164,7 @@ public class CadastrarCompra extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				int index = list_comprados.getSelectedIndex();//Pega o indice do elemento selecionado e o deleta.
-				String ID = list_comprados.getSelectedValue().toString().substring(list_comprados.getSelectedValue().toString().indexOf("[", 0)+1,list_comprados.getSelectedValue().toString().lastIndexOf("]"));
+				String ID = list_comprados.getSelectedValue().toString().substring(list_comprados.getSelectedValue().toString().indexOf("[", 0)+1,list_comprados.getSelectedValue().toString().lastIndexOf("]")); //Retorna o ID de cada servico.
 				try {
 					preco -= OficinaFacade.buscarServico(ID).getPreco();
 					tf_valorapagar.setText(String.valueOf(preco));
@@ -210,7 +209,7 @@ public class CadastrarCompra extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 
-				Servico[] comprados = new Servico[0];
+				Servico[] comprados = new Servico[0]; //Array de todos os Servicos Comprados.
 				for(int i = 0; i < model_Comprados.getSize();i++){
 					String ID = model_Comprados.get(i).toString().substring(model_Comprados.get(i).toString().indexOf("[", 0)+1,model_Comprados.get(i).toString().lastIndexOf("]"));
 					try {

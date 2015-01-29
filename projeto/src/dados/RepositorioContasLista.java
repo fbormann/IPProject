@@ -73,6 +73,7 @@ public class RepositorioContasLista implements RepositorioContas{
 	}
 
 	public void update(Conta conta){
+		//Para cada atributo modificado, ele sera renovado neste metodo.
 		if(this.conta.getCPF().equals(conta.getCPF())){
 			if(!this.conta.getNome().equals(conta.getNome())){
 				this.conta.setNome(conta.getNome());

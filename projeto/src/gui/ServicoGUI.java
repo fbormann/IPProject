@@ -139,7 +139,7 @@ public class ServicoGUI extends JFrame {
 				AtualizarServico frame = new AtualizarServico();
 				frame.setVisible(true);
 				try {
-					frame.selecionarDados(OficinaFacade.buscarServico(ID));
+					frame.selecionarDados(OficinaFacade.buscarServico(ID)); //Passa os dados necessarios de uma GUI para a outra.
 				} catch (ServicoNaoEncontradoException e) {
 					lbl_error.setText("Servico Nao Encontrado");
 					e.printStackTrace();

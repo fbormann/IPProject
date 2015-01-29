@@ -41,7 +41,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 		HSSFRow row = contaSheet.createRow(contaSheet.getLastRowNum()+1);
 		HSSFCell cell;
 		int cellIndex = 0;
-		String[] accountData = new String[13];
+		String[] accountData = new String[13]; //Armazena todos os dados do Objeto em forma de String.
 		accountData[0] = conta.getCPF();
 		accountData[1] = conta.getNome();
 		accountData[2] = conta.getEndereco().getBairro();
@@ -257,7 +257,7 @@ public  class RepositorioContasArquivo implements RepositorioContas{
 					conta.setCPF(cell.getStringCellValue()); //Get the CPF.
 					conta.setNome(row.getCell(1).getStringCellValue());//Get the name
 				}
-				return conta;//TODO:Preencher essa conta.
+				return conta;
 
 			}
 			return null;

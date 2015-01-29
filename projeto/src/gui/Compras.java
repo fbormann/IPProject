@@ -20,6 +20,7 @@ import comunicacao.OficinaFacade;
 import entidades.Compra;
 import entidades.Conta;
 import excecoes.CPFInvalidoException;
+import excecoes.CompraNaoExisteException;
 import excecoes.ContaNaoExisteException;
 import excecoes.ServicoNaoEncontradoException;
 
@@ -66,16 +67,12 @@ public class Compras extends JFrame {
 		contentPane.add(btn_Cadastrar);
 
 		JButton btn_Remover = new JButton("Remover");
-		
+
 		btn_Remover.setBounds(311, 110, 89, 23);
 		contentPane.add(btn_Remover);
 
 		JButton btn_Atualizar = new JButton("Atualizar");
-		btn_Atualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+
 		btn_Atualizar.setBounds(311, 181, 89, 23);
 		contentPane.add(btn_Atualizar);
 
@@ -124,7 +121,7 @@ public class Compras extends JFrame {
 				}
 			}
 		});
-		
+
 		btn_Remover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(list_compras.getSelectedValue() != null){
@@ -138,6 +135,23 @@ public class Compras extends JFrame {
 				}else{
 					lbl_error.setText("Nenhum cliente selecionado.");
 				}
+			}
+		});
+
+		btn_Atualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ID = list_compras.getSelectedValue().toString().substring(0,list_compras.getSelectedValue().toString().indexOf("("));
+				AtualizarCompra frame = new AtualizarCompra();
+				frame.setVisible(true);
+
+				try {
+					frame.selecionarDados(OficinaFacade.buscarCompra(ID));
+				} catch (CompraNaoExisteException e1) {
+					e1.printStackTrace();
+				} //Passa os dados necessarios de uma GUI para a outra.
+
+				fecharJFrame();
+
 			}
 		});
 

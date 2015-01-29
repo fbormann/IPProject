@@ -43,7 +43,7 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 	}
 
 	public void adicionar(Servico servico) {
-		HSSFRow row = servicosSheet.createRow(servicosSheet.getLastRowNum()+1);
+		HSSFRow row = servicosSheet.createRow(servicosSheet.getLastRowNum()+1); //Sempre uma linha abaixo do ultimo
 		HSSFCell cell;
 		int cellIndex = 0;
 		String[] servicoData = new String[4];
@@ -89,7 +89,7 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 		while(rowItr.hasNext()){
 			Row row = rowItr.next();
 			Iterator<Cell> cells = row.cellIterator();
-			while(cells.hasNext()){ //TODO:Checar somente Index 0
+			while(cells.hasNext()){ 
 				Cell cell = cells.next();
 				if(cell.getStringCellValue().equals(ID)){
 					removingRow = row;
@@ -100,8 +100,8 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 		servicosSheet.removeRow(removingRow);
 		int rowIndex = removingRow.getRowNum();
 
-		if(rowIndex>=0 && rowIndex<rowsEnds){
-			servicosSheet.shiftRows(rowIndex+1,rowsEnds, -1);
+		if(rowIndex>=0 && rowIndex<rowsEnds){ //Mover todas as linhas apos a removida para cima, de forma que o Iterator nao encontre uma linha nula.
+			servicosSheet.shiftRows(rowIndex+1,rowsEnds, -1); 
 		}
 		rows--; //To fix the index counter at the Iterator.
 		FileOutputStream stream = null;
@@ -259,6 +259,7 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 				if(!cell.getStringCellValue().equals("")){
 					servico.setID(cell.getStringCellValue());
 					servico.setNome(row.getCell(1).getStringCellValue());
+					servico.setPreco(Double.parseDouble(row.getCell(2).getStringCellValue()));
 				}
 				return servico;
 
@@ -266,11 +267,6 @@ public class RepositorioServicoArquivo implements RepositorioServico{
 			return null;
 		}
 
-		@Override
-		public void remove() {
-			// TODO Auto-generated method stub
-			
-		}
 
 	}
 

@@ -99,7 +99,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 		compraSheet.removeRow(removingRow);
 		int rowIndex = removingRow.getRowNum();
 
-		if(rowIndex>=0 && rowIndex<rowsEnds){
+		if(rowIndex>=0 && rowIndex<rowsEnds){ //Para remover todas as linhas para uma posicao acima de forma que o Iterator nao percorrra uma linha nula.
 			compraSheet.shiftRows(rowIndex+1,rowsEnds, -1);
 		}
 		rows--; //To fix the index counter at the Iterator.
@@ -145,8 +145,10 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 				Iterator<Cell> cells = row.cellIterator();
 				while(cells.hasNext()){
 					Cell cell = cells.next();
-					cell.setCellValue(compraData[index]);
-					index++;
+					if(index < 3){ //Index only updates until here.
+						cell.setCellValue(compraData[index]); //As celas serao modificas com os valores novos encontrados em compra
+						index++;
+					}
 				}
 			}
 		}
@@ -269,11 +271,6 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 			return null;
 		}
 
-		@Override
-		public void remove() {
-			// TODO Auto-generated method stub
-
-		}
 
 	}
 }

@@ -147,7 +147,7 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 		compra.setId(compraData[0]);
 		compra.setContaCPF(compraData[1]);
 		compra.setValor(Double.parseDouble(compraData[2]));
-		Servico servicoadc;
+		Servico servicoadc = null;
 
 		Servico[] servicos = new Servico[compraData.length-3];
 		for(int i = 3; i < compraData.length;i++){
@@ -163,7 +163,9 @@ public class RepositorioCompraArquivo implements RepositorioCompras{
 				servicoadc = new Produto();
 				break;
 			}
-
+			int beginIndex = 0;
+			//servicoadc.setID(compraData[i].substring(beginIndex, ));
+			servicos[i-3] = servicoadc;
 		}
 
 
